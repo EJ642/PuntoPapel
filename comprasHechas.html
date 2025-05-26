@@ -335,11 +335,11 @@
                 text: 'Exportar a PDF',
                 className: 'btn btn-danger',
                 orientation: 'vertical',
-                exportOptions: {
-                            columns: [ 1, 2, 3, 4, 5, 6, 7]
-                        }
                 pageSize: 'A4',
                 title: '',
+                exportOptions: {
+            columns: [ 1, 2, 3, 4, 5, 6,7] // columnas 1 a 7
+              },
                 customize: function (doc) {
                     const now = new Date();
                     const fecha = now.toLocaleDateString();
