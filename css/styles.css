@@ -1,0 +1,43 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #c9dbe338, #2574fc5f);
+  height: 100vh;
+  margin: 0;
+}
+.fondo-formulario {
+  background-color: rgba(229, 235, 240, 0.063);
+  color: white;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+  color: #444;
+  font-weight: 600;
+}
+
+.form-control {
+  border-radius: 0.75rem;
+  border: 1px solid #ccc;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #2575fc;
+}
+
+.btn-primary {
+  background-color: #2575fc;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #1a5ed9;
+}
