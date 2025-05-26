@@ -235,7 +235,69 @@
       dom: 'Bfrtip',
       buttons: [
         { extend: 'excelHtml5', text: '<i class="bi bi-file-earmark-excel"></i> Excel', className: 'btn btn-outline-success' },
-        { extend: 'pdfHtml5', text: '<i class="bi bi-file-earmark-pdf"></i> PDF', className: 'btn btn-outline-danger', orientation: 'portrait', pageSize: 'A4', exportOptions: { columns: [0] } },
+        { extend: 'pdfHtml5',
+         text: '<i class="bi bi-file-earmark-pdf"></i> PDF',
+         className: 'btn btn-outline-danger',
+         orientation: 'portrait',
+         pageSize: 'A4', 
+         exportOptions: {
+           columns: [1] 
+         },
+         customize: function (doc) {
+                            const now = new Date();
+                            const fecha = now.toLocaleDateString();
+                            const hora = now.toLocaleTimeString();
+                            // Agregar encabezado personalizado
+                            doc.content.splice(0, 0, {
+                                text: [
+                                { text: 'LIBRERIA ROCIO\n', fontSize: 14, bold: true },
+                                { text: 'Reporte de registros de Marcas\n', fontSize: 12 },
+                                ],
+                                alignment: 'center',
+                                margin: [0, 0, 0, 12]
+                            });
+
+                             // Ajustar ancho automático
+                            for (let i = 0; i < doc.content.length; i++) {
+                                if (doc.content[i].table !== undefined) {
+                                const tableNode = doc.content[i];
+                                if (tableNode.table.body && tableNode.table.body.length > 0) {
+                                    const colCount = tableNode.table.body[0].length;
+                                    tableNode.table.widths = Array(colCount).fill('*');
+                                }
+                                break;
+                                }
+                            }
+
+                            // Pie de página con número de página
+                            doc.footer = function (currentPage, pageCount) {
+                                return {
+                                columns: [
+                                    { text: `Fecha de exportación: ${fecha} ${hora}`, alignment: 'left', margin: [40, 0] },
+                                    { text: `Página ${currentPage} de ${pageCount}`, alignment: 'right', margin: [0, 0, 40] }
+                                ],
+                                fontSize: 8
+                                };
+                            };
+
+                            doc.defaultStyle.fontSize = 10;
+
+
+                            // Verifica si `content` tiene una tabla definida
+                            for (let i = 0; i < doc.content.length; i++) {
+                                if (doc.content[i].table !== undefined) {
+                                    const tableNode = doc.content[i];
+                                    // Si hay body, ajustamos los anchos
+                                    if (tableNode.table.body && tableNode.table.body.length > 0) {
+                                        const colCount = tableNode.table.body[0].length;
+                                        tableNode.table.widths = Array(colCount).fill('*');
+                                    }
+                                    break; // salimos del loop luego de encontrar la tabla
+                                }
+                            }
+                        }
+        
+        },
         { extend: 'csvHtml5', text: '<i class="bi bi-filetype-csv"></i> CSV', className: 'btn btn-outline-primary' }
       ],
       language: {
