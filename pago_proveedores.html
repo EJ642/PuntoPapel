@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pago a Proveedores - Librería Rocío</title>
-  <!-- Icono -->
-  <link rel="icon" href="img/logo.png" type="image/png">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="bt/bootstrap.min.css">
   <script src="bt/bootstrap.bundle.min.js"></script>
@@ -249,11 +247,11 @@
         language: { url: "dt/es-ES.json" },
         columns: [
           { data: 'ruc' },
-          { data: 'proveedor' },
+          { data: 'nombre' },
           { 
             data: null,
             render: function(data) {
-              return `<button class="btn btn-sm btn-success" onclick="seleccionarProveedor('${data.id}', '${data.ruc}', '${data.proveedor}')">
+              return `<button class="btn btn-sm btn-success" onclick="seleccionarProveedor('${data.id}', '${data.ruc}', '${data.nombre}')">
                 <i class="bi bi-check-lg"></i> Seleccionar
               </button>`;
             }
@@ -275,33 +273,6 @@
       document.getElementById("inputBuscarRUC").addEventListener("keyup", function(e) {
         if (e.key === "Enter") buscarProveedores();
       });
-      function mostrarModalProveedores(){
-            const tbody = document.querySelector("#tablaProveedores tbody");
-            tbody.innerHTML = "";
-            const proveedores = JSON.parse(localStorage.getItem("proveedores")) || [];
-            proveedores.forEach(p => {
-                const fila = document.createElement("tr");
-                fila.innerHTML = `
-                <td>${p.ruc}</td>
-                <td>${p.proveedor}</td>
-                <td>
-                    <button class="btn btn-sm btn-primary" onclick="seleccionarProveedor('${p.ruc}', '${p.proveedor}')">
-                        Seleccionar
-                    </button>
-                </td>
-                `;
-                tbody.appendChild(fila);
-            });
-            const modal = new bootstrap.Modal(document.getElementById("modalProveedores"));
-            modal.show();
-        }
-        function seleccionarProveedor(ruc, proveedor) {
-            document.getElementById("ruc").value = ruc;
-            document.getElementById("proveedor").value = proveedor;
-            bootstrap.Modal.getInstance(document.getElementById("modalProveedores")).hide();
-            alertify.success("Proveedor seleccionado");
-        }
-
 
       // Cambiar símbolo monetario
       document.getElementById("moneda").addEventListener("change", function() {
@@ -341,8 +312,8 @@
         const pago = {
           id: Date.now(),
           idproveedor: idproveedor,
-          proveedor: document.getElementById("proveedor").textContent,
-          ruc: document.getElementById("ruc").value,
+          proveedor: document.getElementById("nombreProveedor").textContent,
+          ruc: document.getElementById("rucProveedor").value,
           numeroCuenta: document.getElementById("numeroCuenta").value,
           factura: document.getElementById("factura").value,
           moneda: document.getElementById("moneda").value,
@@ -437,6 +408,7 @@
       });
       tabla.draw();
     }
+
     function generarComprobante(idPago) {
       const pagos = JSON.parse(localStorage.getItem("pagosProveedores")) || [];
       const pago = pagos.find(p => p.id == idPago);
@@ -475,6 +447,7 @@
           ['Tipo de Pago', pago.tipo.toUpperCase()],
           ['Moneda', pago.moneda],
           ['Importe', pago.moneda === 'PYG' ? `₲ ${pago.importe.toLocaleString('es-PY')}` : `$ ${pago.importe.toLocaleString('es-PY')}`],
+          ['Registrado por', pago.usuario]
         ],
         theme: 'grid',
         headStyles: { fillColor: [41, 128, 185] }
@@ -483,7 +456,7 @@
       // Pie de página
       doc.setFontSize(8);
       doc.setTextColor(150);
-      doc.text("Sistema de Gestión Librería Rocío", 105, 285, { align: 'center' });
+      doc.text("Sistema de Gestión - Librería Rocío", 105, 285, { align: 'center' });
       
       doc.save(`comprobante-pago-${pago.id}.pdf`);
     }
@@ -500,6 +473,8 @@
       
       // Encabezado del reporte
       doc.setFontSize(16);
+      const imgData = 'data:image/png;base64,img/logo.png';
+      doc.addImage(imgData, 'PNG', 15, 10, 30, 15);
       doc.text("REPORTE DE PAGOS A PROVEEDORES", 105, 15, { align: 'center' });
       doc.setFontSize(10);
       doc.text(`Generado el: ${new Date().toLocaleDateString('es-PY')}`, 105, 22, { align: 'center' });
