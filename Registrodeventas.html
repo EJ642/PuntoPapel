@@ -366,36 +366,7 @@ tablaVentas = $('#tabla_ventas').DataTable({
         const fechaFormateada = hoy.toISOString().split('T')[0]; // formato YYYY-MM-DD
         inputFecha.value = fechaFormateada;
 
-    $(document).ready(function () {
-    if (!$.fn.DataTable.isDataTable('#tabla_ventas')) {
-        $('#tabla_ventas').DataTable({
-            dom: 'Bfrtip',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-            data: [],
-            columns: [
-                { data: 'id' },
-                { data: 'fecha' },
-                { data: 'cliente' },
-                { data: 'articulo' },
-                { data: 'cantidad' },
-                { data: 'precio' },
-                { data: 'total' },
-                { data: 'formaPago' },
-                {
-                   data: null,
-            render: function(data, type, row) {
-                return `
-                    <button class="btn btn-sm btn-primary" onclick="editarVenta(${row.id})">Editar</button>
-                   <td><button class="btn btn-danger btn-sm btn-eliminar-venta" data-id="${v.idventa}">Eliminar</button></td>
-
-                `;
-                }
-                }
-            ]
-        });
-    }
-});
-
+   
 
      let ventas = JSON.parse(localStorage.getItem("ventas")) || [];
     let productos = JSON.parse(localStorage.getItem("articulos")) || [];
