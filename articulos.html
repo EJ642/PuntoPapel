@@ -155,11 +155,11 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="codigo" class="form-label">Código</label>
-                        <input type="text" id="codigo" class="form-control" placeholder="Código" required>
+                        <input type="number" id="codigo" class="form-control" placeholder="Código" required max = "4", min = "7"> 
                     </div>
                     <div class="mb-3">
                         <label for="nombre_articulo" class="form-label">Nombre Artículo</label>
-                        <input type="text" id="nombre_articulo" class="form-control text-uppercase" placeholder="Nombre" required>
+                        <input type="text" id="nombre_articulo" class="form-control text-uppercase" placeholder="Nombre" required maxlength = "3" minlength = "80" >
                     </div>
                     <div class="mb-3">
                         <label for="categorias" class="form-label">Categorías</label>
@@ -195,7 +195,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="stock" class="form-label">Stock</label>
-                        <input type="number" id="stock" class="form-control text-right" placeholder="0" min="1" required>
+                        <input type="number" id="stock" class="form-control text-right" placeholder="0" min="1">
                     </div>
                 </div>
                 <div class="modal-footer">
