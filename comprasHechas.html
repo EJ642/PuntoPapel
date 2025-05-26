@@ -319,16 +319,68 @@
             localStorage.setItem("articulos", JSON.stringify(articulos));
         }
 
-        $(document).ready(function() {
-        $('#tablaCompras').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-            'copy', 'excel', 'pdf', 'print'
-            ],
-            language: {
-            url: 'dt/es-ES.js'
+        //botones para exportar a excel, pdf e imprimir
+        tablaCompras = $('#tablaCompras').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+            extend: 'excelHtml5',
+            text: 'Exportar a Excel',
+            title: 'Ventas'
+            },
+            {
+            extend: 'pdfHtml5',
+            exportOptions : {
+                columns: [1,2,3,4,5,6,7]
+            },
+            text: 'Exportar a PDF',
+            className: 'btn btn-danger',
+            orientation: 'vertical', // opcional: horizontal
+            pageSize: 'A4',
+            title: 'Registro de Compras',
+            customize: function (doc) {
+                // Encabezado personalizado (membrete, fecha)
+                const now = new Date();
+                const fecha = now.toLocaleDateString();
+                const hora = now.toLocaleTimeString();
+
+                // Agregar encabezado
+                doc.content.splice(0, 0,
+                {
+                    text: [
+                    { text: 'LIBRERIA ROCIO\n', fontSize: 14, bold: true },
+                    { text: 'Registro de Ventas\n', fontSize: 12 }
+                    ],
+                    alignment: 'center',
+                    margin: [0, 0, 0, 12]
+                }
+                );
+
+                // Pie de página con número de página
+                doc.footer = function (currentPage, pageCount) {
+                return {
+                    columns: [
+                    { text: `Fecha de exportación: ${fecha} ${hora}`, alignment: 'left', margin: [40, 0] },
+                    { text: `Página ${currentPage} de ${pageCount}`, alignment: 'right', margin: [0, 0, 40] }
+                    ],
+                    fontSize: 8
+                };
+                };
+
+                // Ajustes opcionales de estilo
+                doc.styles.tableHeader.alignment = 'center';
+                doc.defaultStyle.fontSize = 10;
             }
-        });
+            },
+            {
+            extend: 'print',
+            text: 'Imprimir',
+            title: 'Ventas'
+            }
+        ],
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+        }
         });
     </script>
 </body>
