@@ -283,12 +283,12 @@
   function guardarMarca() {
   const nombreMarca = document.getElementById('nuevaMarca').value.trim();
   if (!nombreMarca) return alertify.error('Ingrese un nombre');
-  if (marcas.some(m => m.marcas.toLowerCase() === marcas.toLowerCase()))
+  if (marcas.some(m => m.marcas.toLowerCase() === nombreMarca.toLowerCase()))
     return alertify.error('La marca ya existe');
 
   const nuevaMarca = {
     idmarca: obtenerSiguienteId(),
-    marcas: marcas
+    marcas: nombreMarca
   };
 
   marcas.push(nuevaMarca);
