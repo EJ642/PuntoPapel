@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pago a Proveedores - Librería Rocío</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="bt/bootstrap.min.css">
+  <script src="bt/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="bt-icons/bootstrap-icons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="dt/datatables.min.css">
+  <!-- AlertifyJS -->
+  <link rel="stylesheet" href="alert/alertify.min.css">
+  <link rel="stylesheet" href="alert/themes/default.min.css">
+  <!-- CSS Personalizado -->
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .text-right {
+      text-align: right !important;
+    }
+    .dt-body-right {
+      text-align: right;
+    }
+    .cursor-pointer {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="cabecera-nav">
+    <nav class="navbar navbar-expand-lg navbar-light cabecera-nav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Inicio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown" id="menuMantenimiento">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Mantenimiento</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="articulos.html">Artículos</a></li>
+                <li><a class="dropdown-item" href="marcas.html">Marcas</a></li>
+                <li><a class="dropdown-item" href="proveedores.html">Proveedores</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown" id="menuCompras">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Compras</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="pago-proveedores.html">Pago a Proveedores</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="sb-sidenav-footer">
+          <div class="small">Iniciado por:</div>
+          <div id="usuario"></div>
+        </div>
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown">
+              <i class="bi bi-person-fill"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Contenido Principal -->
+  <div class="container mt-4 cont-principal">
+    <h2 class="mb-4"><i class="bi bi-cash-coin"></i> Pago a Proveedores</h2>
+    
+    <!-- Formulario de Pago -->
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <form id="formPagoProveedor">
+          <div class="row g-3">
+            <!-- Proveedor con búsqueda por RUC -->
+            <div class="col-md-6">
+              <label class="form-label">Proveedor (RUC)</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="rucProveedor" 
+                       placeholder="Buscar por RUC" 
+                       pattern="[0-9\-]+"
+                       maxlength="15"
+                       required
+                       readonly>
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#modalBuscarProveedor">
+                  <i class="bi bi-search"></i> Buscar
+                </button>
+              </div>
+              <input type="hidden" id="idproveedor">
+              <div class="form-text" id="nombreProveedor">No seleccionado</div>
+            </div>
+
+            <!-- Número de Cuenta -->
+            <div class="col-md-6">
+              <label class="form-label">Número de Cuenta</label>
+              <input type="text" class="form-control" id="numeroCuenta" 
+                     pattern="[0-9\-]{1,15}" 
+                     maxlength="15"
+                     title="Solo números y guiones, máximo 15 caracteres"
+                     required>
+            </div>
+
+            <!-- Moneda -->
+            <div class="col-md-4">
+              <label class="form-label">Moneda</label>
+              <select class="form-select" id="moneda" required>
+                <option value="" selected disabled>Seleccionar</option>
+                <option value="PYG">Guaraníes (PYG)</option>
+                <option value="USD">Dólares (USD)</option>
+              </select>
+            </div>
+
+            <!-- Factura Relacionada -->
+            <div class="col-md-4">
+              <label class="form-label">N° Factura</label>
+              <input type="text" class="form-control" id="factura" required>
+            </div>
+
+            <!-- Importe -->
+            <div class="col-md-4">
+              <label class="form-label">Importe</label>
+              <div class="input-group">
+                <span class="input-group-text" id="simboloMoneda">₲</span>
+                <input type="number" class="form-control text-right" id="importe" placeholder="Ingrese importe" min="1" step="0.01" required>
+              </div>
+            </div>
+
+            <!-- Tipo de Pago -->
+            <div class="col-12">
+              <label class="form-label">Tipo de Pago</label>
+              <div class="btn-group w-100" role="group">
+                <button type="button" class="btn btn-outline-primary active" data-tipo="saldar">Saldar Pendientes</button>
+                <button type="button" class="btn btn-outline-primary" data-tipo="facturas">Saldar Facturas</button>
+                <button type="button" class="btn btn-outline-primary" data-tipo="anticipo">Anticipo</button>
+              </div>
+              <input type="hidden" id="tipoPago" value="saldar">
+            </div>
+
+            <!-- Botones -->
+            <div class="col-12 text-end">
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save"></i> REGISTRAR PAGO
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tabla de Registros -->
+    <div class="card shadow">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Historial de Pagos</h5>
+        <button id="btnExportPDF" class="btn btn-danger btn-sm">
+          <i class="bi bi-file-earmark-pdf"></i> Exportar a PDF
+        </button>
+      </div>
+      <div class="card-body">
+        <table id="tablaPagos" class="table table-striped" style="width:100%">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Proveedor</th>
+              <th>RUC</th>
+              <th>Cuenta</th>
+              <th>Factura</th>
+              <th class="text-right">Moneda</th>
+              <th class="text-right">Importe</th>
+              <th>Tipo</th>
+              <th>Fecha</th>
+              <th>Comprobante</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para buscar proveedor -->
+  <div class="modal fade" id="modalBuscarProveedor" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Buscar Proveedor por RUC</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <input type="text" id="inputBuscarRUC" class="form-control" placeholder="Ingrese RUC para buscar...">
+            <button class="btn btn-primary" type="button" id="btnBuscarRUC">
+              <i class="bi bi-search"></i> Buscar
+            </button>
+          </div>
+          <table id="tablaProveedores" class="table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th>RUC</th>
+                <th>Nombre</th>
+                <th>Seleccionar</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="dt/jquery-3.7.1.js"></script>
+  <script src="dt/datatables.min.js"></script>
+  <script src="dt/es-ES.js"></script>
+  <script src="alert/alertify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <script>
+    // Configura jsPDF
+    const { jsPDF } = window.jspdf;
+    let tablaProveedores; // Para la tabla de búsqueda
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // Verificar sesión
+      const nombre = sessionStorage.getItem("nomUsuario");
+      if (!nombre) {
+        window.location.href = "error.html";
+        return;
+      }
+      document.getElementById("usuario").textContent = nombre;
+
+      // Inicializar DataTable para proveedores
+      tablaProveedores = $('#tablaProveedores').DataTable({
+        language: { url: "dt/es-ES.json" },
+        columns: [
+          { data: 'ruc' },
+          { data: 'nombre' },
+          { 
+            data: null,
+            render: function(data) {
+              return `<button class="btn btn-sm btn-success" onclick="seleccionarProveedor('${data.id}', '${data.ruc}', '${data.nombre}')">
+                <i class="bi bi-check-lg"></i> Seleccionar
+              </button>`;
+            }
+          }
+        ]
+      });
+
+      // Configurar DataTable para pagos
+      const tablaPagos = $('#tablaPagos').DataTable({
+        language: { url: "dt/es-ES.json" },
+        responsive: true
+      });
+
+      // Cargar datos existentes
+      cargarPagosEnTabla();
+
+      // Buscar proveedor por RUC
+      document.getElementById("btnBuscarRUC").addEventListener("click", buscarProveedores);
+      document.getElementById("inputBuscarRUC").addEventListener("keyup", function(e) {
+        if (e.key === "Enter") buscarProveedores();
+      });
+
+      // Cambiar símbolo monetario
+      document.getElementById("moneda").addEventListener("change", function() {
+        document.getElementById("simboloMoneda").textContent = 
+          this.value === "PYG" ? "₲" : "$";
+      });
+
+      // Validar número de cuenta
+      document.getElementById("numeroCuenta").addEventListener("input", function() {
+        this.value = this.value.replace(/[^0-9\-]/g, '');
+      });
+
+      // Validar RUC
+      document.getElementById("rucProveedor").addEventListener("input", function() {
+        this.value = this.value.replace(/[^0-9\-]/g, '');
+      });
+
+      // Manejar tipo de pago
+      document.querySelectorAll('[data-tipo]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('[data-tipo]').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          document.getElementById('tipoPago').value = this.dataset.tipo;
+        });
+      });
+
+      // Guardar pago
+      document.getElementById("formPagoProveedor").addEventListener("submit", function(e) {
+        e.preventDefault();
+        
+        const idproveedor = document.getElementById("idproveedor").value;
+        if (!idproveedor) {
+          alertify.error("Seleccione un proveedor");
+          return;
+        }
+
+        const pago = {
+          id: Date.now(),
+          idproveedor: idproveedor,
+          proveedor: document.getElementById("nombreProveedor").textContent,
+          ruc: document.getElementById("rucProveedor").value,
+          numeroCuenta: document.getElementById("numeroCuenta").value,
+          factura: document.getElementById("factura").value,
+          moneda: document.getElementById("moneda").value,
+          importe: parseFloat(document.getElementById("importe").value),
+          tipo: document.getElementById("tipoPago").value,
+          fecha: new Date().toLocaleDateString('es-PY'),
+          usuario: usuario.nombre
+        };
+
+        // 1. Guardar pago
+        const pagos = JSON.parse(localStorage.getItem("pagosProveedores")) || [];
+        pagos.push(pago);
+        localStorage.setItem("pagosProveedores", JSON.stringify(pagos));
+
+        // 2. Actualizar saldo del proveedor
+        actualizarSaldoProveedor(idproveedor, pago.importe, pago.moneda);
+
+        // 3. Actualizar UI
+        cargarPagosEnTabla();
+        alertify.success(`Pago registrado a ${pago.proveedor}`);
+        this.reset();
+        document.getElementById("proveedor").textContent = "No seleccionado";
+      });
+
+      // Botón para exportar PDF
+      document.getElementById("btnExportPDF").addEventListener("click", exportarPDF);
+    });
+
+    function buscarProveedores() {
+      const inputRUC = document.getElementById("inputBuscarRUC").value.trim();
+      const proveedores = JSON.parse(localStorage.getItem("proveedores")) || [];
+      
+      // Filtrar por RUC (coincidencia parcial)
+      const resultados = inputRUC 
+        ? proveedores.filter(p => p.ruc.includes(inputRUC))
+        : proveedores;
+
+      tablaProveedores.clear().rows.add(resultados).draw();
+    }
+
+    function seleccionarProveedor(id, ruc, nombre) {
+      document.getElementById("idproveedor").value = id;
+      document.getElementById("ruc").value = ruc;
+      document.getElementById("proveedor").textContent = nombre;
+      
+      // Cerrar modal
+      const modal = bootstrap.Modal.getInstance(document.getElementById('modalBuscarProveedor'));
+      modal.hide();
+    }
+
+    function actualizarSaldoProveedor(idproveedor, importe, moneda) {
+      const proveedores = JSON.parse(localStorage.getItem("proveedores")) || [];
+      const proveedorIndex = proveedores.findIndex(p => p.id == idproveedor);
+      
+      if (proveedorIndex !== -1) {
+        // Inicializar saldo si no existe
+        if (!proveedores[proveedorIndex].saldo) {
+          proveedores[proveedorIndex].saldo = { PYG: 0, USD: 0 };
+        }
+        
+        // Restar el importe del saldo (asumiendo que el pago reduce la deuda)
+        proveedores[proveedorIndex].saldo[moneda] -= importe;
+        
+        localStorage.setItem("proveedores", JSON.stringify(proveedores));
+      }
+    }
+
+    function cargarPagosEnTabla() {
+      const pagos = JSON.parse(localStorage.getItem("pagosProveedores")) || [];
+      const tabla = $('#tablaPagos').DataTable();
+      tabla.clear();
+      
+      pagos.forEach(pago => {
+        tabla.row.add([
+          pago.id,
+          pago.proveedor,
+          pago.ruc || 'N/A',
+          pago.numeroCuenta || 'N/A',
+          pago.factura || 'N/A',
+          pago.moneda,
+          pago.moneda === 'PYG' ? `₲ ${pago.importe.toLocaleString('es-PY')}` : `$ ${pago.importe.toLocaleString('es-PY')}`,
+          pago.tipo === 'saldar' ? 'Saldar Pendientes' : 
+            pago.tipo === 'facturas' ? 'Saldar Facturas' : 'Anticipo',
+          pago.fecha,
+          `<button class="btn btn-sm btn-outline-danger" onclick="generarComprobante(${pago.id})">
+            <i class="bi bi-file-earmark-pdf"></i> PDF
+          </button>`,
+          `<button class="btn btn-sm btn-danger" onclick="eliminarPago(${pago.id})">
+            <i class="bi bi-trash"></i>
+          </button>`
+        ]);
+      });
+      tabla.draw();
+    }
+
+    function generarComprobante(idPago) {
+      const pagos = JSON.parse(localStorage.getItem("pagosProveedores")) || [];
+      const pago = pagos.find(p => p.id == idPago);
+      
+      if (!pago) {
+        alertify.error("Pago no encontrado");
+        return;
+      }
+
+      const doc = new jsPDF();
+      
+      // Logo y Encabezado
+      doc.setFontSize(18);
+      doc.setTextColor(40);
+      doc.text("LIBRERÍA ROCÍO", 105, 15, { align: 'center' });
+      doc.setFontSize(12);
+      doc.text("COMPROBANTE DE PAGO", 105, 22, { align: 'center' });
+      
+      // Línea divisoria
+      doc.setDrawColor(200);
+      doc.line(15, 25, 195, 25);
+      
+      // Datos del Comprobante
+      doc.setFontSize(10);
+      doc.text(`N° Comprobante: ${pago.id}`, 15, 35);
+      doc.text(`Fecha: ${pago.fecha}`, 15, 40);
+      doc.text(`Proveedor: ${pago.proveedor} (RUC: ${pago.ruc || 'N/A'})`, 15, 45);
+      doc.text(`N° Cuenta: ${pago.numeroCuenta || 'N/A'}`, 15, 50);
+      doc.text(`Factura Relacionada: ${pago.factura || 'N/A'}`, 15, 55);
+      
+      // Tabla de Detalle
+      doc.autoTable({
+        startY: 65,
+        head: [['Concepto', 'Detalle']],
+        body: [
+          ['Tipo de Pago', pago.tipo.toUpperCase()],
+          ['Moneda', pago.moneda],
+          ['Importe', pago.moneda === 'PYG' ? `₲ ${pago.importe.toLocaleString('es-PY')}` : `$ ${pago.importe.toLocaleString('es-PY')}`],
+          ['Registrado por', pago.usuario]
+        ],
+        theme: 'grid',
+        headStyles: { fillColor: [41, 128, 185] }
+      });
+      
+      // Pie de página
+      doc.setFontSize(8);
+      doc.setTextColor(150);
+      doc.text("Sistema de Gestión - Librería Rocío", 105, 285, { align: 'center' });
+      
+      doc.save(`comprobante-pago-${pago.id}.pdf`);
+    }
+
+    function exportarPDF() {
+      const pagos = JSON.parse(localStorage.getItem("pagosProveedores")) || [];
+      
+      if (pagos.length === 0) {
+        alertify.error("No hay pagos para exportar");
+        return;
+      }
+
+      const doc = new jsPDF();
+      
+      // Encabezado del reporte
+      doc.setFontSize(16);
+      const imgData = 'data:image/png;base64,img/logo.png';
+      doc.addImage(imgData, 'PNG', 15, 10, 30, 15);
+      doc.text("REPORTE DE PAGOS A PROVEEDORES", 105, 15, { align: 'center' });
+      doc.setFontSize(10);
+      doc.text(`Generado el: ${new Date().toLocaleDateString('es-PY')}`, 105, 22, { align: 'center' });
+      
+      // Tabla con todos los pagos
+      doc.autoTable({
+        startY: 30,
+        head: [
+          ['ID', 'Proveedor', 'RUC', 'Cuenta', 'Factura', 'Moneda', 'Importe', 'Tipo']
+        ],
+        body: pagos.map(p => [
+          p.id,
+          p.proveedor,
+          p.ruc || 'N/A',
+          p.numeroCuenta || 'N/A',
+          p.factura || 'N/A',
+          p.moneda,
+          p.moneda === 'PYG' ? `₲ ${p.importe.toLocaleString('es-PY')}` : `$ ${p.importe.toLocaleString('es-PY')}`,
+          p.tipo.toUpperCase()
+        ]),
+        styles: { fontSize: 8 },
+        headStyles: { fillColor: [58, 64, 90] },
+        columnStyles: {
+          6: { cellWidth: 25 } // Ancho columna importe
+        }
+      });
+      
+      doc.save(`reporte-pagos-${new Date().getTime()}.pdf`);
+    }
+
+    function eliminarPago(id) {
+      alertify.confirm("Eliminar Pago", "¿Está seguro de eliminar este registro?", 
+        () => {
+          const pagos = JSON.parse(localStorage.getItem("pagosProveedores")) || [];
+          const pago = pagos.find(p => p.id == id);
+          const nuevosPagos = pagos.filter(p => p.id != id);
+          
+          if (pago) {
+            // Revertir el saldo del proveedor
+            const proveedores = JSON.parse(localStorage.getItem("proveedores")) || [];
+            const proveedorIndex = proveedores.findIndex(p => p.id == pago.idproveedor);
+            
+            if (proveedorIndex !== -1 && proveedores[proveedorIndex].saldo) {
+              proveedores[proveedorIndex].saldo[pago.moneda] += pago.importe;
+              localStorage.setItem("proveedores", JSON.stringify(proveedores));
+            }
+          }
+          
+          localStorage.setItem("pagosProveedores", JSON.stringify(nuevosPagos));
+          cargarPagosEnTabla();
+          alertify.success("Pago eliminado");
+        },
+        () => {}
+      );
+    }
+
+    function cerrarSesion() {
+      sessionStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
