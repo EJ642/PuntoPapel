@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Ventas</title>
+    <!-- Icono -->
+    <link rel="icon" href="img/user128.png" type="image/png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- ESTILOS DEL MENU -->
+    <link rel="stylesheet" href="menu/styles.css">
+    <!-- DATATABLES -->
+    <link rel="stylesheet" href="dt/datatables.min.css">
+    <link rel="stylesheet" href="dt/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="dt/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="bt/bootstrap.min.css">
+    <!-- Bootstrap -->
+    <script src="bt/bootstrap.bundle.min.js"></script>
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="bt-icons/bootstrap-icons.min.css">
+    <!-- Alertify -->
+    <link rel="stylesheet" href="alert/alertify.min.css">
+    <link rel="stylesheet" href="alert/themes/default.min.css">
+    <script src="alert/alertify.min.js"></script>
+</head>
+<body>
+    <div class="cabecera-nav">
+        <nav class="navbar navbar-expand-lg navbar-light cabecera-nav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown" id="menuMantenimiento">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Mantenimiento
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="articulos.html">Artículos</a></li>
+                                <li><a class="dropdown-item" href="marcas.html">Marcas</a></li>
+                                <li><a class="dropdown-item" href="clasificaciones.html">Clasificaciones</a></li>
+                                <li><a class="dropdown-item" href="proveedores.html">Proveedores</a></li>
+                                <li><a class="dropdown-item" href="cliente.html">Clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuCompras">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Compras
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Registro de compras</a></li>
+                                <li><a class="dropdown-item" href="#">Créditos con Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Pago a Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Ajuste de Stock</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuVentas">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Ventas
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="ventas.html">Registro de ventas</a></li>
+                                <li><a class="dropdown-item" href="credito_Cliente.html">Créditos con clientes</a></li>
+                                <li><a class="dropdown-item" href="#">Cobró de creditos a clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuInformes">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Informes
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Informes de ventas</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Créditos con clientes </a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Cobró de créditos</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de compras</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de créditos con Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Pago a Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de ajuste de Stock</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item" id="menuUsuarios"></li>
+                            <a class="nav-link" href="usuario.html">Usuarios</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Iniciado por:</div>
+                    <div id="usuario"></div>
+                </div>
+            </div>
+            <div>
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Configuraciones</a></li>
+                            <li><a class="dropdown-item" href="#!">Actividad</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+  
+    <!-- AQUÍ VA TODO LO QUE SE VA A VISUALIZAR EN LA PÁGINA -->
+    <main>
+    <div class="container-fluid px-4">
+      <h1 class="mt-2">Registro de Ventas</h1>
+      <div class="mb-3">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVenta">
+          <i class="bi bi-plus-circle"></i> Nueva Venta
+        </button>
+      </div>
+      <div class="row">
+        <table id="tabla_ventas" class="display compact" style="width: 100%">
+        <thead>
+            <tr>
+                <th>ID Venta</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Artículo</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Total</th>
+                <th>Forma de Pago</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        </table>
+      </div>
+    </div>
+    </main>
+
+  <!-- Modal Registrar Venta -->
+<div class="modal fade" id="modalVenta" tabindex="-1" aria-labelledby="modalNuevaVentaLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <form id="formNuevaVenta" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNuevaVentaLabel">Registrar Venta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 mb-2"> <label class="form-label">Cliente</label> <div class="input-group"> <select id="venta_cliente" class="form-control"> <option value="">Sin Nombre</option> </select> <button class="btn btn-outline-primary" type="button" onclick="mostrarModalCliente()"> + </button> </div> </div>
+                    <div class="col-md-6 mb-2">
+                        <label class="form-label">Fecha</label>
+                      <input type="date" class="form-control" id="venta_fecha" readonly>
+                    </div>
+                </div>
+                
+                <div class="mb-2">
+                    <label class="form-label">Detalle de Productos</label>
+                    <table class="table table-bordered" id="tablaDetalleVenta">
+                        <thead>
+                            <tr>
+                                <th>Artículo</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unitario</th>
+                                <th>SubTotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="detalleVentaBody"></tbody>
+                    </table>
+                    <button type="button" class="btn btn-sm btn-secondary" onclick="agregarFilaVenta()">Agregar Producto</button>
+                    <div class="col-md-4">
+                    <label>Forma de pago</label>
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="formaPago" id="contado" checked>
+                    <label class="form-check-label" for="contado">Contado</label>
+                    </div>
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="formaPago" id="credito">
+                    <label class="form-check-label" for="credito">Crédito</label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label>Total a Pagar</label>
+                    <input type="text" class="form-control bg-light" id="totalPagar" value="0.00" readonly>
+                </div>
+
+                <div class="col-md-4">
+                    <label>Efectivo Recibido</label>
+                    <input type="number" id="efectivoRecibido" class="form-control" onchange="calcularSubTotalVenta()">
+                </div>
+
+                <div class="col-md-4">
+                    <label>Cambio</label>
+                    <input type="text" class="form-control bg-light" id="cambio" readonly>
+                </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary w-100" onclick="generarVenta()">Generar Venta</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+ <!-- JavaScript -->
+    <script src="js/funcionesSistema.js"></script>
+    <script src="js/ventas.js"></script>
+    <script src="js/bd.js"></script>
+    <!-- MENU -->
+    <script src="menu/bootstrap.bundle.min.js"></script>
+    <script src="menu/scripts.js"></script>
+    <!-- DATATABLES -->
+    <script src="dt/jquery-3.7.1.js"></script>
+    <script src="dt/datatables.min.js"></script>
+    <script src="dt/jquery.dataTables.min.js"></script>
+    <!-- DATATABLES Buttons extension -->
+    <script src="dt/dataTables.buttons.min.js"></script>
+    <script src="dt/buttons.print.min.js"></script>
+    <script src="dt/buttons.html5.min.js"></script>
+    <!-- DATATABLES JSZip y pdfmake para exportar -->
+    <script src="dt/jszip.min.js"></script>
+    <script src="dt/pdfmake.min.js"></script>
+    <script src="dt/vfs_fonts.js"></script>
+    <!-- DATATABLES Idioma Español -->
+    <script src="dt/es-ES.js"></script>
+    <script>
+        // control de seguridad al cargarse la página
+        document.addEventListener("DOMContentLoaded", function () {
+            const nombre = sessionStorage.getItem("nomUsuario");
+
+            if (!nombre) {
+            // Si no hay sesión, redirige al login
+                window.location.href = "login.html";
+            } else {
+            // Mostrar el nombre del usuario si existe el elemento
+                const spanUsuario = document.getElementById("usuario");
+                if (spanUsuario) {
+                spanUsuario.textContent = nombre;
+                }
+            }
+        });
+        // usuario actual
+        const usuarioActual = {
+            rol: sessionStorage.getItem("rolUsuario")
+        }
+//botones para exportar a excel, pdf e imprimir
+tablaVentas = $('#tabla_ventas').DataTable({
+  dom: 'Bfrtip',
+  buttons: [
+    {
+      extend: 'excelHtml5',
+      text: 'Exportar a Excel',
+      title: 'Ventas'
+    },
+    {
+    extend: 'pdfHtml5',
+    text: 'Exportar a PDF',
+    className: 'btn btn-danger',
+    orientation: 'landscape', // opcional: horizontal
+    pageSize: 'A4',
+    title: 'Registro de Ventas',
+    customize: function (doc) {
+        // Encabezado personalizado (membrete, fecha)
+        const now = new Date();
+        const fecha = now.toLocaleDateString();
+        const hora = now.toLocaleTimeString();
+
+        // Agregar encabezado
+        doc.content.splice(0, 0,
+        {
+            text: [
+            { text: 'LIBRERIA ROCIO\n', fontSize: 14, bold: true },
+            { text: 'Registro de Ventas\n', fontSize: 12 }
+            ],
+            alignment: 'center',
+            margin: [0, 0, 0, 12]
+        }
+        );
+
+        // Pie de página con número de página
+        doc.footer = function (currentPage, pageCount) {
+        return {
+            columns: [
+            { text: `Fecha de exportación: ${fecha} ${hora}`, alignment: 'left', margin: [40, 0] },
+            { text: `Página ${currentPage} de ${pageCount}`, alignment: 'right', margin: [0, 0, 40] }
+            ],
+            fontSize: 8
+        };
+        };
+
+        // Ajustes opcionales de estilo
+        doc.styles.tableHeader.alignment = 'center';
+        doc.defaultStyle.fontSize = 10;
+    }
+    },
+    {
+      extend: 'print',
+      text: 'Imprimir',
+      title: 'Ventas'
+    }
+  ],
+  language: {
+    url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+  }
+});
+//funcion que oculta elementos del menu dependiendo del rol
+    document.addEventListener("DOMContentLoaded", function () {
+    const rol = sessionStorage.getItem("rolUsuario"); // debe tener: administrador, gerente, etc.
+    const nombre = sessionStorage.getItem("nomUsuario");
+
+    if (!rol || !nombre) {
+      alertify.error("Acceso denegado.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Mostrar el nombre en el panel
+    const spanUsuario = document.getElementById("usuario");
+    if (spanUsuario) spanUsuario.textContent = nombre;
+
+    
+    // Ocultar menús según el rol
+    switch (rol) {
+      case "administrador":
+        // ve todo
+        break;
+      case "gerente":
+        ocultar(["menuUsuarios"]);
+        break;
+      case "cajero":
+        ocultar(["menuMantenimiento", "menuCompras", "menuUsuarios"]);
+        break;
+      case "codificador":
+        ocultar(["menuVentas", "menuCompras", "menuInformes", "menuUsuarios"]);
+        break;
+      default:
+        alertify.error("Rol no válido.");
+        window.location.href = "login.html";
+    }
+
+    // Función para ocultar elementos por ID
+    function ocultar(ids) {
+      ids.forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem) elem.style.display = "none";
+      });
+    }
+  });
+  // habilitar crear nuevos usuarios solo para adminsitradores
+        document.addEventListener("DOMContentLoaded", function(){
+            const btnCrear = document.getElementById("btnCrearCliente");
+            if(btnCrear && !tienePermiso(usuarioActual, permisos.usuarios_crear)){
+                btnCrear.style.display = "none"; // oculta si no tiene permiso
+            }
+        });
+
+        // Establecer la fecha actual en el campo de fecha
+        const inputFecha = document.getElementById("venta_fecha");
+        const hoy = new Date();
+        const fechaFormateada = hoy.toISOString().split('T')[0]; // formato YYYY-MM-DD
+        inputFecha.value = fechaFormateada;
+
+    $(document).ready(function () {
+    if (!$.fn.DataTable.isDataTable('#tabla_ventas')) {
+        $('#tabla_ventas').DataTable({
+            dom: 'Bfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            data: [],
+            columns: [
+                { data: 'id' },
+                { data: 'fecha' },
+                { data: 'cliente' },
+                { data: 'articulo' },
+                { data: 'cantidad' },
+                { data: 'precio' },
+                { data: 'total' },
+                { data: 'formaPago' },
+                {
+                   data: null,
+            render: function(data, type, row) {
+                return `
+                    <button class="btn btn-sm btn-primary" onclick="editarVenta(${row.id})">Editar</button>
+                   <td><button class="btn btn-danger btn-sm btn-eliminar-venta" data-id="${v.idventa}">Eliminar</button></td>
+
+                `;
+                }
+                }
+            ]
+        });
+    }
+});
+
+
+     let ventas = JSON.parse(localStorage.getItem("ventas")) || [];
+    let productos = JSON.parse(localStorage.getItem("articulos")) || [];
+    let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+
+    function agregarFilaVenta() {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+            <td>
+                <select class="form-control articulo-select" onchange="calcularFila(this)">
+                    <option value="">Seleccionar...</option>
+                    ${productos.map(p => `<option value="${p.idarticulo}" data-precio="${p.precio}" data-nombre="${p.nombre_articulo}">${p.nombre_articulo}</option>`).join('')}
+                </select>
+            </td>
+            <td><input type="number" class="form-control cantidad" min="1" value="1" onchange="calcularFila(this)"></td>
+            <td><input type="number" class="form-control precio" readonly></td>
+            <td><input type="number" class="form-control subtotal" readonly></td>
+            <td><button type="button" class="btn btn-sm btn-danger" onclick="eliminarFila(this)">X</button></td>
+        `;
+        document.getElementById("detalleVentaBody").appendChild(fila);
+        calcularSubTotalVenta();
+    }
+
+
+    function eliminarFila(btn) {
+        btn.closest("tr").remove();
+        calcularSubTotalVenta();
+    }
+
+    function calcularFila(input) {
+        const fila = input.closest("tr");
+        const select = fila.querySelector(".articulo-select");
+        const cantidad = parseInt(fila.querySelector(".cantidad").value) || 0;
+        const precio = parseInt(select.selectedOptions[0]?.dataset.precio || 0);
+
+        fila.querySelector(".precio").value = precio;
+        fila.querySelector(".subtotal").value = cantidad * precio;
+        calcularSubTotalVenta();
+    }
+
+ function calcularSubTotalVenta() {
+    let total = 0;
+    const subtotales = document.querySelectorAll("#detalleVentaBody .subtotal");
+
+    subtotales.forEach(input => {
+        const valor = parseFloat(input.value);
+        if (!isNaN(valor)) {
+            total += valor;
+        }
+    });
+
+    // Mostrar el total
+    document.getElementById("totalPagar").value = total;
+
+    // Obtener efectivo recibido y calcular cambio
+    const efectivo = parseFloat(document.getElementById("efectivoRecibido").value);
+    let cambio = 0;
+
+    if (!isNaN(efectivo)) {
+        cambio = efectivo - total;
+    }
+
+    document.getElementById("cambio").value = cambio;
+}
+
+
+    function guardarVentas(lista) {
+        localStorage.setItem("ventas", JSON.stringify(lista));
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Cargar clientes en el select
+        const selectCliente = document.getElementById("venta_cliente");
+        clientes.forEach(c => {
+            const option = document.createElement("option");
+            option.value = c.idcliente;
+            option.textContent = c.nombre;
+            selectCliente.appendChild(option);
+        });
+
+        document.getElementById("formNuevaVenta").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const idVenta = Date.now();
+            const cliente = document.getElementById("venta_cliente").value;
+            const fecha = document.getElementById("venta_fecha").value;
+            const filas = document.querySelectorAll("#detalleVentaBody tr");
+
+            if (!cliente || !fecha || filas.length === 0) {
+                alertify.error("Todos los campos son obligatorios");
+                return;
+            }
+           const detalle = Array.from(filas).map(fila => {
+                const select = fila.querySelector(".articulo-select");
+                const idArticulo = select.value;
+                const articulo = productos.find(p => p.idarticulo == idArticulo);
+
+                return {
+                    idarticulo: idArticulo,
+                    nombre: articulo?.nombre_articulo || "Desconocido",
+                    cantidad: parseInt(fila.querySelector(".cantidad").value),
+                    precio: parseInt(fila.querySelector(".precio").value),
+                    subtotal: parseInt(fila.querySelector(".subtotal").value),
+                };
+            });
+
+            const totalVenta = detalle.reduce((sum, d) => sum + d.subtotal, 0);
+            
+
+            const nuevaVenta = {
+                idventa: idVenta,
+                idcliente: cliente,
+                fecha: fecha,
+                formaPago: document.querySelector('input[name="formaPago"]:checked').id,
+                efectivoRecibido: parseInt(document.getElementById("efectivoRecibido").value) || 0,
+                total: totalVenta,
+                detalle: detalle
+            };
+
+            ventas.push(nuevaVenta);
+            guardarVentas(ventas);
+            document.getElementById("formNuevaVenta").reset();
+            document.getElementById("detalleVentaBody").innerHTML = "";
+            document.getElementById("totalVenta").textContent = "0";
+            bootstrap.Modal.getInstance(document.getElementById("modalVenta")).hide();
+            alertify.success("Venta registrada correctamente");
+            cargarTablaVentas();
+        });
+
+        cargarTablaVentas();
+    });
+
+   function cargarTablaVentas() {
+    const tablaBody = document.querySelector("#tabla_ventas tbody");
+    if (!tablaBody) return;
+
+    tablaBody.innerHTML = ventas.map(v => `
+        <tr>
+            <td>${v.idventa}</td>
+            <td>${v.fecha}</td>
+            <td>${clientes.find(c => c.idcliente == v.idcliente)?.nombre || ''}</td>
+            <td>${v.detalle.map(d => d.nombre).join(", ")}</td>
+            <td>${v.detalle.reduce((sum, d) => sum + d.cantidad, 0)}</td>
+            <td>${v.detalle.map(d => d.precio).join(", ")}</td>
+            <td>${v.total}</td>
+            <td>${v.formaPago}</td>
+            <td><button class="btn btn-danger btn-sm btn-eliminar-venta" data-id="${v.idventa}">Eliminar</button></td>
+        </tr>
+    `).join("");
+
+    // Asignar evento a los botones eliminar
+    document.querySelectorAll(".btn-eliminar-venta").forEach(btn => {
+        btn.addEventListener("click", function () {
+            const idVenta = this.dataset.id;
+
+            alertify.confirm("¿Estás segura/o?", "¿Deseás eliminar esta venta?", function () {
+                ventas = ventas.filter(v => v.idventa != idVenta);
+                guardarVentas(ventas);
+                cargarTablaVentas();
+                alertify.success("Venta eliminada");
+            }, function () {
+                alertify.error("Cancelado");
+            });
+        });
+    });
+}
+
+    function mostrarModalCliente() {
+        // Aquí puedes implementar la lógica para mostrar el modal de cliente
+        alertify.alert("Funcionalidad no implementada", "Esta funcionalidad aún no está disponible.");
+    }
+
+
+
+</script>
+
+  
+    
+</body>
+</html>
