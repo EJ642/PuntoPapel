@@ -1,0 +1,434 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA_Compatible" content="IE-edge"/> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+     
+     
+    <title>Punto Papel: categorias</title> 
+     
+    <!-- Icono --> 
+    <link rel="icon" href="img/logo.png" type="image/png"> 
+    <!-- CSS --> 
+    <link rel="stylesheet" href="css/estilos.css"> 
+    <!-- JavaScript --> 
+    <script src="js/funcionesSistema.js"></script> 
+    <!-- DataTables --> 
+    <link rel="stylesheet" href="dt/datatables.min.css"> 
+    <link rel="stylesheet" href="dt/jquery.dataTables.min.css"> 
+    <link rel="stylesheet" href="dt/buttons.dataTables.min.css"> 
+    <link rel="stylesheet" href="bt/bootstrap.min.css"> 
+    <!-- Bootstrap --> 
+    <link rel="stylesheet" href="bt/bootstrap.min.css"> 
+    <script src="bt/bootstrap.bundle.min.js"></script> 
+    <!-- Iconos de Bootstrap --> 
+    <link rel="stylesheet" href="bt-icons/bootstrap-icons.min.css"> 
+    <!-- Alertify --> 
+    <link rel="stylesheet" href="alert/alertify.min.css"> 
+    <link rel="stylesheet" href="alert/themes/default.min.css"> 
+    <script src="alert/alertify.min.js"></script> 
+     
+</head> 
+<body> 
+<div class="cabecera-nav">
+        <nav class="navbar navbar-expand-lg navbar-light cabecera-nav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown" id="menuMantenimiento">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Mantenimiento
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="articulos.html">Artículos</a></li>
+                                <li><a class="dropdown-item" href="marcas.html">Marcas</a></li>
+                                <li><a class="dropdown-item" href="clasificaciones.html">Clasificaciones</a></li>
+                                <li><a class="dropdown-item" href="proveedores.html">Proveedores</a></li>
+                                <li><a class="dropdown-item" href="cliente.html">Clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuCompras">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Compras
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Registro de compras</a></li>
+                                <li><a class="dropdown-item" href="#">Créditos con Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Pago a Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Ajuste de Stock</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuVentas">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Ventas
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="ventas.html">Registro de ventas</a></li>
+                                <li><a class="dropdown-item" href="credito_Cliente.html">Créditos con clientes</a></li>
+                                <li><a class="dropdown-item" href="#">Cobró de creditos a clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuInformes">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Informes
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Informes de ventas</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Créditos con clientes </a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Cobró de créditos</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de compras</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de créditos con Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Pago a Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de ajuste de Stock</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item" id="menuUsuarios"></li>
+                            <a class="nav-link" href="usuario.html">Usuarios</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Iniciado por:</div>
+                    <div id="usuario"></div>
+                </div>
+            </div>
+            <div>
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Configuraciones</a></li>
+                            <li><a class="dropdown-item" href="#!">Actividad</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+  
+    <!-- AQUÍ VA TODO LO QUE SE VA A VISUALIZAR EN LA PÁGINA --> 
+    <div class="cont-principal">     
+            <main> 
+                    <div class="container-fluid px-4"> 
+                        <h1 class="mt-2">Categorias</h1> 
+                        <div class="row"> 
+                            <table id="tabla_categorias" class="display compact" style="width:100%"> 
+                                <thead> 
+                                        <tr> 
+                                            <th>Id Categoria</th> 
+                                            <th>Categoria</th> 
+                                            <th>Acciones</th> 
+                                        </tr> 
+                                </thead> 
+ 
+                            </table> 
+ 
+                        </div> 
+                    </div> 
+            </main> 
+             
+             
+         
+ 
+    <!-- Modal Nuevo Usuario --> 
+    <div class="modal fade" id="modalNuevaCategoria" tabindex="-1" aria-labelledby="modalCategoriaLabel" aria-hidden="true" data-bs-backdrop="static"> 
+        <div class="modal-dialog"> 
+            <form id="formNuevaCategoria" class="modal-content"> 
+                <div class="modal-header"> 
+                    <h5 class="modal-title" id="modalCategoriaLabel">Agregar Nueva Categoria</h5> 
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button> 
+                </div> 
+                <div class="modal-body"> 
+                    <div class="mb-2"> 
+                        <label class="form-label">Categoria</label> 
+                        <input type="text" id="txtcategoria" class="form-control" required minlength="5" maxlength="30"> 
+                    </div> 
+             
+                </div> 
+                <div class="modal-footer"> 
+                    <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button> 
+                    <button type="submit" class="btn btn-primary">Guardar Categoria</button> 
+                </div> 
+            </form> 
+        </div> 
+    </div> 
+ 
+    <!-- Modal Editar Usuario --> 
+    <div class="modal fade" id="modalEditarCategoria" tabindex="-1" aria-labelledby="modalEditarCategoriaLabel" aria-hidden="true" data-bs-backdrop="static"> 
+        <div class="modal-dialog"> 
+            <form id="formEditarCategoria" class="modal-content"> 
+                <div class="modal-header"> 
+                    <h5 class="modal-title" id="modalEditarCategoriaLabel">Editar Categoria</h5> 
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button> 
+                </div> 
+                <div class="modal-body"> 
+                    <input type="hidden" id="edit_idcategoria"> 
+             
+                    <div class="mb-2"> 
+                        <label class="form-label">Categoria</label> 
+                        <input type="text" id="edit_categoria" class="form-control" required minlength="5" maxlength="30"> 
+                    </div> 
+             
+                </div> 
+                <div class="modal-footer"> 
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button> 
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button> 
+                </div> 
+            </form> 
+        </div> 
+    </div> 
+ 
+ 
+ 
+        <script src="js/funcionesSistema.js"></script> 
+        <!-- MENU --> 
+        <script src="menu/bootstrap.bundle.min.js"></script> 
+        <script src="menu/scripts.js"></script> 
+        <!-- DATATABLES --> 
+        <script src="dt/jquery-3.7.1.js"></script> 
+        <script src="dt/datatables.min.js"></script> 
+        <script src="dt/jquery.dataTables.min.js"></script> 
+        <!-- DATATABLES Buttons extension --> 
+        <script src="dt/dataTables.buttons.min.js"></script> 
+        <script src="dt/buttons.print.min.js"></script> 
+        <script src="dt/buttons.html5.min.js"></script> 
+        <!-- DATATABLES JSZip y pdfmake para exportar --> 
+        <script src="dt/jszip.min.js"></script> 
+        <script src="dt/pdfmake.min.js"></script> 
+        <script src="dt/vfs_fonts.js"></script> 
+        <!-- DATATABLES Idioma Español --> 
+        <script src="dt/es-ES.js"></script> 
+    </div> 
+    <div> 
+        <footer class="py-2 bg-white mt-auto border-top"> 
+            <div class="container-fluid px-4"> 
+                <div class="d-flex align-items-center justify-content-between small text-muted"> 
+                    <div>&copy; Librería Rocio 2025</div> 
+                </div> 
+            </div> 
+        </footer> 
+    </div> 
+    <script> 
+    //Al cargarse la página--------------------------------------------------------------------------- 
+    //Control de seguridad en la apertura de la página------------------------------------------------ 
+    document.addEventListener("DOMContentLoaded", function () { 
+            const nombre = sessionStorage.getItem("nomUsuario"); 
+ 
+            if (!nombre) { 
+            // Si no hay sesión, redirige al login 
+                window.location.href = "error.html"; 
+            } else { 
+            // Mostrar el nombre del usuario si existe el elemento 
+                const spanUsuario = document.getElementById("usuario"); 
+                if (spanUsuario) { 
+                spanUsuario.textContent = nombre; 
+                } 
+            } 
+        }); 
+    //Fin del Control de seguridad en la apertura de la página---------------------------------------- 
+ 
+    //------------------------------------------------------------------------------------------------ 
+    // usuario actual 
+    const usuarioActual = { 
+            rol: sessionStorage.getItem("rolUsuario") 
+        } 
+        // habilitar crear nuevos usuarios solo para adminsitradores 
+        document.addEventListener("DOMContentLoaded", function(){ 
+            const btnCrear = document.getElementById("btnCrearUsuario"); 
+            if(btnCrear && !tienePermiso(usuarioActual, permisos.usuarios_crear)){ 
+                btnCrear.style.display = "none"; // oculta si no tiene permiso 
+            } 
+        }); 
+    // Recuperar el array de objetos desde localStorage 
+    var categorias = JSON.parse(localStorage.getItem("categorias")) || []; 
+    let tabla; 
+ 
+    const modalNCategoria = new bootstrap.Modal(document.getElementById('modalNuevaCategoria')); 
+ 
+    document.addEventListener('DOMContentLoaded', function (){ 
+    cargarTablaCategorias(); 
+ 
+     
+ 
+    //Evento para Nuevo Usuario---------------------------------------------------------- 
+    document.getElementById('formNuevaCategoria').addEventListener('submit', function (e) { 
+            e.preventDefault(); 
+ 
+            const nuevaCategoria = { 
+                idcategoria: obtenerSiguienteId(categorias), 
+                categorias: document.getElementById('txtcategoria').value.trim() 
+            }; 
+ 
+            if (Object.values(nuevaCategoria).some(val => val === '')) { 
+                alert('Todos los campos son obligatorios'); 
+                return; 
+            } 
+ 
+            categorias.push(nuevaCategoria); 
+            guardarCategorias(categorias); 
+            this.reset(); 
+            tabla.row.add(nuevaCategoria).draw(); 
+            modalNCategoria.hide(); 
+            alertify.success("Registro guardado"); 
+    }); 
+ 
+    const modalECategoria = new bootstrap.Modal(document.getElementById('modalEditarCategoria')); 
+    // Evento para botón editar-------------------------------------------------------------- 
+    document.addEventListener('click', function (e) { 
+            if (e.target.closest('.btn-editar')) { 
+                const id = parseInt(e.target.closest('.btn-editar').dataset.id); 
+                const categoria = categorias.find(u => u.idcategoria === id); 
+                if (categoria) { 
+                    document.getElementById('edit_idcategoria').value = categoria.idcategoria; 
+                    document.getElementById('edit_categoria').value = categoria.categoria; 
+                    modalECategoria.show(); 
+                } 
+            } 
+    }); 
+ 
+    // Guardar cambios al editar----------------------------------------------------------- 
+    document.getElementById('formEditarCategoria').addEventListener('submit', function (e) { 
+            e.preventDefault(); 
+            const id = parseInt(document.getElementById('edit_idcategoria').value); 
+            const index = categorias.findIndex(u => u.idcategoria === id); 
+            if (index !== -1) { 
+                categorias[index] = { 
+                    idcategoria: id, 
+                    categorias: document.getElementById('edit_categoria').value.trim() 
+                }; 
+                guardarCategorias(categorias); 
+                tabla.clear().rows.add(categorias).draw(); 
+                modalECategoria.hide(); 
+                alertify.success("Categoria actualizada"); 
+            } 
+    }); 
+ 
+    // Evento para botón eliminar 
+    document.addEventListener('click', function (e) { 
+            if (e.target.closest('.btn-eliminar')) { 
+                const id = parseInt(e.target.closest('.btn-eliminar').dataset.id); 
+                alertify.confirm("Eliminar categoria", "¿Estás seguro de eliminar esta categoria?", 
+                    function(){ 
+                        categorias = categorias.filter(u => u.idcategoria !== id); 
+                        guardarCategorias(categorias); 
+                        tabla.clear().rows.add(categorias).draw(); 
+                        alertify.success("Categoria eliminada"); 
+                    }, 
+                    function(){ 
+                        alertify.error("Eliminación cancelada"); 
+                    } 
+                ).set('labels', {ok:'Sí', cancel:'No'}); 
+            } 
+    }); 
+    }); 
+    //------------------------------------------------------------------------------ 
+    function cargarTablaCategorias(){ 
+    // Inicializar el DataTable 
+    tabla = new DataTable("#tabla_categorias", { 
+            data: categorias, 
+            columns: [ 
+                { data: 'idcategoria', title: 'Id Categoria' }, 
+                { data: 'categorias', title: 'Categorias' }, 
+                { 
+                    data: null, 
+                    render: function (data, type, row) { 
+                    return ` 
+                        <button class="btn btn-sm btn-warning me-1 btn-editar" data-id="${row.idcategoria}"><i class="bi bi-pencil
+                        square"></i></button> 
+                        <button class="btn btn-sm btn-danger btn-eliminar" data-id="${row.idcategoria}"><i class="bi bi-trash"></i></button> 
+                    `; 
+                    } 
+                } 
+            ], 
+            dom: 'Bfrtip', 
+            buttons: [ 
+                { 
+                    extend: 'print', 
+                    text: '<i class="bi bi-printer"></i> Imprimir' 
+                }, 
+                { 
+                    extend: 'excelHtml5', 
+                    text: '<i class="bi bi-filetype-xlsx"></i> Exportar a Excel' 
+                }, 
+                { 
+                    extend: 'pdfHtml5', 
+                    text: '<i class="bi bi-filetype-pdf"></i> Exportar a PDF', 
+                    exportOptions: { 
+                        columns: [0, 1] // Excluye columna de acciones (índice 6) 
+                    }, 
+                    customize: function (doc) { 
+                        // Verifica si `content` tiene una tabla definida 
+                        for (let i = 0; i < doc.content.length; i++) { 
+                                if (doc.content[i].table !== undefined) { 
+                                    const tableNode = doc.content[i]; 
+ 
+                                    // Si hay body, ajustamos los anchos 
+                                    if (tableNode.table.body && tableNode.table.body.length > 0) { 
+                                        const colCount = tableNode.table.body[0].length; 
+                                        tableNode.table.widths = Array(colCount).fill('*'); 
+                                    } 
+ 
+                                    break; // salimos del loop luego de encontrar la tabla 
+                                } 
+                        } 
+                    } 
+                }, 
+                { 
+                    text: '<i class="bi bi-file-earmark-plus"></i> Nueva categoria', 
+                    className: 'btn btn-sm btn-primary', 
+                    action: function (e, dt, node, config) { 
+                        // Abrir un modal para crear un nuevo usuario 
+                        $('#modalNuevaCategoria').modal('show'); 
+                    } 
+                } 
+            ], 
+            responsive: true, 
+            language: spanish, 
+            initComplete: function () { 
+                // Aplicar clases de Bootstrap a los botones 
+                $('.dt-button:contains("Nueva categoria")') 
+                    .removeClass('dt-button') // elimina estilo por defecto 
+                    .addClass('btn btn-sm btn-primary'); // agrega estilos Bootstrap 
+ 
+                $('.dt-button:contains("Imprimir")') 
+                    .removeClass('dt-button') 
+                    .addClass('btn btn-sm btn-info'); 
+ 
+                $('.dt-button:contains("Exportar a Excel")') 
+                    .removeClass('dt-button') 
+                    .addClass('btn btn-sm btn-success'); 
+ 
+                $('.dt-button:contains("Exportar a PDF")') 
+                    .removeClass('dt-button') 
+                    .addClass('btn btn-sm btn-danger'); 
+            } 
+        }); 
+    //tabla.column(5).visible(false); //Ocultar la columna contraseña 
+    } 
+ 
+    //------------------------------------------------------------------------------ 
+    function guardarCategorias(data) { 
+            localStorage.setItem('categorias', JSON.stringify(data)); 
+        } 
+    //------------------------------------------------------------------------------ 
+    function obtenerSiguienteId(categorias) { 
+            if (categorias.length === 0){ 
+                    return 1; 
+            }else{ 
+                    const maxId = Math.max(...categorias.map(u => u.idcategoria || 0)); 
+                    return maxId + 1; 
+            } 
+        } 
+    //------------------------------------------------------------------------------ 
+    </script> 
+</body> 
+</html> 

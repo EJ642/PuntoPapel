@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error!</title>
+  <link rel="icon" type="image/png" href="img/error.png">
+  <!-- BOOTSTRAP -->
+  <link rel="stylesheet" href="bt/bootstrap.min.css">
+  <script src="bt/bootstrap.min.js"></script>
+</head>
+<body class="bg-dark bg-opacity-25"> 
+  <div class="text-center mt-5">
+    <p class="display-2 fw-bold text-danger">Error!</p>
+    <p class="display-5 fw-bold">No se puede cargar la página</p>
+    <p id="mensaje" class="fw-bold">En 5 segundos serás redirigido</p>
+  </div>
+  <script>
+    segundos = 5;
+    cronometro = document.getElementById("mensaje");
+    intervalo = setInterval(() => {
+      segundos--;
+      cronometro.textContent = "En " + segundos + " segundos serás redirigido";
+      if (segundos === 0) {
+        clearInterval(intervalo);
+        window.location.href = "login.html"; // Cambiá esto por tu URL de login real
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

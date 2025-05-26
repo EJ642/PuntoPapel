@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA_Compatible" content="IE-edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario</title>
+    <!-- Icono -->
+    <link rel="icon" href="img/user128.png" type="image/png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- ESTILOS DEL MENU -->
+    <link rel="stylesheet" href="menu/styles.css">
+    <!-- DATATABLES -->
+    <link rel="stylesheet" href="dt/datatables.min.css">
+    <link rel="stylesheet" href="dt/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="dt/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="bt/bootstrap.min.css">
+    <!-- Bootstrap -->
+    <script src="bt/bootstrap.bundle.min.js"></script>
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="bt-icons/bootstrap-icons.min.css">
+    <!-- Alertify -->
+    <link rel="stylesheet" href="alert/alertify.min.css">
+    <link rel="stylesheet" href="alert/themes/default.min.css">
+    <script src="alert/alertify.min.js"></script>
+</head>
+<body>
+     <div class="cabecera-nav">
+        <nav class="navbar navbar-expand-lg navbar-light cabecera-nav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown" id="menuMantenimiento">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Mantenimiento
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="articulos.html">Artículos</a></li>
+                                <li><a class="dropdown-item" href="marcas.html">Marcas</a></li>
+                                <li><a class="dropdown-item" href="clasificaciones.html">Clasificaciones</a></li>
+                                <li><a class="dropdown-item" href="proveedores.html">Proveedores</a></li>
+                                <li><a class="dropdown-item" href="cliente.html">Clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuCompras">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Compras
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Registro de compras</a></li>
+                                <li><a class="dropdown-item" href="#">Créditos con Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Pago a Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Ajuste de Stock</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuVentas">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Ventas
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="ventas.html">Registro de ventas</a></li>
+                                <li><a class="dropdown-item" href="credito_Cliente.html">Créditos con clientes</a></li>
+                                <li><a class="dropdown-item" href="#">Cobró de creditos a clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuInformes">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Informes
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Informes de ventas</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Créditos con clientes </a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Cobró de créditos</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de compras</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de créditos con Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Pago a Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de ajuste de Stock</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item" id="menuUsuarios"></li>
+                            <a class="nav-link" href="usuario.html">Usuarios</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Iniciado por:</div>
+                    <div id="usuario"></div>
+                </div>
+            </div>
+            <div>
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Configuraciones</a></li>
+                            <li><a class="dropdown-item" href="#!">Actividad</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- AQUÍ VA TODO LO QUE SE VA A VISUALIZAR EN LA PÁGINA -->
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-2">Usuarios</h1>
+            <div class="row">
+                <table id="tabla_usuarios" class="display compact" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>ID Usuario</th>
+                            <th>N° Cédula</th>
+                            <th>Nombre Completo</th>
+                            <th>Rol</th>
+                            <th>Celular</th>
+                            <th>Usuario</th>
+                            <th>Contraseña</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </main>
+    <!-- Modal Nuevo Usuario -->
+    <div class="modal fade" id="modalNuevoUsuario" tabindex="-1" aria-labelledby="modalUsuarioLabel" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <form id="formNuevoUsuario" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalUsuarioLabel">Agregar Nuevo Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label class="form-label">N° Cédula</label>
+                        <input type="number" id="cedula" class="form-control" required min="1000000" max="9999999">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Nombre Completo</label>
+                        <input type="text" id="nombre" class="form-control text-uppercase" required minlength="6" maxlength="50">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Rol</label>
+                        <select id="rol" class="form-control" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="gerente">Gerente</option>
+                            <option value="cajero">Cajero</option>
+                            <option value="codificador">Codificador</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Celular</label>
+                        <input type="text" id="celular" class="form-control" required minlength="6" maxlength="12">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Usuario</label>
+                        <input type="text" id="txtusuario" class="form-control" required minlength="5" maxlength="30">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Contraseña</label>
+                        <input type="password" id="contrasena" class="form-control" required minlength="5" maxlength="30">
+                        <small id="mensajeSeguridad_contra" class="form-text text-danger d-none">La contraseña no es segura.Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un caracter especial.</small>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Confirmar Contraseña</label>
+                        <input type="password" id="Conf_contrasena" class="form-control" required minlength="5" maxlength="30">
+                        <small id="mensajeCoincidencia_contra" class="form-text text-danger d-none">Las contraseñas no coinciden</small>
+                    </div>
+                </div>  
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Modal Editar Usuario -->
+    <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalEditarUsuarioLabel" aria-hidden="true" data-bs-backdrop="static"> 
+        <div class="modal-dialog">
+            <form id="formEditarUsuario" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditarUsuarioLabel">Editar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="edit_idusuario">
+                    <div class="mb-2">
+                        <label class="form-label">N° Cédula</label>
+                        <input type="number" id="edit_cedula" class="form-control" required min="1000000" max="9999999">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Nombre Completo</label>
+                        <input type="text" id="edit_nombre" class="form-control text-uppercase" required minlength="6" maxlength="50">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Rol</label>
+                        <select id="edit_rol" class="form-control" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="gerente">Gerente</option>
+                            <option value="cajero">Cajero</option>
+                            <option value="codificador">Codificador</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Celular</label>
+                        <input type="text" id="edit_celular" class="form-control" required minlength="6" maxlength="12">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Usuario</label>
+                        <input type="text" id="edit_usuario" class="form-control" required minlength="5" maxlength="30">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Contraseña</label>
+                        <input type="password" id="edit_contrasena" class="form-control" required minlength="5" maxlength="30">
+                        <small id="mensajeSeguridad_edit_contra" class="form-text text-danger d-none">La contraseña no es segura.Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un caracter especial.</small>
+                        
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">Confirmar Contraseña</label>
+                        <input type="password" id="edit_Conf_contrasena" class="form-control" required minlength="5" maxlength="30">
+                        <small id="mensajeCoincidencia_edit_contra" class="form-text text-danger d-none"> Las contraseñas no coinciden</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--Modal para ver los permisos -->
+    <div class="modal fade" id="modalPermisos" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <h5 class="modal-title">Permisos del rolUsuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form id="formPermisos">
+                        <div id="listaChkPermisos" class="form-check-group">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarPermisos">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript -->
+    <script src="js/funcionesSistema.js"></script>
+    <script src="js/auth/permisos.js"></script>
+    <!-- MENU -->
+    <script src="menu/bootstrap.bundle.min.js"></script>
+    <script src="menu/scripts.js"></script>
+    <!-- DATATABLES -->
+    <script src="dt/jquery-3.7.1.js"></script>
+    <script src="dt/datatables.min.js"></script>
+    <script src="dt/jquery.dataTables.min.js"></script>
+    <!-- DATATABLES Buttons extension -->
+    <script src="dt/dataTables.buttons.min.js"></script>
+    <script src="dt/buttons.print.min.js"></script>
+    <script src="dt/buttons.html5.min.js"></script>
+    <!-- DATATABLES JSZip y pdfmake para exportar -->
+    <script src="dt/jszip.min.js"></script>
+    <script src="dt/pdfmake.min.js"></script>
+    <script src="dt/vfs_fonts.js"></script>
+    <!-- DATATABLES Idioma Español -->
+    <script src="dt/es-ES.js"></script>
+    <script>
+       // control de seguridad al cargarse la página
+        document.addEventListener("DOMContentLoaded", function () {
+            const nombre = sessionStorage.getItem("nomUsuario");
+
+            if (!nombre) {
+            // Si no hay sesión, redirige al login
+                window.location.href = "error.html";
+            } else {
+            // Mostrar el nombre del usuario si existe el elemento
+                const spanUsuario = document.getElementById("usuario");
+                if (spanUsuario) {
+                spanUsuario.textContent = nombre;
+                }
+            }
+        });
+        // usuario actual
+        const usuarioActual = {
+            rol: sessionStorage.getItem("rolUsuario")
+        }
+        // habilitar crear nuevos usuarios solo para adminsitradores
+        document.addEventListener("DOMContentLoaded", function(){
+            const btnCrear = document.getElementById("btnCrearUsuario");
+            if(btnCrear && !tienePermiso(usuarioActual, permisos.usuarios_crear)){
+                btnCrear.style.display = "none"; // oculta si no tiene permiso
+            }
+        });
+        // Recuperar el array de objetos desde localStorage
+        let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        let tabla;
+        const modalNUsuario = new bootstrap.Modal(document.getElementById('modalNuevoUsuario'));
+        document.addEventListener('DOMContentLoaded', function(){
+            cargarTablaUsuarios();
+            // Evento para cargar nuevos usuarios
+            document.getElementById('formNuevoUsuario').addEventListener('submit', function(e){
+                e.preventDefault();
+                // verifica si las contraseñas coiciden
+                const contrasena = document.getElementById('contrasena').value;
+                const confContrasena = document.getElementById('Conf_contrasena').value;
+                if (contrasena !== confContrasena) {
+                    alertify.error('Las contraseñas no coinciden');
+                    return;
+                }
+                const nuevoUsuario = {
+                    idusuario: obtenerSiguienteId(usuarios),
+                    cedula: document.getElementById('cedula').value.trim(),
+                    nombre: document.getElementById('nombre').value.trim(),
+                    rol: document.getElementById('rol').value.trim(),
+                    celular: document.getElementById('celular').value.trim(),
+                    usuario: document.getElementById('txtusuario').value.trim(),
+                    contrasena: contrasena,
+                };
+                
+                if(Object.values(nuevoUsuario).some(val => val === '')){
+                    alertify.error('Todos los campos son obligatorios');
+                    return;
+                }
+                // Verificar cédula única
+                if (usuarios.some(u => u.cedula === nuevoUsuario.cedula)) {
+                    alertify.error('Ya existe un usuario con esta cédula');
+                    return;
+                }
+                usuarios.push(nuevoUsuario);
+                guardarUsuarios(usuarios);
+                this.reset();
+                tabla.row.add(nuevoUsuario).draw();
+                modalNUsuario.hide();
+                alertify.success("Registro guardado");
+            });
+            function permisos(usuario, permisoRequerido){
+                return permisos_por_rol[usuario.rol]?.includes(permisoRequerido) || false;
+            }
+            //-----------------------------
+            const modalEUsuario = new bootstrap.Modal(document.getElementById('modalEditarUsuario'));
+            // evento para editar 
+            document.addEventListener('click', function(e){
+                if(e.target.closest('.btn-editar')){
+                    const id = parseInt(e.target.closest('.btn-editar').dataset.id);
+                    const usuario = usuarios.find(u => u.idusuario === id);
+                    if(usuario){
+                        document.getElementById('edit_idusuario').value = id; 
+                        document.getElementById('edit_cedula').value = usuario.cedula;
+                        document.getElementById('edit_nombre').value = usuario.nombre;
+                        document.getElementById('edit_rol').value = usuario.rol;
+                        document.getElementById('edit_celular').value = usuario.celular;
+                        document.getElementById('edit_usuario').value = usuario.usuario;
+                        document.getElementById('edit_contrasena').value = usuario.contrasena;
+                        modalEUsuario.show();
+                    }
+                }
+            });
+            // guardar cambios al editar
+            document.getElementById('formEditarUsuario').addEventListener('submit', function (e){
+                e.preventDefault();
+                const id = parseInt(document.getElementById('edit_idusuario').value);
+                const index = usuarios.findIndex(u => u.idusuario === id);
+                // Validar contraseñas si se modificaron
+                const nuevaContrasena = document.getElementById('edit_contrasena').value;
+                const confContrasena = document.getElementById('edit_Conf_contrasena').value;
+                if (nuevaContrasena && nuevaContrasena !== confContrasena) {
+                    alertify.error('Las contraseñas no coinciden');
+                    return;
+                }
+                if(index !== -1){
+                    usuarios[index] = {
+                        idusuario: id,
+                        cedula: document.getElementById('edit_cedula').value.trim(),
+                        nombre: document.getElementById('edit_nombre').value.trim(),
+                        rol: document.getElementById('edit_rol').value.trim(),
+                        celular: document.getElementById('edit_celular').value.trim(),
+                        usuario: document.getElementById('edit_usuario').value.trim(),
+                        contrasena:  nuevaContrasena || usuarios[index].contrasena, // Mantener anterior si no se cambió
+                };
+                guardarUsuarios(usuarios);
+                tabla.clear().rows.add(usuarios).draw();
+                modalEUsuario.hide();
+                alertify.success("Usuario actualizado");
+                } 
+            });
+            // Evento para botón eliminar
+            document.addEventListener('click', function (e) {
+                    if(e.target.closest('.btn-eliminar')) {
+                        const id = parseInt(e.target.closest('.btn-eliminar').dataset.id);
+                        alertify.confirm("Eliminar usuario", "¿Estás seguro de eliminar este usuario?",
+                            function(){
+                                usuarios = usuarios.filter(u => u.idusuario !== id);
+                                guardarUsuarios(usuarios);
+                                tabla.clear().rows.add(usuarios).draw();
+                                alertify.success("Usuario eliminado");
+                            },
+                            function(){
+                                alertify.error("Eliminación cancelada");
+                            }
+                        ).set('labels', {ok:'Sí', cancel:'No'});
+                    }
+                }); 
+        });
+        // evento modalPermisos
+        const modalPermisos = new bootstrap.Modal(document.getElementById("modalPermisos"));
+        let usuarioSeleccionado = null; 
+        // cargar los permisos en el modal
+        document.addEventListener("click", function(e){
+            const btn = e.target.closest(".btn-permisos");
+            if(!btn) return;
+            const id = parseInt(btn.dataset.id);
+            usuarioSeleccionado = usuarios.find(u => u.idusuario === id);
+            if(!usuarioSeleccionado) return;
+            const contenedor = document.getElementById("listaChkPermisos");
+            contenedor.innerHTML = "";
+            // obtener permisos del sistema y del usuario
+            const permisoSistema = Object.values(permisos);
+            const permisosAsignados = usuarioSeleccionado.permisos || obtenerPermisos(usuarioSeleccionado.rol);
+            permisoSistema.forEach(p => {
+            const checked = permisosAsignados.includes(p) ? "checked" : "";
+            contenedor.innerHTML += `
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="${p}" id="perm-${p}" ${checked}>
+                <label class="form-check-label" for="perm-${p}">
+                ${p}
+                </label>
+            </div>`;
+            });
+            modalPermisos.show();
+        });
+        // Guardar cambios al cerrar el modal
+        document.getElementById("btnGuardarPermisos").addEventListener("click", function(){
+            if (!usuarioSeleccionado) return;
+            const seleccionados = [...document.querySelectorAll("#listaChkPermisos input:checked")].map(el => el.value);
+            // Guardar permisos personalizados al usuario
+            usuarioSeleccionado.permisos = seleccionados;
+            // Actualizar en el array y guardar
+            const index = usuarios.findIndex(u => u.idusuario === usuarioSeleccionado.idusuario);
+            if (index !== -1) {
+                usuarios[index] = usuarioSeleccionado;
+                guardarUsuarios(usuarios);
+                tabla.clear().rows.add(usuarios).draw();
+                alertify.success("Permisos actualizados");
+                modalPermisos.hide();
+            }
+        });
+        function cargarTablaUsuarios(){
+            // Inicializar el DataTable
+            tabla = new DataTable("#tabla_usuarios", {
+                data: usuarios,
+                columns: [
+                    { data: 'idusuario', title: 'Id Usuario' },
+                    { data: 'cedula', title: 'N° Cédula' },
+                    { data: 'nombre', title: 'Nombre Completo' },
+                    { data: 'rol', title: 'Rol' },
+                    { data: 'celular', title: 'Celular' },
+                    { data: 'usuario', title: 'Usuario' },
+                    { data: 'contrasena', title: 'Contraseña' },
+                    {
+                        data: null, 
+                        title: 'Acciones',
+                        render: function (data, type, row) {
+                            return `
+                                <button class="btn btn-sm btn-warning me-1 btn-editar" data-id="${row.idusuario}">
+                                <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger me-1 btn-eliminar" data-id="${row.idusuario}">
+                                <i class="bi bi-trash"></i>
+                                </button>
+                                <button class="btn btn-sm btn-secondary btn-permisos" data-id="${row.idusuario}">
+                                <i class="bi bi-key"></i>
+                                </button>
+                            `;
+                        }
+                    }
+                ],
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: '<i class="bi bi-printer"></i> Imprimir'
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="bi bi-filetype-xlsx"></i> Exportar a Excel'
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="bi bi-filetype-pdf"></i> Exportar a PDF',
+                        exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5] // Excluye columna de acciones (índice 6)
+                        },
+                        customize: function (doc) {
+                            const now = new Date();
+                            const fecha = now.toLocaleDateString();
+                            const hora = now.toLocaleTimeString();
+                            // Agregar encabezado personalizado
+                            doc.content.splice(0, 0, {
+                                text: [
+                                { text: 'LIBRERIA ROCIO\n', fontSize: 14, bold: true },
+                                { text: 'Reporte de registros de usuarios\n', fontSize: 12 },
+                                { text: `Fecha: ${fecha} - Hora: ${hora}\n\n`, fontSize: 10 }
+                                ],
+                                alignment: 'center',
+                                margin: [0, 0, 0, 12]
+                            });
+
+                             // Ajustar ancho automático
+                            for (let i = 0; i < doc.content.length; i++) {
+                                if (doc.content[i].table !== undefined) {
+                                const tableNode = doc.content[i];
+                                if (tableNode.table.body && tableNode.table.body.length > 0) {
+                                    const colCount = tableNode.table.body[0].length;
+                                    tableNode.table.widths = Array(colCount).fill('*');
+                                }
+                                break;
+                                }
+                            }
+
+                            // Pie de página con número de página
+                            doc.footer = function (currentPage, pageCount) {
+                                return {
+                                columns: [
+                                    { text: `Fecha de exportación: ${fecha} ${hora}`, alignment: 'left', margin: [40, 0] },
+                                    { text: `Página ${currentPage} de ${pageCount}`, alignment: 'right', margin: [0, 0, 40] }
+                                ],
+                                fontSize: 8
+                                };
+                            };
+
+                            doc.defaultStyle.fontSize = 10;
+
+
+                            // Verifica si `content` tiene una tabla definida
+                            for (let i = 0; i < doc.content.length; i++) {
+                                if (doc.content[i].table !== undefined) {
+                                    const tableNode = doc.content[i];
+                                    // Si hay body, ajustamos los anchos
+                                    if (tableNode.table.body && tableNode.table.body.length > 0) {
+                                        const colCount = tableNode.table.body[0].length;
+                                        tableNode.table.widths = Array(colCount).fill('*');
+                                    }
+                                    break; // salimos del loop luego de encontrar la tabla
+                                }
+                            }
+                        }
+                    },
+                    {
+                        text: '<i class="bi bi-file-earmark-plus"></i> Nuevo usuario',
+                        className: 'btn btn-sm btn-primary',
+                        action: function (e, dt, node, config) {
+                            // Abrir un modal para crear un nuevo usuario
+                            modalNUsuario.show();
+                        }
+                    }
+                ],
+                responsive: true,
+                language: spanish,
+                initComplete: function () {
+                    // Aplicar clases de Bootstrap a los botones
+                    $('.dt-button:contains("Nuevo usuario")')
+                        .removeClass('dt-button') // elimina estilo por defecto
+                        .addClass('btn btn-sm btn-primary'); // agrega estilos Bootstrap
+                    $('.dt-button:contains("Imprimir")')
+                        .removeClass('dt-button')
+                        .addClass('btn btn-sm btn-info');
+                    $('.dt-button:contains("Exportar a Excel")')
+                        .removeClass('dt-button')
+                        .addClass('btn btn-sm btn-success');
+                    $('.dt-button:contains("Exportar a PDF")')
+                        .removeClass('dt-button')
+                        .addClass('btn btn-sm btn-danger');
+                }
+            });
+            //tabla.column(5).visible(false); //Ocultar la columna contraseña
+            //--------------------------------------------------------
+        }
+        function guardarUsuarios(data) {
+            localStorage.setItem('usuarios', JSON.stringify(data));
+        }
+        //--------------------------------------------------------
+        function obtenerSiguienteId(usuarios) {
+            if (usuarios.length === 0){
+                return 1;
+            }else{
+                const maxId = Math.max(...usuarios.map(u => u.idusuario || 0));
+                return maxId + 1;
+            }
+        }
+        //Funcion para validar que la contraseña sea segura
+    const reglas = {
+        r1: c => c.length >= 8,
+        r2: c => /[A-Z]/.test(c),
+        r3: c => /[a-z]/.test(c),
+        r4: c => /\d/.test(c),
+        r5: c => /[@#$%^&+=!¡¿?*()\-_"':;.,<>~`|{}[\]\\]/.test(c),
+    };
+
+    function mostrarSeguridad(inputId, mensajeId) {
+        const input = document.getElementById(inputId);
+        const mensaje = document.getElementById(mensajeId);
+
+        input.addEventListener("input", () => {
+        const contra = input.value;
+        const cumple = Object.values(reglas).every(fn => fn(contra));
+        
+        if (contra === "") {
+            mensaje.classList.add("d-none");
+            return;
+        }
+
+        mensaje.classList.remove("d-none");
+        if (cumple) {
+            mensaje.textContent = "🟢 Contraseña segura";
+            mensaje.classList.remove("text-danger");
+            mensaje.classList.add("text-success");
+        } else {
+            mensaje.textContent = "La contraseña no es segura.Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un caracter especial.";
+            mensaje.classList.remove("text-success");
+            mensaje.classList.add("text-danger");
+        }
+        });
+    }
+
+    mostrarSeguridad("contrasena", "mensajeSeguridad_contra");
+    mostrarSeguridad("edit_contrasena", "mensajeSeguridad_edit_contra");
+
+  // Validación al enviar formulario
+    [
+        { formId: "formNuevoUsuario", passId: "contrasena", confId: "Conf_contrasena" },
+        { formId: "formEditarUsuario", passId: "edit_contrasena", confId: "edit_Conf_contrasena" },
+    ].forEach(({ formId, passId, confId }) => {
+        const form = document.getElementById(formId);
+        form.addEventListener("submit", function (e) {
+        const contra = document.getElementById(passId).value;
+        const confContra = document.getElementById(confId).value;
+        const cumple = Object.values(reglas).every(fn => fn(contra));
+
+        if (!cumple) {
+            e.preventDefault();
+            alertify.error("La contraseña no es segura.");
+        } else if (contra !== confContra) {
+            e.preventDefault();
+            alertify.warning("Las contraseñas no coinciden.");
+        }
+        });
+  });
+  // función para verificar coincidencia de contraseñas
+  function verificarCoincidencia(passId, confId, mensajeId) {
+  const pass = document.getElementById(passId);
+  const conf = document.getElementById(confId);
+  const mensaje = document.getElementById(mensajeId);
+
+  function checkMatch() {
+    if (conf.value === "") {
+      mensaje.classList.add("d-none");
+      return;
+    }
+
+    if (pass.value === conf.value) {
+      mensaje.classList.add("d-none");
+    } else {
+      mensaje.textContent = "Las contraseñas no coinciden";
+      mensaje.classList.remove("d-none");
+    }
+  }
+
+  pass.addEventListener("input", checkMatch);
+  conf.addEventListener("input", checkMatch);
+}
+
+verificarCoincidencia("contrasena", "Conf_contrasena", "mensajeCoincidencia_contra");
+verificarCoincidencia("edit_contrasena", "edit_Conf_contrasena", "mensajeCoincidencia_edit_contra");
+
+//funcion que oculta elementos del menu dependiendo del rol
+    document.addEventListener("DOMContentLoaded", function () {
+    const rol = sessionStorage.getItem("rolUsuario"); // debe tener: administrador, gerente, etc.
+    const nombre = sessionStorage.getItem("nomUsuario");
+
+    if (!rol || !nombre) {
+      alertify.error("Acceso denegado.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Mostrar el nombre en el panel
+    const spanUsuario = document.getElementById("usuario");
+    if (spanUsuario) spanUsuario.textContent = nombre;
+
+    
+    // Ocultar menús según el rol
+    switch (rol) {
+      case "administrador":
+        // ve todo
+        break;
+      case "gerente":
+        ocultar(["menuUsuarios"]);
+        break;
+      case "cajero":
+        ocultar(["menuMantenimiento", "menuCompras", "menuUsuarios"]);
+        break;
+      case "codificador":
+        ocultar(["menuVentas", "menuCompras", "menuInformes", "menuUsuarios"]);
+        break;
+      default:
+        alertify.error("Rol no válido.");
+        window.location.href = "login.html";
+    }
+
+    // Función para ocultar elementos por ID
+    function ocultar(ids) {
+      ids.forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem) elem.style.display = "none";
+      });
+    }
+  });
+
+
+
+
+
+</script>
+</body>
+</html>

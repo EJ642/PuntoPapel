@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punto Papel</title>
+    <!-- Icono -->
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- JavaScript -->
+    <script src="js/funcionesSistema.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bt/bootstrap.min.css">
+    <script src="bt/bootstrap.bundle.min.js"></script>
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="bt_icons/bootstrap-icons.min.css">
+    <!-- Alertify -->
+    <link rel="stylesheet" href="alert/alertify.min.css">
+    <link rel="stylesheet" href="alert/themes/default.min.css">
+    <script src="alert/alertify.min.js"></script>
+</head>
+<body>
+    
+    <div class="cabecera-nav">
+        <nav class="navbar navbar-expand-lg navbar-light cabecera-nav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown" id="menuMantenimiento">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Mantenimiento
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="articulos.html">Artículos</a></li>
+                                <li><a class="dropdown-item" href="marcas.html">Marcas</a></li>
+                                <li><a class="dropdown-item" href="categorias.html">Clasificaciones</a></li>
+                                <li><a class="dropdown-item" href="proveedores.html">Proveedores</a></li>
+                                <li><a class="dropdown-item" href="cliente.html">Clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuCompras">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Compras
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="compra.html">Registro de compras</a></li>
+                                <li><a class="dropdown-item" href="pago_proveedores.html">Pago a Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Ajuste de Stock</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuVentas">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Ventas
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="ventas.html">Registro de ventas</a></li>
+                                <li><a class="dropdown-item" href="credito_Cliente.html">Créditos con clientes</a></li>
+                                <li><a class="dropdown-item" href="#">Cobró de creditos a clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuInformes">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Informes
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Informes de ventas</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Créditos con clientes </a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Cobró de créditos</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de compras</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de créditos con Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de Pago a Proveedores</a></li>
+                                <li><a class="dropdown-item" href="#">Informes de ajuste de Stock</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item" id="menuUsuarios"></li>
+                            <a class="nav-link" href="usuario.html">Usuarios</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Iniciado por:</div>
+                    <div id="usuario"></div>
+                </div>
+            </div>
+            <div>
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Configuraciones</a></li>
+                            <li><a class="dropdown-item" href="#!">Actividad</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+   <!-- Pantalla principal donde se mostrará el contenido -->
+    <div class="cont-principal">
+        
+    </div>
+    <div>
+        <footer class="py-2 bg-white mt-auto border-top">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small text-muted">
+                    <div>&copy; Librería Rocio 2025</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const nombre = sessionStorage.getItem("nomUsuario");
+
+        if (!nombre) {
+        // Si no hay sesión, redirige al login
+            window.location.href = "error.html";
+        } else {
+        // Mostrar el nombre del usuario si existe el elemento
+            const spanUsuario = document.getElementById("usuario");
+            if (spanUsuario) {
+            spanUsuario.textContent = nombre;
+            }
+        }
+    });
+    
+    //funcion que oculta elementos del menu dependiendo del rol
+    document.addEventListener("DOMContentLoaded", function () {
+    const rol = sessionStorage.getItem("rolUsuario"); // debe tener: administrador, gerente, etc.
+    const nombre = sessionStorage.getItem("nomUsuario");
+
+    if (!rol || !nombre) {
+      alertify.error("Acceso denegado.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Mostrar el nombre en el panel
+    const spanUsuario = document.getElementById("usuario");
+    if (spanUsuario) spanUsuario.textContent = nombre;
+
+    
+    // Ocultar menús según el rol
+    switch (rol) {
+      case "administrador":
+        // ve todo
+        break;
+      case "gerente":
+        ocultar(["menuUsuarios"]);
+        break;
+      case "cajero":
+        ocultar(["menuMantenimiento", "menuCompras", "menuUsuarios"]);
+        break;
+      case "codificador":
+        ocultar(["menuVentas", "menuCompras", "menuInformes", "menuUsuarios"]);
+        break;
+      default:
+        alertify.error("Rol no válido.");
+        window.location.href = "login.html";
+    }
+
+    // Función para ocultar elementos por ID
+    function ocultar(ids) {
+      ids.forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem) elem.style.display = "none";
+      });
+    }
+  });
+    </script>
+</body>
+</html>
