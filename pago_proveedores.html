@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Icono -->
+  <link rel="icon" href="img/logo.png" type="image/png">
   <title>Pago a Proveedores - Librería Rocío</title>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="bt/bootstrap.min.css">
@@ -446,8 +448,7 @@
         body: [
           ['Tipo de Pago', pago.tipo.toUpperCase()],
           ['Moneda', pago.moneda],
-          ['Importe', pago.moneda === 'PYG' ? `₲ ${pago.importe.toLocaleString('es-PY')}` : `$ ${pago.importe.toLocaleString('es-PY')}`],
-          ['Registrado por', pago.usuario]
+          ['Importe', pago.moneda === 'PYG' ? `₲ ${pago.importe.toLocaleString('es-PY')}` : `$ ${pago.importe.toLocaleString('es-PY')}`]
         ],
         theme: 'grid',
         headStyles: { fillColor: [41, 128, 185] }
