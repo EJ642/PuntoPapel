@@ -1,27 +1,124 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
+/* Fuente general */
 body {
-    display: flex;
-    flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
 }
-.cabecera-nav {
-    height: 10vh;
-    background-color: #ffffff;
-    z-index: 1000;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+
+/* Navbar */
+.navbar {
+  background-color: #d51f56;
 }
+
+.navbar .nav-link,
+.navbar-brand,
+.navbar .navbar-text {
+  color: #fff !important;
+}
+
+.navbar .nav-link:hover,
+.navbar-brand:hover {
+  color: #00e1ff !important;
+}
+
+/* Cabecera de tarjetas */
+.card-header {
+  background-color: #e9ecef;
+  border-bottom: 2px solid #dee2e6;
+  font-weight: bold;
+  color: #003366;
+}
+
 .cont-principal {
-    height: 90vh;
-    overflow-y: auto;
-    padding: 20px;
-    background-color: #dbd0d2;
+  text-align: left;
 }
-.text-right {
-    text-align: right !important;
+
+/* Botones principales */
+.btn-primary {
+  background-color: #cc0000;
+  border-color: #cc0000;
 }
-.dt-body-right {
-    text-align: right;
+
+.btn-primary:hover {
+  background-color: #990000;
+  border-color: #990000;
+}
+
+.btn-success {
+  background-color: #0073e6;
+  border-color: #0073e6;
+}
+
+.btn-success:hover {
+  background-color: #005bb5;
+  border-color: #005bb5;
+}
+
+.btn-danger {
+  background-color: #cc0000;
+  border-color: #cc0000;
+}
+
+.btn-danger:hover {
+  background-color: #990000;
+  border-color: #990000;
+}
+
+/* Tabla DataTable */
+table.dataTable thead {
+  background-color: #003366;
+  color: white;
+}
+
+table.dataTable tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Inputs y formularios */
+.form-control:focus,
+.form-select:focus {
+  border-color: #0073e6;
+  box-shadow: 0 0 0 0.2rem rgba(0, 115, 230, 0.25);
+}
+
+/* Etiquetas */
+label.form-label {
+  color: #003366;
+  font-weight: 500;
+}
+
+/* Footer / sesión */
+.sb-sidenav-footer {
+  background-color: #d51f56;
+  color: #f1f1f1;
+  padding: 10px;
+  font-size: 0.9rem;
+}
+
+/* Título principal */
+h2 i,
+.card-header i,
+.btn i {
+  margin-right: 5px;
+}
+
+/* Botón Datatable PDF */
+#btnExportPDF {
+  background-color: #cc0000;
+  border-color: #cc0000;
+}
+
+#btnExportPDF:hover {
+  background-color: #990000;
+  border-color: #990000;
+}
+
+/* Indicador proveedor */
+#nombreProveedor {
+  font-weight: bold;
+  color: #003366;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
