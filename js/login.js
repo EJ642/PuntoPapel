@@ -131,11 +131,11 @@ function verBD() {
     pageLength: 5
   });
 
-  $('#tablaMarcas').DataTable({
+  $('#tabla_marcas').DataTable({
     data: marcas,
     columns: [
       { data: 'idmarca', title: 'ID Marca' },
-      { data: 'marcas', title: 'Marca' }
+      { data: 'marca', title: 'Marca' }
     ],
     language: spanish,
     searching: false,
