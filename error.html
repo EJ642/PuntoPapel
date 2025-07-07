@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Error!</title>
   <link rel="icon" type="image/png" href="img/error.png">
-  <!-- BOOTSTRAP -->
   <link rel="stylesheet" href="bt/bootstrap.min.css">
   <script src="bt/bootstrap.min.js"></script>
 </head>
@@ -23,7 +22,7 @@
       cronometro.textContent = "En " + segundos + " segundos serás redirigido";
       if (segundos === 0) {
         clearInterval(intervalo);
-        window.location.href = "login.html"; // Cambiá esto por tu URL de login real
+        window.location.href = "login.html";
       }
     }, 1000);
   </script>

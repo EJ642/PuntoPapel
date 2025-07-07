@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creditos a Clientes</title>
+    <!-- Icono -->
+    <link rel="icon" href="img/logo16px.png" type="image/png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- DATATABLES -->
+    <link rel="stylesheet" href="dt/datatables.min.css">
+    <link rel="stylesheet" href="dt/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="dt/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="bt/bootstrap.min.css">
+    <!-- Bootstrap -->
+    <script src="bt/bootstrap.bundle.min.js"></script>
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="bt-icons/bootstrap-icons.min.css">
+    <!-- Alertify -->
+    <link rel="stylesheet" href="alert/alertify.min.css">
+    <link rel="stylesheet" href="alert/themes/default.min.css">
+    <script src="alert/alertify.min.js"></script>
+</head>
+<body>
+  <div class="cabecera-nav">
+        <nav class="navbar navbar-expand-lg navbar-light cabecera-nav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown" id="menuMantenimiento">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Mantenimiento
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li id="opcArticulos"><a class="dropdown-item" href="articulos.html">Artículos</a></li>
+                                <li id="opcProveedores"><a class="dropdown-item" href="proveedores.html">Proveedores</a></li>
+                                <li id="opcMarcas"><a class="dropdown-item" href="marcas.html">Marcas</a></li>
+                                <li id="opcCategorias"><a class="dropdown-item" href="categorias.html">Categorías</a></li>
+                                <li id="opcClientes"><a class="dropdown-item" href="cliente.html">Clientes</a></li>
+                                <li id="opcUsuario"><a class="dropdown-item" href="usuario.html">Usuarios</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuCompras">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Compras
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="compra.html">Registro de compras</a></li>
+                                <li><a class="dropdown-item" href="compras_hechas.html">Listado de compras</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li id="opcPagos"><a class="dropdown-item" href="pago_proveedores.html">Pago a Proveedores</a></li>
+                                <li id="opcListado"><a class="dropdown-item" href="pagos_hechos.html">Listado de pagos</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuStock">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Stock
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="ajuste_stock.html">Ajuste de Stock</a></li>
+                                <li><a class="dropdown-item" href="ajustes_hechos.html">Listado de ajustes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuVentas">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Ventas
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="Registrodeventas.html">Registro de ventas</a></li>
+                                <li id="opcListadoVentas"><a class="dropdown-item" href="ventas_realizadas.html">Listado de ventas</a></li>
+                                <li id="opcCredito"><a class="dropdown-item" href="creditos_clientes.html">Créditos con clientes</a></li>
+                                <li id="opcCobro"><a class="dropdown-item" href="historial_de pagos.html">Cobro de créditos a clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuInformes">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Informes
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="informe_venta.html">Informes de ventas</a></li>
+                                <li><a class="dropdown-item" href="informe_credito.html">Informes de créditos con clientes </a></li>
+                                <li><a class="dropdown-item" href="informe_cobro_credito.html">Informes de cobró de créditos</a></li>
+                                <li><a class="dropdown-item" href="informeCompra.html">Informes de compras</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Iniciado por:</div>
+                    <div id="usuario"></div>
+                </div>
+            </div>
+            <div>
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!" onclick="abrirPerfil()">Mi Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+<!-- Pantalla principal -->
+<div class="card mb-4">
+        <div class="card-header bg-secondary text-white fw-bold">
+            Creditos con Clientes
+        </div>
+        <!-- Filtrar PDF por fecha -->
+        <div class="mb-3 d-flex gap-3 align-items-end">
+            <div>
+                <label for="fechaInicio" class="form-label">Desde:</label>
+                <input type="date" id="fechaInicio" class="form-control">
+            </div>
+            <div>
+                <label for="fechaFin" class="form-label">Hasta:</label>
+                <input type="date" id="fechaFin" class="form-control">
+            </div>
+            <button id="btnFiltrar" class="btn btn-primary">Filtrar</button>
+        </div>
+  <!-- Tabla -->
+  <div class="table-responsive">
+    <table id="tablaCreditos" class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Factura</th>
+          <th>Cliente</th>
+          <th>RUC</th>
+          <th>Total</th>
+          <th>Vencimiento</th>
+          <th>Saldo Pendiente</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal Pagar Crédito -->
+<div class="modal fade" id="modalPagoCredito" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5 class="modal-title">Pagar Crédito</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Cliente:</strong> <span id="nombreClienteModal"></span></p>
+        <p><strong>Saldo pendiente:</strong> Gs. <span id="saldoModal"></span></p>
+        <input type="number" id="montoPago" class="form-control mb-2" placeholder="Monto a pagar">
+        <input type="date" id="fechaPago" class="form-control mb-2">
+        <textarea class="form-control" id="obsPago" placeholder="Observación (opcional)"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" onclick="confirmarPago()">Confirmar Pago</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  <script src="script.js"></script>
+
+ <!-- JavaScript -->
+    <script src="js/funcionesSistema.js"></script>
+    <script src="js/ventas.js"></script>
+    <script src="js/bd.js"></script>
+    <!-- MENU -->
+    <script src="menu/bootstrap.bundle.min.js"></script>
+    <script src="menu/scripts.js"></script>
+    <!-- DATATABLES -->
+    <script src="dt/jquery-3.7.1.js"></script>
+    <script src="dt/datatables.min.js"></script>
+    <script src="dt/jquery.dataTables.min.js"></script>
+    <!-- DATATABLES Buttons extension -->
+    <script src="dt/dataTables.buttons.min.js"></script>
+    <script src="dt/buttons.print.min.js"></script>
+    <script src="dt/buttons.html5.min.js"></script>
+    <!-- DATATABLES JSZip y pdfmake para exportar -->
+    <script src="dt/jszip.min.js"></script>
+    <script src="dt/pdfmake.min.js"></script>
+    <script src="dt/vfs_fonts.js"></script>
+    <!-- DATATABLES Idioma Español -->
+    <script src="dt/es-ES.js"></script>
+<script>
+
+    function cargarCreditos() {
+  const tabla = $('#tablaCreditos').DataTable();
+  tabla.clear();
+
+  const creditos = JSON.parse(localStorage.getItem("creditos")) || [];
+  creditos.forEach((c, index) => {
+    tabla.row.add({
+      id: c.id,
+      fecha: c.fecha,
+      factura: c.factura,
+      cliente: c.cliente,
+      ruc: c.ruc,
+      total: c.total,
+      vencimiento: c.vencimiento,
+      saldo: c.saldoPendiente,
+      estado: c.estado,
+     accion: c.saldoPendiente <= 0
+  ? "<span class='text-success fw-bold'>Pagado ✅</span>"
+  : `<button class='btn btn-success btn-sm' onclick='abrirModalPago(${index})'>Pagar</button>`
+
+    });
+  });
+
+  tabla.draw();
+}
+
+$(document).ready(function () {
+  $('#tablaCreditos').DataTable({
+    columns: [
+      { data: 'id' },
+      { data: 'fecha' },
+      { data: 'factura' },
+      { data: 'cliente' },
+      { data: 'ruc' },
+      { data: 'total' },
+      { data: 'vencimiento' },
+      { data: 'saldo' },
+      { data: 'estado' },
+      { data: 'accion' }
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+    }
+  });
+
+  cargarCreditos();
+});
+
+let indiceCreditoActual = null;
+
+function abrirModalPago(index) {
+  const creditos = JSON.parse(localStorage.getItem("creditos")) || [];
+  const credito = creditos[index];
+  indiceCreditoActual = index;
+
+  document.getElementById("nombreClienteModal").textContent = credito.cliente;
+  document.getElementById("saldoModal").textContent = credito.saldoPendiente;
+  document.getElementById("montoPago").value = "";
+  document.getElementById("fechaPago").valueAsDate = new Date();
+  document.getElementById("obsPago").value = "";
+
+  const modal = new bootstrap.Modal(document.getElementById("modalPagoCredito"));
+  modal.show();
+}
+
+
+
+    const credito = {
+  id: generarId(), // ID único
+  cliente: cliente,
+  ruc: ruc,
+    fecha: fecha, // fecha actual
+  fechaVenta: fecha,
+  vencimiento: fechaVencimiento, // seleccionada al crear la venta
+  total: total,
+  saldoPendiente: total,
+  pagos: [], // array de pagos parciales
+  estado: "pendiente",
+  detalle: detalleVenta // productos de la venta
+};
+function generarId() {
+  return Math.floor(Math.random() * 1000000); // Genera un ID aleatorio
+}
+credito.pagos.push({
+  fecha: nuevaFecha,
+  monto: montoPagado,
+  observacion: "Pago parcial"
+});
+credito.saldoPendiente -= montoPagado;
+if (credito.saldoPendiente <= 0) {
+  credito.estado = "pagado";
+}
+
+// 4. ACTUALIZAR ESTADO EN LA LISTA DE VENTAS AL PAGAR CRÉDITO
+function confirmarPago() {
+    const montoPago = parseFloat(document.getElementById("montoPago").value);
+    const fechaPago = document.getElementById("fechaPago").value;
+    const obsPago = document.getElementById("obsPago").value;
+
+    if (isNaN(montoPago) || montoPago <= 0 || !fechaPago) {
+        alertify.error("Datos de pago inválidos");
+        return;
+    }
+
+    const creditos = JSON.parse(localStorage.getItem("creditos")) || [];
+    const credito = creditos[indiceCreditoActual];
+
+    let cambio = 0;
+
+    if (montoPago >= credito.saldoPendiente) {
+        cambio = montoPago - credito.saldoPendiente;
+
+        credito.pagos.push({
+            fecha: fechaPago,
+            monto: credito.saldoPendiente, // solo se paga lo que corresponde
+            observacion: obsPago + (cambio > 0 ? ` (Se entregó de más: Gs. ${cambio})` : "")
+        });
+
+        credito.saldoPendiente = 0;
+        credito.estado = "pagado";
+
+        // actualizar también la venta asociada
+        let ventas = JSON.parse(localStorage.getItem("ventas")) || [];
+        const venta = ventas.find(v => v.id === credito.id);
+        if (venta) venta.estado = "pagado";
+        localStorage.setItem("ventas", JSON.stringify(ventas));
+    } else {
+        // pago parcial
+        credito.pagos.push({ fecha: fechaPago, monto: montoPago, observacion: obsPago });
+        credito.saldoPendiente -= montoPago;
+    }
+
+    localStorage.setItem("creditos", JSON.stringify(creditos));
+
+    let mensaje = "Pago registrado correctamente";
+    if (cambio > 0) {
+        mensaje += `. Cambio: Gs. ${cambio}`;
+    }
+
+    alertify.success(mensaje);
+    generarFacturaPago(credito.cliente, fechaPago, montoPago, credito.total, cambio, obsPago);
+    bootstrap.Modal.getInstance(document.getElementById("modalPagoCredito")).hide();
+    cargarCreditos();
+}
+
+// function generarFacturaPago(cliente, fecha, montoPagado, total, cambio, observacion) {
+//     const creditos = JSON.parse(localStorage.getItem("creditos")) || [];
+//     const credito = creditos[indiceCreditoActual];
+
+//     const ventana = window.open('', '_blank');
+
+//     let detalleHTML = '';
+//     if (credito.detalle && Array.isArray(credito.detalle) && credito.detalle.length > 0) {
+//         detalleHTML += `
+//         <h3>Detalle de productos</h3>
+//         <table>
+//             <thead>
+//                 <tr>
+//                     <th>Artículo</th>
+//                     <th>Cantidad</th>
+//                     <th>Precio</th>
+//                     <th>Subtotal</th>
+//                 </tr>
+//             </thead>
+//             <tbody>`;
+//         credito.detalle.forEach(item => {
+//             detalleHTML += `
+//                 <tr>
+//                     <td>${item.nombre_articulo}</td>
+//                     <td>${item.cantidad}</td>
+//                     <td>Gs. ${Number(item.precio).toLocaleString()}</td>
+//                     <td>Gs. ${(item.cantidad * item.precio).toLocaleString()}</td>
+//                 </tr>`;
+//         });
+//         detalleHTML += `
+//             </tbody>
+//         </table>`;
+//     }
+
+//     const html = `
+// <!DOCTYPE html>
+// <html lang="es">
+// <head>
+//     <meta charset="UTF-8">
+//     <title>Factura de Pago</title>
+//     <style>
+//         body { font-family: Arial, sans-serif; padding: 20px; }
+//         h2, h3 { text-align: center; }
+//         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+//         th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+//         .totales { margin-top: 20px; font-weight: bold; text-align: center; }
+//     </style>
+// </head>
+// <body>
+//     <h2>Comprobante de Pago de Crédito</h2>
+//     <p><strong>Cliente:</strong> ${cliente}</p>
+//     <p><strong>Fecha:</strong> ${fecha}</p>
+//     <p><strong>Total de la Deuda:</strong> Gs. ${Number(total).toLocaleString()}</p>
+//     <p><strong>Monto Pagado:</strong> Gs. ${Number(montoPagado).toLocaleString()}</p>
+//     <p><strong>Cambio:</strong> Gs. ${Number(cambio).toLocaleString()}</p>
+//     <p><strong>Observación:</strong> ${observacion || "Sin observación"}</p>
+
+//     ${detalleHTML}
+
+//     <div class="totales">
+//         <p>Gracias por su pago.</p>
+//     </div>
+
+//     <script>
+//         window.onload = function () {
+//             window.print();
+//         };
+//     <\/script>
+// </body>
+// </html>
+//     `;
+
+//     // Abrir documento y escribir contenido correctamente
+//     ventana.document.open();
+//     // ventana.document.write(html);
+//     ventana.document.close();
+// }
+
+
+// control de seguridad al cargarse la página
+       document.addEventListener("DOMContentLoaded", function () {
+        const nombre = sessionStorage.getItem("nomUsuario");
+
+        if (!nombre) {
+        // Si no hay sesión, redirige al login
+            window.location.href = "error.html";
+        } else {
+        // Mostrar el nombre del usuario si existe el elemento
+            const spanUsuario = document.getElementById("usuario");
+            if (spanUsuario) {
+            spanUsuario.textContent = nombre;
+            }
+        }
+    });
+    
+    //funcion que oculta elementos del menu dependiendo del rol
+    document.addEventListener("DOMContentLoaded", function () {
+    const rol = sessionStorage.getItem("rolUsuario"); // debe tener: administrador, gerente, etc.
+    const nombre = sessionStorage.getItem("nomUsuario");
+
+    if (!rol || !nombre) {
+      alertify.error("Acceso denegado.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Mostrar el nombre en el panel
+    const spanUsuario = document.getElementById("usuario");
+    if (spanUsuario) spanUsuario.textContent = nombre;
+
+    
+    // Ocultar menús según el rol
+    switch (rol) {
+            case "administrador":
+                // ve todo
+                break;
+            case "gerente":
+                ocultar(["menuMantenimiento", "menuCompras", "menuStock", "menuVentas"]);
+                break;
+            case "cajero":
+                ocultar(["menuMantenimiento", "menuCompras", "menuStock", "opcCobro", "opcCredito", "opcListadoVentas", "menuInformes"]);
+                break;
+            case "codificador":
+                ocultar(["opcUsuario", "opcClientes", "menuVentas", "opcPagos", "opcListado", "menuStock", "menuInformes"]);
+                break;
+            default:
+                alertify.error("Rol no válido.");
+                window.location.href = "login.html";
+    }
+
+    // Función para ocultar elementos por ID
+    function ocultar(ids) {
+      ids.forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem) elem.style.display = "none";
+      });
+    }
+  });
+        // habilitar crear nuevos usuarios solo para adminsitradores
+        document.addEventListener("DOMContentLoaded", function(){
+            const btnCrear = document.getElementById("btnCrearCliente");
+            if(btnCrear && !tienePermiso(usuarioActual, permisos.usuarios_crear)){
+                btnCrear.style.display = "none"; // oculta si no tiene permiso
+            }
+        });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+    </body>
+</html>

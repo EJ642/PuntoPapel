@@ -8,8 +8,6 @@
     <link rel="icon" href="img/user128.png" type="image/png">
     <!-- CSS -->
     <link rel="stylesheet" href="css/estilos.css">
-    <!-- ESTILOS DEL MENU -->
-    <link rel="stylesheet" href="menu/styles.css">
     <!-- DATATABLES -->
     <link rel="stylesheet" href="dt/datatables.min.css">
     <link rel="stylesheet" href="dt/jquery.dataTables.min.css">
@@ -25,7 +23,7 @@
     <script src="alert/alertify.min.js"></script>
 </head>
 <body>
-    <div class="cabecera-nav">
+  <div class="cabecera-nav">
         <nav class="navbar navbar-expand-lg navbar-light cabecera-nav">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">Inicio</a>
@@ -39,11 +37,12 @@
                                 Mantenimiento
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="articulos.html">Artículos</a></li>
-                                <li><a class="dropdown-item" href="marcas.html">Marcas</a></li>
-                                <li><a class="dropdown-item" href="clasificaciones.html">Clasificaciones</a></li>
-                                <li><a class="dropdown-item" href="proveedores.html">Proveedores</a></li>
-                                <li><a class="dropdown-item" href="cliente.html">Clientes</a></li>
+                                <li id="opcArticulos"><a class="dropdown-item" href="articulos.html">Artículos</a></li>
+                                <li id="opcProveedores"><a class="dropdown-item" href="proveedores.html">Proveedores</a></li>
+                                <li id="opcMarcas"><a class="dropdown-item" href="marcas.html">Marcas</a></li>
+                                <li id="opcCategorias"><a class="dropdown-item" href="categorias.html">Categorías</a></li>
+                                <li id="opcClientes"><a class="dropdown-item" href="cliente.html">Clientes</a></li>
+                                <li id="opcUsuario"><a class="dropdown-item" href="usuario.html">Usuarios</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown" id="menuCompras">
@@ -51,10 +50,20 @@
                                 Compras
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Registro de compras</a></li>
-                                <li><a class="dropdown-item" href="#">Créditos con Proveedores</a></li>
-                                <li><a class="dropdown-item" href="#">Pago a Proveedores</a></li>
-                                <li><a class="dropdown-item" href="#">Ajuste de Stock</a></li>
+                                <li><a class="dropdown-item" href="compra.html">Registro de compras</a></li>
+                                <li><a class="dropdown-item" href="compras_hechas.html">Listado de compras</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li id="opcPagos"><a class="dropdown-item" href="pago_proveedores.html">Pago a Proveedores</a></li>
+                                <li id="opcListado"><a class="dropdown-item" href="pagos_hechos.html">Listado de pagos</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuStock">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Stock
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="ajuste_stock.html">Ajuste de Stock</a></li>
+                                <li><a class="dropdown-item" href="ajustes_hechos.html">Listado de ajustes</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown" id="menuVentas">
@@ -62,9 +71,10 @@
                                 Ventas
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="ventas.html">Registro de ventas</a></li>
-                                <li><a class="dropdown-item" href="credito_Cliente.html">Créditos con clientes</a></li>
-                                <li><a class="dropdown-item" href="#">Cobró de creditos a clientes</a></li>
+                                <li><a class="dropdown-item" href="Registrodeventas.html">Registro de ventas</a></li>
+                                <li id="opcListadoVentas"><a class="dropdown-item" href="ventas_realizadas.html">Listado de ventas</a></li>
+                                <li id="opcCredito"><a class="dropdown-item" href="creditos_clientes.html">Créditos con clientes</a></li>
+                                <li id="opcCobro"><a class="dropdown-item" href="historial_de pagos.html">Cobro de créditos a clientes</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown" id="menuInformes">
@@ -72,17 +82,11 @@
                                 Informes
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Informes de ventas</a></li>
-                                <li><a class="dropdown-item" href="#">Informes de Créditos con clientes </a></li>
-                                <li><a class="dropdown-item" href="#">Informes de Cobró de créditos</a></li>
-                                <li><a class="dropdown-item" href="#">Informes de compras</a></li>
-                                <li><a class="dropdown-item" href="#">Informes de créditos con Proveedores</a></li>
-                                <li><a class="dropdown-item" href="#">Informes de Pago a Proveedores</a></li>
-                                <li><a class="dropdown-item" href="#">Informes de ajuste de Stock</a></li>
+                                <li><a class="dropdown-item" href="informe_venta.html">Informes de ventas</a></li>
+                                <li><a class="dropdown-item" href="informe_credito.html">Informes de créditos con clientes </a></li>
+                                <li><a class="dropdown-item" href="informe_cobro_credito.html">Informes de cobró de créditos</a></li>
+                                <li><a class="dropdown-item" href="informeCompra.html">Informes de compras</a></li>
                             </ul>
-                        </li>
-                        <li class="nav-item" id="menuUsuarios"></li>
-                            <a class="nav-link" href="usuario.html">Usuarios</a>
                         </li>
                     </ul>
                 </div>
@@ -98,8 +102,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">Configuraciones</a></li>
-                            <li><a class="dropdown-item" href="#!">Actividad</a></li>
+                            <li><a class="dropdown-item" href="#!" onclick="abrirPerfil()">Mi Perfil</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
                         </ul>
@@ -107,472 +110,994 @@
                 </ul>
             </div>
         </nav>
-    </div>
-  
-    <!-- AQUÍ VA TODO LO QUE SE VA A VISUALIZAR EN LA PÁGINA -->
-    <main>
-    <div class="container-fluid px-4">
-      <h1 class="mt-2">Registro de Ventas</h1>
-      <div class="mb-3">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVenta">
-          <i class="bi bi-plus-circle"></i> Nueva Venta
-        </button>
-      </div>
-      <div class="row">
-        <table id="tabla_ventas" class="display compact" style="width: 100%">
-        <thead>
-            <tr>
-                <th>ID Venta</th>
-                <th>Fecha</th>
-                <th>Cliente</th>
-                <th>Artículo</th>
-                <th>Cantidad</th>
-                <th>Precio Unitario</th>
-                <th>Total</th>
-                <th>Forma de Pago</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
+    </div>    
+  <!-- CONTENEDOR PRINCIPAL -->
+  <div class="container mt-4 cont-principal">
+    <h2 class="mb-4"><i class="bi bi-cash-coin"></i> Registro de Ventas</h2>
+    <form id="formCompras" class="p-3 bg-white shadow rounded">
+      <!-- SECCIÓN CLIENTE -->
+      <div class="card p-4 mb-4 shadow-sm">
+        <h5 class="mb-3">Datos del Cliente</h5>
+        <div class="row g-3 align-items-end">
+          <div class="col-md-4">
+            <label for="cliente" class="form-label">Nombre</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="cliente" value="VENTA AL PÚBLICO" readonly placeholder="Nombre del cliente">
+              <button type="button" class="btn btn-outline-secondary" onclick="mostrarModalClientes()">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="ruc" class="form-label">RUC</label>
+            <input type="text" class="form-control" id="ruc" placeholder="RUC">
+          </div>
+          <div class="col-md-4">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccion" readonly placeholder="Dirección">
+          </div>
 
+          <div class="col-md-4">
+            <label for="condicionPago" class="form-label">Condición de Pago</label>
+            <select class="form-select" id="condicionPago" onchange="mostrarFechaVencimiento()">
+              <option value="contado">Contado</option>
+              <option value="crédito">Crédito</option>
+            </select>
+          </div>
+
+          <div class="col-md-4" id="grupoFechaVencimiento" style="display: none;">
+            <label for="fechaVencimiento" class="form-label">Fecha de Vencimiento</label>
+            <input type="date" class="form-control" id="fechaVencimiento">
+          </div>
+        </div>
+      </div>
+
+      <!-- FECHA Y FACTURA -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <label for="fecha" class="form-label">Fecha</label>
+          <input type="text" class="form-control" id="fecha" readonly>
+        </div>
+        <div class="col-md-6">
+          <label for="factura" class="form-label">N° Factura</label>
+          <input type="text" class="form-control" id="factura" readonly>
+        </div>
+      </div>
+
+      <!-- DETALLE DE VENTA -->
+      <div class="card p-4 mb-4 shadow-sm">
+        <h5 class="mb-3">Detalle de Venta</h5>
+        <div class="row g-3 align-items-end">
+          <div class="col-md-5">
+            <label class="form-label">Código del Producto</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="producto" placeholder="Código del producto">
+              <button type="button" class="btn btn-outline-secondary" onclick="mostrarModalArticulos()">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control" id="descripcion" placeholder="Descripción" readonly>
+          </div>
+          <div class="col-md-2">
+            <label for="cantidad" class="form-label">Cantidad</label>
+            <input type="number" class="form-control" id="cantidad" placeholder="Cantidad" min="1" value="1" required>
+          </div>
+          <div class="col-md-3">
+            <label for="precioUnit" class="form-label">Precio Unitario</label>
+            <input type="text" class="form-control" id="precioUnit" placeholder="Precio Unitario" readonly>
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-primary w-100" onclick="agregarProducto()">Añadir</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLA DETALLE DE VENTA -->
+      <div class="table-responsive mb-4">
+        <table class="table table-bordered table-hover text-center align-middle" id="tablaDetalle">
+          <thead class="table-light">
+            <tr>
+              <th>Código</th>
+              <th>Descripción</th>
+              <th>Cant.</th>
+              <th>Pre. Unit</th>
+              <th>IVA</th>
+              <th>Subtotal</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
         </table>
       </div>
-    </div>
-    </main>
 
-  <!-- Modal Registrar Venta -->
-<div class="modal fade" id="modalVenta" tabindex="-1" aria-labelledby="modalNuevaVentaLabel" aria-hidden="true" data-bs-backdrop="static">
+      <!-- TOTAL Y BOTÓN -->
+      <div class="row mb-5">
+        <div class="col text-end">
+          <h5>Total: Gs. <span id="total"></span></h5>
+          <button type="button" class="btn btn-success mt-2" onclick="registrarVenta()">
+            Generar Venta
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- Modal: Resumen de Venta -->
+  <div class="modal fade" id="modalVenta" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title">Resumen de Venta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <label for="modalTotal" class="form-label">Total a Pagar</label>
+          <input type="text" class="form-control mb-2" id="modalTotal" readonly>
+
+          <label for="efectivo" class="form-label">Efectivo Recibido</label>
+          <input type="number" class="form-control mb-2" id="efectivo">
+
+          <label for="cambio" class="form-label">Cambio</label>
+          <input type="text" class="form-control mb-2" id="cambio" readonly>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" onclick="guardarVenta('contado')">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Contenedor oculto del ticket -->
+  <div id="comprobanteTicket" style="display: none;"></div>
+  <!-- modal seleccion cliente -->
+  <div class="modal fade" id="modalClientes" tabindex="-1">
     <div class="modal-dialog modal-lg">
-        <form id="formNuevaVenta" class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalNuevaVentaLabel">Registrar Venta</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6 mb-2"> <label class="form-label">Cliente</label> <div class="input-group"> <select id="venta_cliente" class="form-control"> <option value="">Sin Nombre</option> </select> <button class="btn btn-outline-primary" type="button" onclick="mostrarModalCliente()"> + </button> </div> </div>
-                    <div class="col-md-6 mb-2">
-                        <label class="form-label">Fecha</label>
-                      <input type="date" class="form-control" id="venta_fecha" readonly>
-                    </div>
-                </div>
-                
-                <div class="mb-2">
-                    <label class="form-label">Detalle de Productos</label>
-                    <table class="table table-bordered" id="tablaDetalleVenta">
-                        <thead>
-                            <tr>
-                                <th>Artículo</th>
-                                <th>Cantidad</th>
-                                <th>Precio Unitario</th>
-                                <th>SubTotal</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="detalleVentaBody"></tbody>
-                    </table>
-                    <button type="button" class="btn btn-sm btn-secondary" onclick="agregarFilaVenta()">Agregar Producto</button>
-                    <div class="col-md-4">
-                    <label>Forma de pago</label>
-                    <div class="form-check">
-                    <input class="form-check-input" type="radio" name="formaPago" id="contado" checked>
-                    <label class="form-check-label" for="contado">Contado</label>
-                    </div>
-                    <div class="form-check">
-                    <input class="form-check-input" type="radio" name="formaPago" id="credito">
-                    <label class="form-check-label" for="credito">Crédito</label>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <label>Total a Pagar</label>
-                    <input type="text" class="form-control bg-light" id="totalPagar" value="0.00" readonly>
-                </div>
-
-                <div class="col-md-4">
-                    <label>Efectivo Recibido</label>
-                    <input type="number" id="efectivoRecibido" class="form-control" onchange="calcularSubTotalVenta()">
-                </div>
-
-                <div class="col-md-4">
-                    <label>Cambio</label>
-                    <input type="text" class="form-control bg-light" id="cambio" readonly>
-                </div>
-                </div>
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                <button class="btn btn-primary w-100" onclick="generarVenta()">Generar Venta</button>
-            </div>
-        </form>
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title">Seleccionar Cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-bordered" id="tablaClientes">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>RUC</th>
+                <th>Dirección</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+  <!-- modal seleccion producto -->
+  <div class="modal fade" id="modalArticulos" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title">Seleccionar Artículo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-bordered" id="tablaArticulosModal">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>IVA</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
- <!-- JavaScript -->
-    <script src="js/funcionesSistema.js"></script>
-    <script src="js/ventas.js"></script>
-    <script src="js/bd.js"></script>
-    <!-- MENU -->
-    <script src="menu/bootstrap.bundle.min.js"></script>
-    <script src="menu/scripts.js"></script>
-    <!-- DATATABLES -->
-    <script src="dt/jquery-3.7.1.js"></script>
-    <script src="dt/datatables.min.js"></script>
-    <script src="dt/jquery.dataTables.min.js"></script>
-    <!-- DATATABLES Buttons extension -->
-    <script src="dt/dataTables.buttons.min.js"></script>
-    <script src="dt/buttons.print.min.js"></script>
-    <script src="dt/buttons.html5.min.js"></script>
-    <!-- DATATABLES JSZip y pdfmake para exportar -->
-    <script src="dt/jszip.min.js"></script>
-    <script src="dt/pdfmake.min.js"></script>
-    <script src="dt/vfs_fonts.js"></script>
-    <!-- DATATABLES Idioma Español -->
-    <script src="dt/es-ES.js"></script>
-    <script>
-        // control de seguridad al cargarse la página
-        document.addEventListener("DOMContentLoaded", function () {
-            const nombre = sessionStorage.getItem("nomUsuario");
+  <!-- Modal para Autenticación de Administrador -->
+  <div class="modal fade" id="modalAdmin" tabindex="-1" aria-labelledby="modalAdminLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content p-3">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAdminLabel">Autenticación de Administrador</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <label for="adminUsuario">Usuario Administrador</label>
+          <input type="text" class="form-control mb-2" id="adminUsuario" placeholder="Usuario">
 
-            if (!nombre) {
-            // Si no hay sesión, redirige al login
-                window.location.href = "login.html";
-            } else {
-            // Mostrar el nombre del usuario si existe el elemento
-                const spanUsuario = document.getElementById("usuario");
-                if (spanUsuario) {
-                spanUsuario.textContent = nombre;
-                }
-            }
-        });
-        // usuario actual
-        const usuarioActual = {
-            rol: sessionStorage.getItem("rolUsuario")
-        }
-//botones para exportar a excel, pdf e imprimir
-tablaVentas = $('#tabla_ventas').DataTable({
-  dom: 'Bfrtip',
-  buttons: [
-    {
-      extend: 'excelHtml5',
-      text: 'Exportar a Excel',
-      title: 'Ventas'
-    },
-    {
-    extend: 'pdfHtml5',
-    text: 'Exportar a PDF',
-    className: 'btn btn-danger',
-    orientation: 'landscape', // opcional: horizontal
-    pageSize: 'A4',
-    title: 'Registro de Ventas',
-    customize: function (doc) {
-        // Encabezado personalizado (membrete, fecha)
-        const now = new Date();
-        const fecha = now.toLocaleDateString();
-        const hora = now.toLocaleTimeString();
-
-        // Agregar encabezado
-        doc.content.splice(0, 0,
-        {
-            text: [
-            { text: 'LIBRERIA ROCIO\n', fontSize: 14, bold: true },
-            { text: 'Registro de Ventas\n', fontSize: 12 }
-            ],
-            alignment: 'center',
-            margin: [0, 0, 0, 12]
-        }
-        );
-
-        // Pie de página con número de página
-        doc.footer = function (currentPage, pageCount) {
-        return {
-            columns: [
-            { text: `Fecha de exportación: ${fecha} ${hora}`, alignment: 'left', margin: [40, 0] },
-            { text: `Página ${currentPage} de ${pageCount}`, alignment: 'right', margin: [0, 0, 40] }
-            ],
-            fontSize: 8
-        };
-        };
-
-        // Ajustes opcionales de estilo
-        doc.styles.tableHeader.alignment = 'center';
-        doc.defaultStyle.fontSize = 10;
-    }
-    },
-    {
-      extend: 'print',
-      text: 'Imprimir',
-      title: 'Ventas'
-    }
-  ],
-  language: {
-    url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
-  }
-});
-//funcion que oculta elementos del menu dependiendo del rol
+          <label for="adminPassword">Contraseña</label>
+          <input type="password" class="form-control mb-2" id="adminPassword" placeholder="Contraseña">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="verificarAdmin()">Autorizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal del Comprobante -->
+  <div class="modal fade" id="modalComprobanteVenta" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">🧾 Comprobante de Venta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="contenidoComprobanteVenta" class="p-2"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="imprimirComprobanteVenta()">🖨️ Imprimir</button>
+          <button class="btn btn-danger" onclick="exportarPDFComprobante()">📄 PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Modal para editar el perfil del usuario -->
+    <div class="modal fade" id="modalPerfilUsuario" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="formPerfilUsuario" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="perfil_id">
+                    <div class="mb-2">
+                        <label>Nombre del Usuario</label>
+                        <input type="text" id="perfil_nombre" class="form-control" readonly>
+                    </div>
+                    <div class="mb-2">
+                        <label>Usuario</label>
+                        <input type="text" id="perfil_usuario" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label>Contraseña</label>
+                        <input type="password" id="perfil_contrasena" class="form-control" required>
+                        <small id="mensajeSeguridad_perfil" class="form-text text-danger d-none">La contraseña no es segura.Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un caracter especial.</small>
+                    </div>
+                    <div class="mb-2">
+                        <label>Confirmar Contraseña</label>
+                        <input type="password" id="perfil_confirmar" class="form-control" required>
+                        <small id="mensajeCoincidencia_perfil" class="form-text text-danger d-none"> Las contraseñas no coinciden</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="js/perfil.js"></script>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  <script src="script.js"></script>
+  <!-- JavaScript -->
+  <script src="js/funcionesSistema.js"></script>
+  <script src="js/ventas.js"></script>
+  <script src="js/bd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- MENU -->
+  <script src="menu/bootstrap.bundle.min.js"></script>
+  <script src="menu/scripts.js"></script>
+  <!-- DATATABLES -->
+  <script src="dt/jquery-3.7.1.js"></script>
+  <script src="dt/datatables.min.js"></script>
+  <script src="dt/jquery.dataTables.min.js"></script>
+  <!-- DATATABLES Buttons extension -->
+  <script src="dt/dataTables.buttons.min.js"></script>
+  <script src="dt/buttons.print.min.js"></script>
+  <script src="dt/buttons.html5.min.js"></script>
+  <!-- DATATABLES JSZip y pdfmake para exportar -->
+  <script src="dt/jszip.min.js"></script>
+  <script src="dt/pdfmake.min.js"></script>
+  <script src="dt/vfs_fonts.js"></script>
+  <!-- DATATABLES Idioma Español -->
+  <script src="dt/es-ES.js"></script>
+  <script>
+    // control de seguridad al cargarse la página
     document.addEventListener("DOMContentLoaded", function () {
-    const rol = sessionStorage.getItem("rolUsuario"); // debe tener: administrador, gerente, etc.
-    const nombre = sessionStorage.getItem("nomUsuario");
-
-    if (!rol || !nombre) {
-      alertify.error("Acceso denegado.");
-      window.location.href = "login.html";
-      return;
-    }
-
-    // Mostrar el nombre en el panel
-    const spanUsuario = document.getElementById("usuario");
-    if (spanUsuario) spanUsuario.textContent = nombre;
-
-    
-    // Ocultar menús según el rol
-    switch (rol) {
-      case "administrador":
-        // ve todo
-        break;
-      case "gerente":
-        ocultar(["menuUsuarios"]);
-        break;
-      case "cajero":
-        ocultar(["menuMantenimiento", "menuCompras", "menuUsuarios"]);
-        break;
-      case "codificador":
-        ocultar(["menuVentas", "menuCompras", "menuInformes", "menuUsuarios"]);
-        break;
-      default:
-        alertify.error("Rol no válido.");
-        window.location.href = "login.html";
-    }
-
-    // Función para ocultar elementos por ID
-    function ocultar(ids) {
-      ids.forEach(id => {
-        const elem = document.getElementById(id);
-        if (elem) elem.style.display = "none";
-      });
-    }
-  });
-  // habilitar crear nuevos usuarios solo para adminsitradores
-        document.addEventListener("DOMContentLoaded", function(){
-            const btnCrear = document.getElementById("btnCrearCliente");
-            if(btnCrear && !tienePermiso(usuarioActual, permisos.usuarios_crear)){
-                btnCrear.style.display = "none"; // oculta si no tiene permiso
+        const nombre = sessionStorage.getItem("nomUsuario");
+        if (!nombre) {
+        // Si no hay sesión, redirige al login
+            window.location.href = "error.html";
+        } else {
+        // Mostrar el nombre del usuario si existe el elemento
+            const spanUsuario = document.getElementById("usuario");
+            if (spanUsuario) {
+            spanUsuario.textContent = nombre;
             }
-        });
-
-        // Establecer la fecha actual en el campo de fecha
-        const inputFecha = document.getElementById("venta_fecha");
-        const hoy = new Date();
-        const fechaFormateada = hoy.toISOString().split('T')[0]; // formato YYYY-MM-DD
-        inputFecha.value = fechaFormateada;
-
-    $(document).ready(function () {
-    if (!$.fn.DataTable.isDataTable('#tabla_ventas')) {
-        $('#tabla_ventas').DataTable({
-            dom: 'Bfrtip',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-            data: [],
-            columns: [
-                { data: 'id' },
-                { data: 'fecha' },
-                { data: 'cliente' },
-                { data: 'articulo' },
-                { data: 'cantidad' },
-                { data: 'precio' },
-                { data: 'total' },
-                { data: 'formaPago' },
-                {
-                   data: null,
-            render: function(data, type, row) {
-                return `
-                    <button class="btn btn-sm btn-primary" onclick="editarVenta(${row.id})">Editar</button>
-                   <td><button class="btn btn-danger btn-sm btn-eliminar-venta" data-id="${v.idventa}">Eliminar</button></td>
-
-                `;
-                }
-                }
-            ]
-        });
-    }
-});
-
-
-     let ventas = JSON.parse(localStorage.getItem("ventas")) || [];
-    let productos = JSON.parse(localStorage.getItem("articulos")) || [];
-    let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
-
-    function agregarFilaVenta() {
-        const fila = document.createElement("tr");
-        fila.innerHTML = `
-            <td>
-                <select class="form-control articulo-select" onchange="calcularFila(this)">
-                    <option value="">Seleccionar...</option>
-                    ${productos.map(p => `<option value="${p.idarticulo}" data-precio="${p.precio}" data-nombre="${p.nombre_articulo}">${p.nombre_articulo}</option>`).join('')}
-                </select>
-            </td>
-            <td><input type="number" class="form-control cantidad" min="1" value="1" onchange="calcularFila(this)"></td>
-            <td><input type="number" class="form-control precio" readonly></td>
-            <td><input type="number" class="form-control subtotal" readonly></td>
-            <td><button type="button" class="btn btn-sm btn-danger" onclick="eliminarFila(this)">X</button></td>
-        `;
-        document.getElementById("detalleVentaBody").appendChild(fila);
-        calcularSubTotalVenta();
-    }
-
-
-    function eliminarFila(btn) {
-        btn.closest("tr").remove();
-        calcularSubTotalVenta();
-    }
-
-    function calcularFila(input) {
-        const fila = input.closest("tr");
-        const select = fila.querySelector(".articulo-select");
-        const cantidad = parseInt(fila.querySelector(".cantidad").value) || 0;
-        const precio = parseInt(select.selectedOptions[0]?.dataset.precio || 0);
-
-        fila.querySelector(".precio").value = precio;
-        fila.querySelector(".subtotal").value = cantidad * precio;
-        calcularSubTotalVenta();
-    }
-
- function calcularSubTotalVenta() {
-    let total = 0;
-    const subtotales = document.querySelectorAll("#detalleVentaBody .subtotal");
-
-    subtotales.forEach(input => {
-        const valor = parseFloat(input.value);
-        if (!isNaN(valor)) {
-            total += valor;
         }
     });
-
-    // Mostrar el total
-    document.getElementById("totalPagar").value = total;
-
-    // Obtener efectivo recibido y calcular cambio
-    const efectivo = parseFloat(document.getElementById("efectivoRecibido").value);
-    let cambio = 0;
-
-    if (!isNaN(efectivo)) {
-        cambio = efectivo - total;
+    // usuario actual
+    const usuarioActual = {
+        rol: sessionStorage.getItem("rolUsuario")
     }
 
-    document.getElementById("cambio").value = cambio;
-}
+    function mostrarTicketVenta(venta, recibido = 0, vuelto = 0) {
+      let totalIva10 = 0, totalIva5 = 0, totalExentas = 0;
 
+      let detalleHTML = venta.detalle.map(item => {
+        const iva = item.iva;
+        const subtotal = item.subtotal;
+        if (iva === 10) totalIva10 += subtotal;
+        else if (iva === 5) totalIva5 += subtotal;
+        else totalExentas += subtotal;
 
-    function guardarVentas(lista) {
-        localStorage.setItem("ventas", JSON.stringify(lista));
+        return `
+          <tr>
+            <td>${item.nombre_articulo}</td>
+            <td>${iva}%</td>
+            <td>${item.cantidad}</td>
+            <td>${item.precioUnit}</td>
+            <td>${item.subtotal}</td>
+          </tr>
+        `;
+      }).join("");
+
+      const html = `
+        <div id="comprobanteVentaHTML" style="font-family: monospace; font-size: 13px;">
+          <center>
+            <h5>*** LIBRERÍA ROCÍO ***</h5>
+            <p>RUC: 5130408-2<br>
+            Avda. Pinedo y Dr. Royg Bernal<br>
+            Cel: 0975-370735<br>
+            CONCEPCIÓN - PARAGUAY</p>
+            <hr>
+            <h6><strong>PRESUPUESTO</strong></h6>
+          </center>
+          <p><strong>N°:</strong> ${venta.factura}</p>
+          <p><strong>Fecha:</strong> ${venta.fecha}</p>
+          <p><strong>Cliente:</strong> ${venta.cliente}</p>
+          <p><strong>RUC/CI:</strong> ${venta.ruc}</p>
+          <p><strong>Condición:</strong> ${venta.condicion}</p>
+          <table class="table table-sm table-bordered">
+            <thead>
+              <tr><th>ARTICULO</th><th>IVA</th><th>CANT.</th><th>PRE.UNIT</th><th>SUBTOTAL</th></tr>
+            </thead>
+            <tbody>${detalleHTML}</tbody>
+          </table>
+          <hr>
+          <p><strong>Total A PAGAR:</strong> Gs. ${venta.total}</p>
+          <hr>
+          <p><strong>Recibido:</strong> Gs. ${recibido}</p>
+          <p><strong>Vuelto:</strong> Gs. ${vuelto}</p>
+          <hr>
+          <h6><strong>TOTAL POR CONCEPTOS</strong></h6>
+          <hr>
+          <p><strong>Exentas:</strong> Gs. ${totalExentas}</p>
+          <p><strong>IVA 5%:</strong> Gs. ${totalIva5}</p>
+          <p><strong>IVA 10%:</strong> Gs. ${totalIva10}</p>
+        <hr>
+        <h6><strong>LIQUIDACION IVA</strong></h6>
+        <hr>
+          <p><strong>IVA 5%:</strong> Gs. ${(totalIva5 / 21).toFixed(0)}</p>
+          <p><strong>IVA 10%:</strong> Gs. ${(totalIva10 / 11).toFixed(0)}</p>
+          <p><strong>Total IVA:</strong> Gs. ${((totalIva5 / 21) + (totalIva10 / 11)).toFixed(0)}</p>
+          <center><strong>¡Gracias por su preferencia!</strong></center>
+        </div>
+      `;
+      document.getElementById("contenidoComprobanteVenta").innerHTML = html;
+      const modal = new bootstrap.Modal(document.getElementById("modalComprobanteVenta"));
+      modal.show();
     }
+    function imprimirComprobanteVenta() {
+      const contenido = document.getElementById("comprobanteVentaHTML").innerHTML;
+      const ventana = window.open("", "", "width=400,height=600");
+      ventana.document.write(`
+        <html>
+          <head>
+            <title>Imprimir Comprobante</title>
+          </head>
+          <body style="font-family: monospace;">${contenido}</body>
+        </html>
+      `);
+      ventana.document.close();
+      ventana.focus();
+      ventana.print();
+    }
+    function exportarPDFComprobante() {
+      const element = document.getElementById("comprobanteVentaHTML");
+      html2pdf().set({
+        margin: 0.5,
+        filename: 'comprobante_venta.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a5', orientation: 'portrait' }
+      }).from(element).save();
+    }     
+    //botones para exportar a excel, pdf e imprimir
+    tablaVentas = $('#tabla_ventas').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'excelHtml5',
+          text: 'Exportar a Excel',
+          title: 'Ventas'
+        },
+        {
+        extend: 'pdfHtml5',
+        text: 'Exportar a PDF',
+        className: 'btn btn-danger',
+        orientation: 'landscape', // opcional: horizontal
+        pageSize: 'A4',
+        title: 'Registro de Ventas',
+        customize: function (doc) {
+            // Encabezado personalizado (membrete, fecha)
+            const now = new Date();
+            const fecha = now.toLocaleDateString();
+            const hora = now.toLocaleTimeString();
 
-    document.addEventListener("DOMContentLoaded", function () {
-        // Cargar clientes en el select
-        const selectCliente = document.getElementById("venta_cliente");
-        clientes.forEach(c => {
-            const option = document.createElement("option");
-            option.value = c.idcliente;
-            option.textContent = c.nombre;
-            selectCliente.appendChild(option);
-        });
-
-        document.getElementById("formNuevaVenta").addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const idVenta = Date.now();
-            const cliente = document.getElementById("venta_cliente").value;
-            const fecha = document.getElementById("venta_fecha").value;
-            const filas = document.querySelectorAll("#detalleVentaBody tr");
-
-            if (!cliente || !fecha || filas.length === 0) {
-                alertify.error("Todos los campos son obligatorios");
-                return;
+            // Agregar encabezado
+            doc.content.splice(0, 0,
+            {
+                text: [
+                { text: 'LIBRERIA ROCIO\n', fontSize: 14, bold: true },
+                { text: 'Registro de Ventas\n', fontSize: 12 }
+                ],
+                alignment: 'center',
+                margin: [0, 0, 0, 12]
             }
-           const detalle = Array.from(filas).map(fila => {
-                const select = fila.querySelector(".articulo-select");
-                const idArticulo = select.value;
-                const articulo = productos.find(p => p.idarticulo == idArticulo);
+            );
 
-                return {
-                    idarticulo: idArticulo,
-                    nombre: articulo?.nombre_articulo || "Desconocido",
-                    cantidad: parseInt(fila.querySelector(".cantidad").value),
-                    precio: parseInt(fila.querySelector(".precio").value),
-                    subtotal: parseInt(fila.querySelector(".subtotal").value),
-                };
-            });
-
-            const totalVenta = detalle.reduce((sum, d) => sum + d.subtotal, 0);
-            
-
-            const nuevaVenta = {
-                idventa: idVenta,
-                idcliente: cliente,
-                fecha: fecha,
-                formaPago: document.querySelector('input[name="formaPago"]:checked').id,
-                efectivoRecibido: parseInt(document.getElementById("efectivoRecibido").value) || 0,
-                total: totalVenta,
-                detalle: detalle
+            // Pie de página con número de página
+            doc.footer = function (currentPage, pageCount) {
+            return {
+                columns: [
+                { text: `Fecha de exportación: ${fecha} ${hora}`, alignment: 'left', margin: [40, 0] },
+                { text: `Página ${currentPage} de ${pageCount}`, alignment: 'right', margin: [0, 0, 40] }
+                ],
+                fontSize: 8
+            };
             };
 
-            ventas.push(nuevaVenta);
-            guardarVentas(ventas);
-            document.getElementById("formNuevaVenta").reset();
-            document.getElementById("detalleVentaBody").innerHTML = "";
-            document.getElementById("totalVenta").textContent = "0";
-            bootstrap.Modal.getInstance(document.getElementById("modalVenta")).hide();
-            alertify.success("Venta registrada correctamente");
-            cargarTablaVentas();
-        });
+            // Ajustes opcionales de estilo
+            doc.styles.tableHeader.alignment = 'center';
+            doc.defaultStyle.fontSize = 10;
+        }
+        },
+        {
+          extend: 'print',
+          text: 'Imprimir',
+          title: 'Ventas'
+        }
+      ],
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+      }
+    });
+    // Función que oculta elementos del menú dependiendo del rol
+    document.addEventListener("DOMContentLoaded", function () {
+      const rol = sessionStorage.getItem("rolUsuario"); // Roles posibles: administrador, gerente, cajero, codificador
+      const nombre = sessionStorage.getItem("nomUsuario");
 
-        cargarTablaVentas();
+      // Si no hay datos de sesión, redirigir al login
+      if (!rol || !nombre) {
+        alertify.error("Acceso denegado.");
+        window.location.href = "login.html";
+        return;
+      }
+
+      // Mostrar el nombre del usuario en el panel
+      const spanUsuario = document.getElementById("usuario");
+      if (spanUsuario) spanUsuario.textContent = nombre;
+
+      // Lógica para ocultar secciones del menú según el rol
+      switch (rol) {
+        case "administrador":
+          // Tiene acceso a todo, no se oculta nada
+          break;
+        case "gerente":
+          ocultar(["menuUsuarios"]);
+          break;
+        case "cajero":
+          ocultar(["menuMantenimiento", "menuCompras", "menuUsuarios"]);
+          break;
+        case "codificador":
+          ocultar(["menuVentas", "menuCompras", "menuInformes", "menuUsuarios"]);
+          break;
+        default:
+          alertify.error("Rol no válido.");
+          window.location.href = "login.html";
+      }
+
+      // Función auxiliar para ocultar elementos por sus IDs
+      function ocultar(ids) {
+        ids.forEach(id => {
+          const elem = document.getElementById(id);
+          if (elem) elem.style.display = "none";
+        });
+      }
+
+      // Generar y asignar automáticamente un número de factura
+      document.getElementById("factura").value = generarNumeroFactura();
+
+      function generarNumeroFactura() {
+        const now = new Date();
+        return "F" +
+          now.getFullYear().toString().slice(-2) +
+          (now.getMonth() + 1).toString().padStart(2, "0") +
+          now.getDate().toString().padStart(2, "0") +
+          "-" +
+          Math.floor(Math.random() * 9000 + 1000); // Ejemplo: F250704-4567
+      }
     });
 
-   function cargarTablaVentas() {
-    const tablaBody = document.querySelector("#tabla_ventas tbody");
-    if (!tablaBody) return;
+    // FECHA AUTOMÁTICA AL CARGAR
+    const hoy = new Date().toISOString().split("T")[0];
+    document.getElementById("fecha").value = hoy;
+    document.getElementById("efectivo").addEventListener("input", calcularCambio);
+    document.getElementById("ruc").addEventListener("blur", buscarClientePorRuc);
+    function buscarClientePorRuc() {
+      const ruc = document.getElementById("ruc").value.trim();
+      const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+      const cliente = clientes.find(c => c.ruc === ruc);
+      if (cliente) {
+        document.getElementById("cliente").value = cliente.nombre;
+        document.getElementById("direccion").value = cliente.direccion;
+        alertify.success("Cliente encontrado");
+      } else {
+        document.getElementById("cliente").value = "VENTA AL PÚBLICO";
+        document.getElementById("direccion").value = "";
+        alertify.error("Cliente no encontrado");
+      }
+    }
+    document.getElementById("producto").addEventListener("blur", buscarProductoPorCodigo);
+    function buscarProductoPorCodigo() {
+      const codigo = document.getElementById("producto").value.trim();
+      const articulos = JSON.parse(localStorage.getItem("articulos")) || [];
+      const articulo = articulos.find(a => a.codigo === codigo);
 
-    tablaBody.innerHTML = ventas.map(v => `
-        <tr>
-            <td>${v.idventa}</td>
-            <td>${v.fecha}</td>
-            <td>${clientes.find(c => c.idcliente == v.idcliente)?.nombre || ''}</td>
-            <td>${v.detalle.map(d => d.nombre).join(", ")}</td>
-            <td>${v.detalle.reduce((sum, d) => sum + d.cantidad, 0)}</td>
-            <td>${v.detalle.map(d => d.precio).join(", ")}</td>
-            <td>${v.total}</td>
-            <td>${v.formaPago}</td>
-            <td><button class="btn btn-danger btn-sm btn-eliminar-venta" data-id="${v.idventa}">Eliminar</button></td>
-        </tr>
-    `).join("");
-
-    // Asignar evento a los botones eliminar
-    document.querySelectorAll(".btn-eliminar-venta").forEach(btn => {
-        btn.addEventListener("click", function () {
-            const idVenta = this.dataset.id;
-
-            alertify.confirm("¿Estás segura/o?", "¿Deseás eliminar esta venta?", function () {
-                ventas = ventas.filter(v => v.idventa != idVenta);
-                guardarVentas(ventas);
-                cargarTablaVentas();
-                alertify.success("Venta eliminada");
-            }, function () {
-                alertify.error("Cancelado");
-            });
-        });
+      if (articulo) {
+        document.getElementById("descripcion").value = articulo.nombre_articulo;
+        document.getElementById("precioUnit").value = articulo.precio;
+        alertify.success("Producto encontrado");
+      } else {
+        document.getElementById("descripcion").value = "";
+        document.getElementById("precioUnit").value = "";
+        alertify.error("Producto no encontrado");
+      }
+    }
+    // habilitar crear nuevos usuarios solo para adminsitradores
+    document.addEventListener("DOMContentLoaded", function(){
+      const btnCrear = document.getElementById("btnCrearCliente");
+      if(btnCrear && !tienePermiso(usuarioActual, permisos.usuarios_crear)){
+          btnCrear.style.display = "none"; // oculta si no tiene permiso
+      }
     });
-}
 
-    function mostrarModalCliente() {
-        // Aquí puedes implementar la lógica para mostrar el modal de cliente
-        alertify.alert("Funcionalidad no implementada", "Esta funcionalidad aún no está disponible.");
+    let detalleVenta = [];
+    // AÑADIR PRODUCTO A LA TABLA
+    function agregarProducto() {
+      const producto = document.getElementById("producto").value;
+      const nombre_articulo = document.getElementById("descripcion").value;
+      const cantidad = parseInt(document.getElementById("cantidad").value);
+      const precioUnit = parseInt(document.getElementById("precioUnit").value);
+      const iva = 10;
+
+      if (!producto || isNaN(cantidad) || isNaN(precioUnit)) {
+          alertify.error("Completa los campos del producto");
+          return;
+      }
+
+      const subtotal = cantidad * precioUnit;
+
+      detalleVenta.push({
+          codigo: producto,
+          nombre_articulo,
+          cantidad,
+          precioUnit,
+          iva,
+          subtotal
+      });
+
+      mostrarDetalle();
+      limpiarCamposProducto();
     }
 
+    // MOSTRAR DETALLE EN LA TABLA
+    function mostrarDetalle() {
+      const tbody = document.querySelector("#tablaDetalle tbody");
+      tbody.innerHTML = "";
+      let total = 0;
+      detalleVenta.forEach((item, index) => {
+          total += item.subtotal;
+          const fila = document.createElement("tr");
+          fila.innerHTML = `
+              <td>${item.codigo}</td>
+              <td>${item.nombre_articulo}</td>
+              <td>${item.cantidad}</td>
+              <td>${item.precioUnit}</td>
+              <td>${item.iva}%</td>
+              <td>${item.subtotal}</td>
+              <td><button class="btn btn-danger btn-sm" onclick="eliminarProducto(${index})">Eliminar</button></td>
+          `;
+          tbody.appendChild(fila);
+      });
+      document.getElementById("total").textContent = total;
+      document.getElementById("modalTotal").value = total;
+    }
+    function mostrarFechaVencimiento() {
+      const condicion = document.getElementById("condicionPago").value;
+      const vencimiento = document.getElementById("grupoFechaVencimiento");
+      vencimiento.style.display = condicion === "crédito" ? "block" : "none";
+    }
+    // ELIMINAR PRODUCTO DE LA TABLA
+    function eliminarProducto(index) {
+      detalleVenta.splice(index, 1);
+      mostrarDetalle();
+    }
+    // LIMPIAR CAMPOS DE PRODUCTO
+    function limpiarCamposProducto() {
+      document.getElementById("producto").value = "";
+      document.getElementById("descripcion").value = "";
+      document.getElementById("cantidad").value = "";
+      document.getElementById("precioUnit").value = "";
+    }
+    // CALCULAR CAMBIO EN EL MODAL
+    function calcularCambio() {
+      const efectivo = parseInt(document.getElementById("efectivo").value) || 0;
+      const total = parseInt(document.getElementById("modalTotal").value) || 0;
+      const cambio = efectivo - total;
+      document.getElementById("cambio").value = cambio >= 0 ? cambio : 0;
+    }
+    // REGISTRAR VENTA
+    function generarIdUnico() {
+      return Date.now() + Math.floor(Math.random() * 1000); // Ej: 1720206812520
+    }
+    function registrarVenta() {
+      const cliente = document.getElementById("cliente").value.trim();
+      const fechaVencimiento = document.getElementById("fechaVencimiento").value;
+      const condicion = document.getElementById("condicionPago").value;
 
+      if (detalleVenta.length === 0) {
+          alertify.error("Debes agregar al menos un producto");
+          return;
+      }
 
-</script>
+      if (condicion === "crédito") {
+          const rol = sessionStorage.getItem("rolUsuario");
 
-  
-    
+          if (!cliente || cliente.toUpperCase() === "VENTA AL PÚBLICO") {
+              alertify.error("Selecciona un cliente válido para crédito");
+              return;
+          }
+
+          if (!fechaVencimiento) {
+              alertify.error("Debes establecer una fecha de vencimiento");
+              return;
+          }
+
+          if (rol === "administrador") {
+              guardarVenta("crédito", fechaVencimiento);
+          } else if (rol === "cajero") {
+              const modal = new bootstrap.Modal(document.getElementById("modalAdmin"));
+              modal.show();
+          } else {
+              alertify.error("Solo un administrador puede autorizar créditos");
+          }
+
+      } else {
+          // ABRIR MODAL DE PAGO (SOLO PARA CONTADO)
+          const modal = new bootstrap.Modal(document.getElementById("modalVenta"));
+          modal.show();
+          
+      }
+    }
+    function verificarStockDisponible() {
+      let articulos = JSON.parse(localStorage.getItem("articulos")) || [];
+      for (const item of detalleVenta) {
+        const articulo = articulos.find(a => a.codigo === parseInt(item.codigo));
+        if (!articulo) {
+          alertify.error(`Artículo no encontrado: código ${item.codigo}`);
+          return false;
+        }
+        if (articulo.stock <= 0) {
+          alertify.error(`No hay stock disponible para: ${articulo.nombre_articulo}`);
+          return false;
+        }    
+        if (item.cantidad > articulo.stock) {
+          alertify.error(`Cantidad solicitada supera el stock para: ${articulo.nombre_articulo} (Stock: ${articulo.stock})`);
+          return false;
+        }
+      }
+      
+      return true;
+    }
+    // RESTAR STOCK AL CONFIRMAR VENTA
+    function restarStock() {
+      let articulos = JSON.parse(localStorage.getItem("articulos")) || [];
+
+      detalleVenta.forEach((item) => {
+          let articulo = articulos.find(a => a.codigo === parseInt(item.codigo));
+          if (articulo) {
+              articulo.stock = (articulo.stock || 0) - item.cantidad;
+              console.log(`Stock actualizado: ${articulo.nombre_articulo} → ${articulo.stock}`);
+          } else {
+              console.warn(`Artículo no encontrado: código ${item.codigo}`);
+          }
+      });
+
+      localStorage.setItem("articulos", JSON.stringify(articulos));
+    }
+
+    function guardarVenta(condicion, fechaVencimiento = null) {
+      if (!verificarStockDisponible()) {
+        return; // Detener la función si no hay stock suficiente
+      }
+      const idVenta = generarIdUnico();
+      const venta = {
+          id: idVenta,
+          cliente: document.getElementById("cliente").value.trim(),
+          ruc: document.getElementById("ruc").value.trim() || "-",
+          direccion: document.getElementById("direccion").value.trim() || "-",
+          fecha: document.getElementById("fecha").value,
+          factura: document.getElementById("factura").value,
+          total: document.getElementById("modalTotal").value,
+          condicion: condicion,
+          estado: condicion === "crédito" ? "pendiente" : "pagado",
+          fechaVencimiento: condicion === "crédito" ? fechaVencimiento : null,
+          detalle: detalleVenta
+      };
+      let ventas = JSON.parse(localStorage.getItem("ventas")) || [];
+      ventas.push(venta);
+      localStorage.setItem("ventas", JSON.stringify(ventas));
+      if (condicion === "crédito") {
+        const credito = {
+            id: idVenta,
+            cliente: venta.cliente,
+            ruc: venta.ruc,
+            fecha: venta.fecha,
+            factura: venta.factura,
+            vencimiento: fechaVencimiento,
+            total: parseFloat(venta.total),
+            saldoPendiente: parseFloat(venta.total),
+            estado: "pendiente",
+            pagos: [],
+            detalle: venta.detalle
+        };
+        let creditos = JSON.parse(localStorage.getItem("creditos")) || [];
+        creditos.push(credito);
+        localStorage.setItem("creditos", JSON.stringify(creditos));
+      }
+      restarStock();
+      alertify.success("Venta registrada correctamente");
+      mostrarTicketVenta(venta, document.getElementById("efectivo").value, document.getElementById("cambio").value);
+      if (condicion === "contado") {
+        const modal = bootstrap.Modal.getInstance(document.getElementById("modalVenta"));
+        const efectivo = parseInt(document.getElementById("efectivo").value) || 0;
+        const total = parseInt(document.getElementById("modalTotal").value) || 0;
+
+        if (efectivo < total) {
+            alertify.error("El efectivo recibido no puede ser menor al total de la venta");
+            return;
+        }
+        if (modal) modal.hide();
+      }
+      limpiarFormulario();    
+    }
+
+    function verificarAdmin() {
+        const usuario = document.getElementById("adminUsuario").value.trim();
+        const clave = document.getElementById("adminPassword").value.trim();
+
+        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        const admin = usuarios.find(u => u.usuario === usuario && u.clave === clave && u.rol === "administrador");
+
+        if (admin) {
+            alertify.success("Autenticación exitosa");
+            bootstrap.Modal.getInstance(document.getElementById("modalAdmin")).hide();
+
+            const fechaVencimiento = document.getElementById("fechaVencimiento").value;
+            guardarVenta("crédito", fechaVencimiento);
+        } else {
+            alertify.error("Credenciales incorrectas o no es administrador");
+        }
+    }
+
+    function limpiarFormulario() {
+      detalleVenta = [];
+      document.getElementById("formCompras").reset();
+      document.getElementById("total").textContent = "";
+      document.getElementById("modalTotal").value = "";
+      document.getElementById("efectivo").value = "";
+      document.getElementById("cambio").value = "";
+      mostrarDetalle();
+    }
+
+    // F2: MOSTRAR MODAL CLIENTES
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "F2") {
+            e.preventDefault();
+            mostrarModalClientes();
+        }
+    });
+    // F3: MOSTRAR MODAL ARTÍCULOS
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "F3") {
+            e.preventDefault();
+            mostrarModalArticulos();
+        }
+    });
+
+    function mostrarModalClientes() {
+        const modal = new bootstrap.Modal(document.getElementById("modalClientes"));
+      const tbody = document.querySelector("#tablaClientes tbody");
+      tbody.innerHTML = "";
+      const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+      clientes.forEach((c) => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+          <td>${c.nombre}</td>
+          <td>${c.ruc}</td>
+          <td>${c.direccion}</td>
+          <td><button class="btn btn-sm btn-primary" onclick="seleccionarCliente('${c.nombre}', '${c.ruc}', '${c.direccion}')">Seleccionar</button></td>
+        `;
+        tbody.appendChild(fila);
+      });
+      modal.show();
+    }
+
+    function mostrarModalArticulos() {
+      const modal = new bootstrap.Modal(document.getElementById("modalArticulos"));
+      const tbody = document.querySelector("#tablaArticulosModal tbody");
+      tbody.innerHTML = "";
+
+      const articulos = JSON.parse(localStorage.getItem("articulos")) || [];
+
+      articulos.forEach((a) => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+          <td>${a.codigo}</td>
+          <td>${a.nombre_articulo}</td>
+          <td>${a.precio}</td>
+          <td>${a.iva}%</td>
+          <td><button class="btn btn-sm btn-primary" onclick="seleccionarArticulo('${a.codigo}', '${a.nombre_articulo}', '${a.precio}')">Seleccionar</button></td>
+        `;
+        tbody.appendChild(fila);
+      });
+
+      modal.show();
+    }
+
+    function seleccionarCliente(nombre, ruc, direccion) {
+        document.getElementById("cliente").value = nombre;
+        document.getElementById("ruc").value = ruc;
+        document.getElementById("direccion").value = direccion;
+        bootstrap.Modal.getInstance(document.getElementById("modalClientes")).hide();
+        alertify.success("Cliente seleccionado");
+    }
+
+    function seleccionarArticulo(codigo, nombre, precio) {
+        document.getElementById("producto").value = codigo;
+        document.getElementById("descripcion").value = nombre;
+        document.getElementById("precioUnit").value = precio;
+        document.getElementById("cantidad").focus();
+        bootstrap.Modal.getInstance(document.getElementById("modalArticulos")).hide();
+        alertify.success("Artículo seleccionado");
+    }
+
+     //funcion que oculta elementos del menu dependiendo del rol
+        document.addEventListener("DOMContentLoaded", function () {
+            const rol = sessionStorage.getItem("rolUsuario"); // debe tener: administrador, gerente, etc.
+            const nombre = sessionStorage.getItem("nomUsuario");
+            if (!rol || !nombre) {
+                alertify.error("Acceso denegado.");
+                window.location.href = "login.html";
+                return;
+            }
+            // Mostrar el nombre en el panel
+            const spanUsuario = document.getElementById("usuario");
+            if (spanUsuario) spanUsuario.textContent = nombre;
+            
+            // Ocultar menús según el rol
+            switch (rol) {
+            case "administrador":
+                // ve todo
+                break;
+            case "gerente":
+                ocultar(["menuMantenimiento", "menuCompras", "menuStock", "menuVentas"]);
+                break;
+            case "cajero":
+                ocultar(["menuMantenimiento", "menuCompras", "menuStock", "opcCobro", "opcCredito", "opcListadoVentas", "menuInformes"]);
+                break;
+            case "codificador":
+                ocultar(["opcUsuario", "opcClientes", "menuVentas", "opcPagos", "opcListado", "menuStock", "menuInformes"]);
+                break;
+            default:
+                alertify.error("Rol no válido.");
+                window.location.href = "login.html";
+            }
+            // Función para ocultar elementos por ID
+            function ocultar(ids) {
+                ids.forEach(id => {
+                    const elem = document.getElementById(id);
+                    if (elem) elem.style.display = "none";
+                });
+            }
+        });
+        // reglas para el perfil
+        document.addEventListener("DOMContentLoaded", function () {
+            const reglas = {
+                r1: c => c.length >= 8,
+                r2: c => /[A-Z]/.test(c),
+                r3: c => /[a-z]/.test(c),
+                r4: c => /\d/.test(c),
+                r5: c => /[@#$%^&+=!¡¿?*()\-_"':;.,<>~`|{}\[\]\\]/.test(c),
+            };
+            function mostrarSeguridad(inputId, mensajeId) {
+                const input = document.getElementById(inputId);
+                const mensaje = document.getElementById(mensajeId);
+                if (!input || !mensaje) return;
+                input.addEventListener("input", () => {
+                    const contra = input.value;
+                    const cumple = Object.values(reglas).every(fn => fn(contra));
+                    if (contra === "") {
+                        mensaje.classList.add("d-none");
+                        return;
+                    }
+                    mensaje.classList.remove("d-none");
+                    if (cumple) {
+                        mensaje.textContent = "🟢 Contraseña segura";
+                        mensaje.classList.remove("text-danger");
+                        mensaje.classList.add("text-success");
+                    } else {
+                        mensaje.textContent = "La contraseña no es segura. Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un caracter especial.";
+                        mensaje.classList.remove("text-success");
+                        mensaje.classList.add("text-danger");
+                    }
+                });
+            }
+            // Validación al enviar formulario
+            [
+                { formId: "formPerfilUsuario", passId: "perfil_contrasena", confId: "perfil_confirmar" },
+            ].forEach(({ formId, passId, confId }) => {
+                const form = document.getElementById(formId);
+                form.addEventListener("submit", function (e) {
+                const contra = document.getElementById(passId).value;
+                const confContra = document.getElementById(confId).value;
+                const cumple = Object.values(reglas).every(fn => fn(contra));
+
+                if (!cumple) {
+                    e.preventDefault();
+                    alertify.error("La contraseña no es segura.");
+                } else if (contra !== confContra) {
+                    e.preventDefault();
+                    alertify.warning("Las contraseñas no coinciden.");
+                }
+                });
+            });
+            // función para verificar coincidencia de contraseñas
+            function verificarCoincidencia(passId, confId, mensajeId) {
+                const pass = document.getElementById(passId);
+                const conf = document.getElementById(confId);
+                const mensaje = document.getElementById(mensajeId);
+                function checkMatch() {
+                    if (conf.value === "") {
+                        mensaje.classList.add("d-none");
+                        return;
+                    }
+                    if (pass.value === conf.value) {
+                        mensaje.classList.add("d-none");
+                    } else {
+                        mensaje.textContent = "Las contraseñas no coinciden";
+                        mensaje.classList.remove("d-none");
+                    }
+                }
+                pass.addEventListener("input", checkMatch);
+                conf.addEventListener("input", checkMatch);
+            }
+            mostrarSeguridad("perfil_contrasena", "mensajeSeguridad_perfil");
+            verificarCoincidencia("perfil_contrasena", "perfil_confirmar", "mensajeCoincidencia_perfil");
+        });
+  </script>
 </body>
 </html>

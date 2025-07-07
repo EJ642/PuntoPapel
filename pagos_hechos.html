@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Punto Papel - Listado de Pagos</title>
+  <!-- Icono -->
+  <link rel="icon" href="img/logo16px.png" type="image/png">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/estilos.css">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="bt/bootstrap.min.css">
+  <script src="bt/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="bt-icons/bootstrap-icons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="dt/datatables.min.css">
+  <!-- AlertifyJS -->
+  <link rel="stylesheet" href="alert/alertify.min.css">
+  <link rel="stylesheet" href="alert/themes/default.min.css">
+  <!-- CSS Personalizado -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="cabecera-nav">
+        <nav class="navbar navbar-expand-lg navbar-light cabecera-nav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown" id="menuMantenimiento">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Mantenimiento
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li id="opcArticulos"><a class="dropdown-item" href="articulos.html">Artículos</a></li>
+                                <li id="opcProveedores"><a class="dropdown-item" href="proveedores.html">Proveedores</a></li>
+                                <li id="opcMarcas"><a class="dropdown-item" href="marcas.html">Marcas</a></li>
+                                <li id="opcCategorias"><a class="dropdown-item" href="categorias.html">Categorías</a></li>
+                                <li id="opcClientes"><a class="dropdown-item" href="cliente.html">Clientes</a></li>
+                                <li id="opcUsuario"><a class="dropdown-item" href="usuario.html">Usuarios</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuCompras">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Compras
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="compra.html">Registro de compras</a></li>
+                                <li><a class="dropdown-item" href="compras_hechas.html">Listado de compras</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li id="opcPagos"><a class="dropdown-item" href="pago_proveedores.html">Pago a Proveedores</a></li>
+                                <li id="opcListado"><a class="dropdown-item" href="pagos_hechos.html">Listado de pagos</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuStock">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Stock
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="ajuste_stock.html">Ajuste de Stock</a></li>
+                                <li><a class="dropdown-item" href="ajustes_hechos.html">Listado de ajustes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuVentas">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Ventas
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="Registrodeventas.html">Registro de ventas</a></li>
+                                <li id="opcListadoVentas"><a class="dropdown-item" href="ventas_realizadas.html">Listado de ventas</a></li>
+                                <li id="opcCredito"><a class="dropdown-item" href="creditos_clientes.html">Créditos con clientes</a></li>
+                                <li id="opcCobro"><a class="dropdown-item" href="historial_de pagos.html">Cobro de créditos a clientes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuInformes">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Informes
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="informe_venta.html">Informes de ventas</a></li>
+                                <li><a class="dropdown-item" href="informe_credito.html">Informes de créditos con clientes </a></li>
+                                <li><a class="dropdown-item" href="informe_cobro_credito.html">Informes de cobró de créditos</a></li>
+                                <li><a class="dropdown-item" href="informeCompra.html">Informes de compras</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Iniciado por:</div>
+                    <div id="usuario"></div>
+                </div>
+            </div>
+            <div>
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!" onclick="abrirPerfil()">Mi Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>    
+  <!-- Contenido Principal -->
+  <div class="container mt-4 cont-principal">
+    <h2 class="mb-4"><i class="bi bi-cash-stack"></i> Listado de Pagos a Proveedores</h2>
+    
+    <!-- Filtros -->
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label">Proveedor</label>
+            <select class="form-select" id="filtroProveedor">
+              <option value="">Todos los proveedores</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Fecha Desde</label>
+            <input type="date" class="form-control" id="fechaDesde">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Fecha Hasta</label>
+            <input type="date" class="form-control" id="fechaHasta">
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button class="btn btn-primary w-100" id="btnFiltrar">
+              <i class="bi bi-funnel"></i> Filtrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de Registros -->
+    <div class="card shadow">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Registros de Pagos</h5>
+        <div>
+          <button id="btnExportPDF" class="btn btn-danger btn-sm">
+            <i class="bi bi-file-earmark-pdf"></i> Exportar a PDF
+          </button>
+          <button id="btnResetFiltros" class="btn btn-secondary btn-sm ms-2">
+            <i class="bi bi-arrow-counterclockwise"></i> Limpiar
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <table id="tablaPagos" class="table table-striped" style="width:100%">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Proveedor</th>
+              <th>RUC</th>
+              <th>Facturas</th>
+              <th class="text-right">Importe</th>
+              <th>Comprobante</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="dt/jquery-3.7.1.js"></script>
+  <script src="dt/datatables.min.js"></script>
+  <script src="dt/es-ES.js"></script>
+  <script src="alert/alertify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <script>
+    // Configura jsPDF
+    const { jsPDF } = window.jspdf;
+    let tablaPagos;
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // Verificar sesión
+      const nombre = sessionStorage.getItem("nomUsuario");
+      if (!nombre) {
+        window.location.href = "error.html";
+        return;
+      }
+      document.getElementById("usuario").textContent = nombre;
+
+      // Configurar fechas (últimos 30 días por defecto)
+      const hoy = new Date();
+      const hace30Dias = new Date();
+      hace30Dias.setDate(hoy.getDate() - 30);
+      
+      document.getElementById('fechaHasta').value = hoy.toISOString().split('T')[0];
+      document.getElementById('fechaDesde').value = hace30Dias.toISOString().split('T')[0];
+
+      // Cargar filtro de proveedores
+      cargarProveedoresEnFiltro();
+
+      // Inicializar DataTable para pagos
+      tablaPagos = $('#tablaPagos').DataTable({
+        language: { 
+          url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
+          buttons: {
+            copy: "Copiar",
+            print: "Imprimir",
+            excel: "Excel"
+          }
+        },
+        dom: 'Bfrtip',
+        buttons: [
+          'copy', 'excel', 'print'
+        ],
+        responsive: true,
+        columns: [
+          { data: 'id' },
+          { data: 'fecha' },
+          { data: 'proveedor' },
+          { data: 'ruc' },
+          { 
+            data: 'facturas',
+            render: function(data) {
+              return data.map(f => f.numFactura).join(', ');
+            }
+          },
+          { 
+            data: 'importe',
+            render: function(data) {
+              return `₲ ${data.toLocaleString('es-PY')}`;
+            },
+            className: 'text-right'
+          },
+          { 
+            data: null,
+            render: function(data) {
+              return `<button class="btn btn-sm btn-outline-danger" onclick="generarComprobante(${data.id})">
+                <i class="bi bi-file-earmark-pdf"></i> PDF
+              </button>`;
+            }
+          }
+        ]
+      });
+
+      // Cargar datos iniciales
+      cargarPagosEnTabla();
+
+      // Configurar filtros
+      document.getElementById('btnFiltrar').addEventListener('click', aplicarFiltros);
+      document.getElementById('btnResetFiltros').addEventListener('click', resetearFiltros);
+
+      // Botón para exportar PDF
+      document.getElementById("btnExportPDF").addEventListener("click", exportarPDF);
+    });
+
+    function cargarProveedoresEnFiltro() {
+      const proveedores = JSON.parse(localStorage.getItem("proveedores")) || [];
+      const select = document.getElementById('filtroProveedor');
+      
+      // Limpiar opciones
+      while (select.options.length > 1) {
+        select.remove(1);
+      }
+      
+      // Agregar proveedores
+      proveedores.forEach(proveedor => {
+        const option = document.createElement('option');
+        option.value = proveedor.id;
+        option.textContent = `${proveedor.proveedor} (${proveedor.ruc})`;
+        select.appendChild(option);
+      });
+    }
+
+    function cargarPagosEnTabla() {
+      const pagos = JSON.parse(localStorage.getItem("pagosProveedores")) || [];
+      tablaPagos.clear().rows.add(pagos).draw();
+    }
+
+    function aplicarFiltros() {
+      const proveedorId = document.getElementById('filtroProveedor').value;
+      const fechaDesde = document.getElementById('fechaDesde').value;
+      const fechaHasta = document.getElementById('fechaHasta').value;
+      
+      let pagos = JSON.parse(localStorage.getItem("pagosProveedores")) || [];
+      
+      // Aplicar filtros
+      if (proveedorId) {
+        pagos = pagos.filter(p => p.idproveedor == proveedorId);
+      }
+      
+      if (fechaDesde) {
+        pagos = pagos.filter(p => new Date(p.fecha) >= new Date(fechaDesde));
+      }
+      
+      if (fechaHasta) {
+        const fechaHastaMas1 = new Date(fechaHasta);
+        fechaHastaMas1.setDate(fechaHastaMas1.getDate() + 1); // Incluir todo el día
+        pagos = pagos.filter(p => new Date(p.fecha) < fechaHastaMas1);
+      }
+      
+      tablaPagos.clear().rows.add(pagos).draw();
+    }
+
+    function resetearFiltros() {
+      document.getElementById('filtroProveedor').value = '';
+      
+      const hoy = new Date();
+      const hace30Dias = new Date();
+      hace30Dias.setDate(hoy.getDate() - 30);
+      
+      document.getElementById('fechaHasta').value = hoy.toISOString().split('T')[0];
+      document.getElementById('fechaDesde').value = hace30Dias.toISOString().split('T')[0];
+      
+      cargarPagosEnTabla();
+    }
+
+    function generarComprobante(idPago) {
+      const pagos = JSON.parse(localStorage.getItem("pagosProveedores")) || [];
+      const pago = pagos.find(p => p.id == idPago);
+      
+      if (!pago) {
+        alertify.error("Pago no encontrado");
+        return;
+      }
+
+      const doc = new jsPDF();
+      
+      // Logo y Encabezado
+      doc.setFontSize(18);
+      doc.setTextColor(40);
+      doc.text("LIBRERÍA ROCÍO", 105, 15, { align: 'center' });
+      doc.setFontSize(12);
+      doc.text("RUC: 1234567-8", 105, 22, { align: 'center' });
+      doc.text("COMPROBANTE DE PAGO", 105, 29, { align: 'center' });
+      
+      // Línea divisoria
+      doc.setDrawColor(200);
+      doc.line(15, 35, 195, 35);
+      
+      // Datos del Comprobante
+      doc.setFontSize(10);
+      doc.text(`N° Comprobante: ${pago.id}`, 15, 45);
+      doc.text(`Fecha: ${pago.fecha}`, 15, 50);
+      doc.text(`Proveedor: ${pago.proveedor} (RUC: ${pago.ruc || 'N/A'})`, 15, 55);
+      
+      // Tabla de Facturas Pagadas
+      doc.autoTable({
+        startY: 65,
+        head: [['Factura', 'Importe (₲)']],
+        body: pago.facturas.map(f => [
+          f.numFactura,
+          `₲ ${f.total.toLocaleString('es-PY')}`
+        ]),
+        theme: 'grid',
+        headStyles: { fillColor: [41, 128, 185] }
+      });
+      
+      // Resumen del Pago
+      const startY = doc.lastAutoTable.finalY + 10;
+      doc.autoTable({
+        startY,
+        body: [
+          ['Total Pagado:', `₲ ${pago.importe.toLocaleString('es-PY')}`],
+        ],
+        theme: 'plain',
+        styles: { 
+          fontStyle: 'bold',
+          halign: 'right',
+          cellPadding: 5
+        },
+        columnStyles: {
+          0: { halign: 'right', cellWidth: 60 },
+          1: { cellWidth: 40 }
+        }
+      });
+      
+      // Pie de página
+      doc.setFontSize(8);
+      doc.setTextColor(150);
+      doc.text("Librería Rocio - RUC: 1234567-8", 105, 285, { align: 'center' });
+      
+      doc.save(`comprobante-pago-${pago.id}.pdf`);
+    }
+
+    function exportarPDF() {
+      const pagos = tablaPagos.rows().data().toArray();
+      
+      if (pagos.length === 0) {
+        alertify.error("No hay pagos para exportar");
+        return;
+      }
+
+      const doc = new jsPDF('landscape');
+      
+      // Encabezado del reporte
+      doc.setFontSize(16);
+      doc.setTextColor(40);
+      doc.text("LIBRERÍA ROCÍO", 140, 15, { align: 'center' });
+      doc.setFontSize(12);
+      doc.text("RUC: 1234567-8", 140, 22, { align: 'center' });
+      doc.text("REPORTE DE PAGOS A PROVEEDORES", 140, 29, { align: 'center' });
+      
+      // Fecha de generación
+      doc.setFontSize(10);
+      doc.text(`Generado el: ${new Date().toLocaleDateString('es-PY')}`, 15, 35);
+      
+      // Filtros aplicados
+      const proveedorFiltro = document.getElementById('filtroProveedor');
+      const proveedorText = proveedorFiltro.options[proveedorFiltro.selectedIndex].text;
+      const fechaDesde = document.getElementById('fechaDesde').value;
+      const fechaHasta = document.getElementById('fechaHasta').value;
+      
+      doc.text(`Proveedor: ${proveedorText}`, 15, 40);
+      doc.text(`Período: ${fechaDesde} al ${fechaHasta}`, 15, 45);
+      
+      // Tabla con todos los pagos
+      doc.autoTable({
+        startY: 55,
+        head: [
+          ['ID', 'Fecha', 'Proveedor', 'RUC', 'Facturas', 'Importe (₲)']
+        ],
+        body: pagos.map(p => [
+          p.id,
+          p.fecha,
+          p.proveedor,
+          p.ruc || 'N/A',
+          p.facturas.map(f => f.numFactura).join(', '),
+          p.importe.toLocaleString('es-PY')
+        ]),
+        styles: { fontSize: 8 },
+        headStyles: { 
+          fillColor: [58, 64, 90],
+          textColor: 255,
+          fontStyle: 'bold'
+        },
+        columnStyles: {
+          5: { halign: 'right' } // Alinear importe a la derecha
+        },
+        margin: { top: 60 }
+      });
+      
+      // Total general
+      const totalGeneral = pagos.reduce((sum, p) => sum + p.importe, 0);
+      
+      doc.autoTable({
+        startY: doc.lastAutoTable.finalY + 5,
+        body: [
+          ['TOTAL GENERAL', `₲ ${totalGeneral.toLocaleString('es-PY')}`]
+        ],
+        styles: { 
+          fontSize: 10,
+          fontStyle: 'bold',
+          halign: 'right'
+        },
+        columnStyles: {
+          0: { fontStyle: 'bold', halign: 'right', cellWidth: 100 },
+          1: { fontStyle: 'bold', cellWidth: 60 }
+        }
+      });
+      
+      // Pie de página
+      doc.setFontSize(8);
+      doc.setTextColor(150);
+      doc.text("Librería Rocio - RUC: 1234567-8", 140, 200, { align: 'center' });
+      
+      doc.save(`reporte-pagos-${new Date().toLocaleDateString('es-PY').replace(/\//g, '-')}.pdf`);
+    }
+
+    function cerrarSesion() {
+      sessionStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

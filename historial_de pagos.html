@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Punto Papel</title>
+    <title>Historial de Pagos</title>
     <!-- Icono -->
     <link rel="icon" href="img/logo16px.png" type="image/png">
     <!-- CSS -->
     <link rel="stylesheet" href="css/estilos.css">
-    <!-- JavaScript -->
-    <script src="js/funcionesSistema.js"></script>
-    <!-- Bootstrap -->
+    <!-- DATATABLES -->
+    <link rel="stylesheet" href="dt/datatables.min.css">
+    <link rel="stylesheet" href="dt/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="dt/buttons.dataTables.min.css">
     <link rel="stylesheet" href="bt/bootstrap.min.css">
+    <!-- Bootstrap -->
     <script src="bt/bootstrap.bundle.min.js"></script>
     <!-- Iconos de Bootstrap -->
-    <link rel="stylesheet" href="bt_icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="bt-icons/bootstrap-icons.min.css">
     <!-- Alertify -->
     <link rel="stylesheet" href="alert/alertify.min.css">
     <link rel="stylesheet" href="alert/themes/default.min.css">
     <script src="alert/alertify.min.js"></script>
 </head>
-<body> 
+<body>
     <div class="cabecera-nav">
         <nav class="navbar navbar-expand-lg navbar-light cabecera-nav">
             <div class="container-fluid">
@@ -108,23 +110,65 @@
                 </ul>
             </div>
         </nav>
-    </div>     
-    <!-- Pantalla principal donde se mostrará el contenido -->
-    <div class="cont-principal">
-        <div class="text-center mb-3">
-            <img src="img/logo.png" alt="Librería Rocío" style="max-width: 800px;">
+    </div>    
+    <!-- Contenedor Principal -->
+     <div class="card mb-4">
+        <div class="card-header bg-secondary text-white fw-bold">
+            Historial de Pagos
         </div>
-    </div>
-    <div>
-        <footer class="py-2 bg-white mt-auto border-top">
-            <div class="container-fluid px-4">
-                <div class="d-flex align-items-center justify-content-between small text-muted">
-                    <div>&copy; Librería Rocio 2025</div>
-                </div>
+        <!-- Filtrar PDF por fecha -->
+        <div class="mb-3 d-flex gap-3 align-items-end">
+            <div>
+                <label for="fechaInicio" class="form-label">Desde:</label>
+                <input type="date" id="fechaInicio" class="form-control">
             </div>
-        </footer>
+            <div>
+                <label for="fechaFin" class="form-label">Hasta:</label>
+                <input type="date" id="fechaFin" class="form-control">
+            </div>
+            <button id="btnFiltrar" class="btn btn-primary">Filtrar</button>
+        </div>
+  <!-- Tabla -->
+    <div class="table-responsive">
+        <table class="table table-bordered" id="tablaCreditos">
+            <thead>
+                <tr>
+                <th>Cliente</th>
+                <th>RUC</th>
+                <th>Factura</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Saldo</th>
+                <th>Estado</th>
+                <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
     </div>
-    <!--Modal para editar el perfil del usuario -->
+
+   <!-- Modal para ver pagos realizados -->
+<div class="modal fade" id="modalPagos" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5 class="modal-title">Pagos realizados</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="contenidoPagos">
+        <p><strong>Cliente:</strong> <span id="clienteNombreTicket"></span></p>
+        <ul id="listaPagos" class="list-group"></ul>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" onclick="imprimirTicket()">🖨️ Imprimir</button>
+        <button class="btn btn-outline-danger" onclick="descargarPDF()">📄 PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal para editar el perfil del usuario -->
     <div class="modal fade" id="modalPerfilUsuario" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <form id="formPerfilUsuario" class="modal-content">
@@ -161,8 +205,40 @@
         </div>
     </div>
     <script src="js/perfil.js"></script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
+
+<!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  <script src="script.js"></script>
+
+ <!-- JavaScript -->
+    <script src="js/funcionesSistema.js"></script>
+    <script src="js/ventas.js"></script>
+    <script src="js/bd.js"></script>
+    <!-- MENU -->
+    <script src="menu/bootstrap.bundle.min.js"></script>
+    <script src="menu/scripts.js"></script>
+    <!-- DATATABLES -->
+    <script src="dt/jquery-3.7.1.js"></script>
+    <script src="dt/datatables.min.js"></script>
+    <script src="dt/jquery.dataTables.min.js"></script>
+    <!-- DATATABLES Buttons extension -->
+    <script src="dt/dataTables.buttons.min.js"></script>
+    <script src="dt/buttons.print.min.js"></script>
+    <script src="dt/buttons.html5.min.js"></script>
+    <!-- DATATABLES JSZip y pdfmake para exportar -->
+    <script src="dt/jszip.min.js"></script>
+    <script src="dt/pdfmake.min.js"></script>
+    <script src="dt/vfs_fonts.js"></script>
+    <!-- DATATABLES Idioma Español -->
+    <script src="dt/es-ES.js"></script>
+
+    <!-- jsPDF para exportar a PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+// control de seguridad al cargarse la página
+       document.addEventListener("DOMContentLoaded", function () {
         const nombre = sessionStorage.getItem("nomUsuario");
 
         if (!nombre) {
@@ -178,6 +254,177 @@
     });
     
     //funcion que oculta elementos del menu dependiendo del rol
+    document.addEventListener("DOMContentLoaded", function () {
+    const rol = sessionStorage.getItem("rolUsuario"); // debe tener: administrador, gerente, etc.
+    const nombre = sessionStorage.getItem("nomUsuario");
+
+    if (!rol || !nombre) {
+      alertify.error("Acceso denegado.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Mostrar el nombre en el panel
+    const spanUsuario = document.getElementById("usuario");
+    if (spanUsuario) spanUsuario.textContent = nombre;
+
+    
+    // Ocultar menús según el rol
+    switch (rol) {
+      case "administrador":
+        // ve todo
+        break;
+      case "gerente":
+        ocultar(["menuUsuarios"]);
+        break;
+      case "cajero":
+        ocultar(["menuMantenimiento", "menuCompras", "menuUsuarios"]);
+        break;
+      case "codificador":
+        ocultar(["menuVentas", "menuCompras", "menuInformes", "menuUsuarios"]);
+        break;
+      default:
+        alertify.error("Rol no válido.");
+        window.location.href = "login.html";
+    }
+
+    // Función para ocultar elementos por ID
+    function ocultar(ids) {
+      ids.forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem) elem.style.display = "none";
+      });
+    }
+  });
+        // habilitar crear nuevos usuarios solo para adminsitradores
+        document.addEventListener("DOMContentLoaded", function(){
+            const btnCrear = document.getElementById("btnCrearCliente");
+            if(btnCrear && !tienePermiso(usuarioActual, permisos.usuarios_crear)){
+                btnCrear.style.display = "none"; // oculta si no tiene permiso
+            }
+        });
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const creditos = JSON.parse(localStorage.getItem("creditos")) || [];
+    const tbody = document.querySelector("#tablaCreditos tbody");
+    tbody.innerHTML = "";
+
+    creditos.forEach((credito, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+        <td>${credito.cliente}</td>
+        <td>${credito.ruc}</td>
+        <td>${credito.factura}</td>
+        <td>${credito.fecha}</td>
+        <td>Gs. ${credito.total}</td>
+        <td>Gs. ${credito.saldoPendiente}</td>
+        <td>${credito.estado}</td>
+        <td>
+            <button class="btn btn-sm btn-primary" onclick="verPagos(${index})">
+            Ver pagos
+            </button>
+        </td>
+        `;
+        tbody.appendChild(tr);
+    });
+    });
+    function verPagos(index) {
+    const creditos = JSON.parse(localStorage.getItem("creditos")) || [];
+    const credito = creditos[index];
+    const lista = document.getElementById("listaPagos");
+    lista.innerHTML = "";
+
+    // Mostramos nombre del cliente en el modal
+    document.getElementById("clienteNombreTicket").textContent = credito.cliente;
+
+    if (!credito.pagos || credito.pagos.length === 0) {
+        lista.innerHTML = `<li class="list-group-item">No hay pagos registrados</li>`;
+    } else {
+        credito.pagos.forEach((pago, i) => {
+        const li = document.createElement("li");
+        li.classList.add("list-group-item");
+        li.textContent = `#${i + 1} - Fecha: ${pago.fecha} - Monto: Gs. ${pago.monto} - Obs: ${pago.observacion || '-'}`;
+        lista.appendChild(li);
+        });
+    }
+
+    const modal = new bootstrap.Modal(document.getElementById("modalPagos"));
+    modal.show();
+    }
+
+   function imprimirTicket() {
+    const nombre = document.getElementById("clienteNombreTicket").textContent;
+    const pagos = Array.from(document.querySelectorAll("#listaPagos li"))
+        .map(li => li.textContent)
+        .join("<br>");
+
+    const ticketHTML = `
+<html>
+  <head>
+    <title>Ticket de Pago</title>
+    <style>
+      body { font-family: monospace; padding: 20px; width: 300px; }
+      h2, h4 { text-align: center; margin: 0; }
+      hr { border: 1px dashed #000; margin: 10px 0; }
+      .datos { font-size: 14px; margin-bottom: 10px; }
+      .pagos { font-size: 13px; white-space: pre-line; }
+      .footer { text-align: center; margin-top: 10px; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <h2>LIBRERÍA ROCÍO</h2>
+    <div class="datos">
+      RUC: 5130408-2<br>
+      Avda. Pinedo y Dr. Royg Bernal<br>
+      Cel: 0975-370735<br>
+      CONCEPCIÓN - PARAGUAY
+    </div>
+    <hr>
+    <h4>TICKET DE PAGO</h4>
+    <p><strong>Cliente:</strong> ${nombre}</p>
+    <div class="pagos">${pagos}</div>
+    <hr>
+    <div class="footer">Gracias por su pago.</div>
+    <script>window.print();<\/script>
+  </body>
+</html>
+`;
+
+const ventana = window.open("", "_blank");
+ventana.document.write(ticketHTML);
+ventana.document.close();
+}
+function descargarPDF() {
+    const nombre = document.getElementById("clienteNombreTicket").textContent;
+    const pagos = Array.from(document.querySelectorAll("#listaPagos li"))
+        .map((li, i) => `#${i + 1} - ${li.textContent}`);
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(14);
+    doc.text("LIBRERÍA ROCÍO", 70, 10);
+    doc.setFontSize(10);
+    doc.text("RUC: 5130408-2", 10, 20);
+    doc.text("Avda. Pinedo y Dr. Royg Bernal", 10, 25);
+    doc.text("Cel: 0975-370735", 10, 30);
+    doc.text("CONCEPCIÓN - PARAGUAY", 10, 35);
+    doc.line(10, 40, 200, 40); // línea horizontal
+
+    doc.setFontSize(12);
+    doc.text("TICKET DE PAGO", 80, 50);
+    doc.text(`Cliente: ${nombre}`, 10, 60);
+
+    pagos.forEach((pago, i) => {
+        doc.text(pago, 10, 70 + i * 10);
+    });
+
+    doc.text("Gracias por su pago.", 10, 80 + pagos.length * 10);
+
+    doc.save("ticket_pago.pdf");
+}
+    //funcion que oculta elementos del menu dependiendo del rol
         document.addEventListener("DOMContentLoaded", function () {
             const rol = sessionStorage.getItem("rolUsuario"); // debe tener: administrador, gerente, etc.
             const nombre = sessionStorage.getItem("nomUsuario");
@@ -192,21 +439,21 @@
             
             // Ocultar menús según el rol
             switch (rol) {
-            case "administrador":
-                // ve todo
-                break;
-            case "gerente":
-                ocultar(["menuMantenimiento", "menuCompras", "menuStock", "menuVentas"]);
-                break;
-            case "cajero":
-                ocultar(["menuMantenimiento", "menuCompras", "menuStock", "opcCobro", "opcCredito", "opcListadoVentas", "menuInformes"]);
-                break;
-            case "codificador":
-                ocultar(["opcUsuario", "opcClientes", "menuVentas", "opcPagos", "opcListado", "menuStock", "menuInformes"]);
-                break;
-            default:
-                alertify.error("Rol no válido.");
-                window.location.href = "login.html";
+                case "administrador":
+                    // ve todo
+                    break;
+                case "gerente":
+                    ocultar(["menuUsuarios"]);
+                    break;
+                case "cajero":
+                    ocultar(["menuMantenimiento", "menuCompras", "menuUsuarios"]);
+                    break;
+                case "codificador":
+                    ocultar(["menuVentas", "menuCompras", "menuInformes", "menuUsuarios"]);
+                    break;
+                default:
+                    alertify.error("Rol no válido.");
+                    window.location.href = "login.html";
             }
             // Función para ocultar elementos por ID
             function ocultar(ids) {
@@ -290,6 +537,6 @@
             mostrarSeguridad("perfil_contrasena", "mensajeSeguridad_perfil");
             verificarCoincidencia("perfil_contrasena", "perfil_confirmar", "mensajeCoincidencia_perfil");
         });
-    </script>
+</script>
 </body>
 </html>

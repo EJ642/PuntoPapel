@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Punto Papel</title>
+    <title>Punto Papel: Compra</title>
     <!-- Icono -->
-    <link rel="icon" href="img/user128.png" type="image/png">
+    <link rel="icon" href="img/logo16px.png" type="image/png">
     <!-- CSS -->
     <link rel="stylesheet" href="css/estilos.css">
-    <!-- ESTILOS DEL MENU -->
-    <link rel="stylesheet" href="menu/styles.css">
     <!-- DATATABLES -->
     <link rel="stylesheet" href="dt/datatables.min.css">
     <link rel="stylesheet" href="dt/jquery.dataTables.min.css">
@@ -39,11 +37,12 @@
                                 Mantenimiento
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="articulos.html">Artículos</a></li>
-                                <li><a class="dropdown-item" href="marcas.html">Marcas</a></li>
-                                <li><a class="dropdown-item" href="categorias.html">Clasificaciones</a></li>
-                                <li><a class="dropdown-item" href="proveedores.html">Proveedores</a></li>
-                                <li><a class="dropdown-item" href="cliente.html">Clientes</a></li>
+                                <li id="opcArticulos"><a class="dropdown-item" href="articulos.html">Artículos</a></li>
+                                <li id="opcProveedores"><a class="dropdown-item" href="proveedores.html">Proveedores</a></li>
+                                <li id="opcMarcas"><a class="dropdown-item" href="marcas.html">Marcas</a></li>
+                                <li id="opcCategorias"><a class="dropdown-item" href="categorias.html">Categorías</a></li>
+                                <li id="opcClientes"><a class="dropdown-item" href="cliente.html">Clientes</a></li>
+                                <li id="opcUsuario"><a class="dropdown-item" href="usuario.html">Usuarios</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown" id="menuCompras">
@@ -52,9 +51,19 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="compra.html">Registro de compras</a></li>
-                                <li><a class="dropdown-item" href="#">Créditos con Proveedores</a></li>
-                                <li><a class="dropdown-item" href="#">Pago a Proveedores</a></li>
-                                <li><a class="dropdown-item" href="#">Ajuste de Stock</a></li>
+                                <li><a class="dropdown-item" href="compras_hechas.html">Listado de compras</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li id="opcPagos"><a class="dropdown-item" href="pago_proveedores.html">Pago a Proveedores</a></li>
+                                <li id="opcListado"><a class="dropdown-item" href="pagos_hechos.html">Listado de pagos</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown" id="menuStock">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Stock
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="ajuste_stock.html">Ajuste de Stock</a></li>
+                                <li><a class="dropdown-item" href="ajustes_hechos.html">Listado de ajustes</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown" id="menuVentas">
@@ -62,9 +71,10 @@
                                 Ventas
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="ventas.html">Registro de ventas</a></li>
-                                <li><a class="dropdown-item" href="credito_Cliente.html">Créditos con clientes</a></li>
-                                <li><a class="dropdown-item" href="#">Cobró de creditos a clientes</a></li>
+                                <li><a class="dropdown-item" href="Registrodeventas.html">Registro de ventas</a></li>
+                                <li id="opcListadoVentas"><a class="dropdown-item" href="ventas_realizadas.html">Listado de ventas</a></li>
+                                <li id="opcCredito"><a class="dropdown-item" href="creditos_clientes.html">Créditos con clientes</a></li>
+                                <li id="opcCobro"><a class="dropdown-item" href="historial_de pagos.html">Cobro de créditos a clientes</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown" id="menuInformes">
@@ -72,17 +82,11 @@
                                 Informes
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Informes de ventas</a></li>
-                                <li><a class="dropdown-item" href="#">Informes de Créditos con clientes </a></li>
-                                <li><a class="dropdown-item" href="#">Informes de Cobró de créditos</a></li>
-                                <li><a class="dropdown-item" href="#">Informes de compras</a></li>
-                                <li><a class="dropdown-item" href="#">Informes de créditos con Proveedores</a></li>
-                                <li><a class="dropdown-item" href="#">Informes de Pago a Proveedores</a></li>
-                                <li><a class="dropdown-item" href="#">Informes de ajuste de Stock</a></li>
+                                <li><a class="dropdown-item" href="informe_venta.html">Informes de ventas</a></li>
+                                <li><a class="dropdown-item" href="informe_credito.html">Informes de créditos con clientes </a></li>
+                                <li><a class="dropdown-item" href="informe_cobro_credito.html">Informes de cobró de créditos</a></li>
+                                <li><a class="dropdown-item" href="informeCompra.html">Informes de compras</a></li>
                             </ul>
-                        </li>
-                        <li class="nav-item" id="menuUsuarios"></li>
-                            <a class="nav-link" href="usuario.html">Usuarios</a>
                         </li>
                     </ul>
                 </div>
@@ -98,8 +102,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">Configuraciones</a></li>
-                            <li><a class="dropdown-item" href="#!">Actividad</a></li>
+                            <li><a class="dropdown-item" href="#!" onclick="abrirPerfil()">Mi Perfil</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#" onclick="cerrarSesion()">Cerrar sesión</a></li>
                         </ul>
@@ -107,7 +110,7 @@
                 </ul>
             </div>
         </nav>
-    </div>
+    </div>    
     <!-- Pantalla principal donde se mostrará el contenido -->
     <div class="container my-4">
         <h1 class="text-center mb-4">Registrar Compras</h1>
@@ -170,7 +173,7 @@
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">Precio Unitario</label>
-                        <input type="text" id="preuni" class="form-control text-end" required readonly>
+                        <input type="text" id="preuni" class="form-control text-end" required>
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">Subtotal</label>
@@ -253,7 +256,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="modalArticulosLabel">Seleccionar Proveedor</h5>
+                    <h5 class="modal-title" id="modalArticulosLabel">Seleccionar Artículo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="cerrar"></button>
                 </div>
                 <div class="modal-body">
@@ -274,8 +277,6 @@
             </div>
         </div>
     </div>
-    <!-- modal para cargar nuevos articulos -->
-
     <div>
         <footer class="py-2 bg-white mt-auto border-top">
             <div class="container-fluid px-4">
@@ -285,10 +286,47 @@
             </div>
         </footer>
     </div>
+    <!--Modal para editar el perfil del usuario -->
+    <div class="modal fade" id="modalPerfilUsuario" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="formPerfilUsuario" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="perfil_id">
+                    <div class="mb-2">
+                        <label>Nombre del Usuario</label>
+                        <input type="text" id="perfil_nombre" class="form-control" readonly>
+                    </div>
+                    <div class="mb-2">
+                        <label>Usuario</label>
+                        <input type="text" id="perfil_usuario" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label>Contraseña</label>
+                        <input type="password" id="perfil_contrasena" class="form-control" required>
+                        <small id="mensajeSeguridad_perfil" class="form-text text-danger d-none">La contraseña no es segura.Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un caracter especial.</small>
+                    </div>
+                    <div class="mb-2">
+                        <label>Confirmar Contraseña</label>
+                        <input type="password" id="perfil_confirmar" class="form-control" required>
+                        <small id="mensajeCoincidencia_perfil" class="form-text text-danger d-none"> Las contraseñas no coinciden</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <!-- JavaScript -->
     <script src="js/funcionesSistema.js"></script>
-    <script src="js/auth/permisos.js"></script>
+    <script src="js/permisos.js"></script>
     <script src="js/bd.js"></script>
+    <script src="js/perfil.js"></script>
     <!-- MENU -->
     <script src="menu/bootstrap.bundle.min.js"></script>
     <script src="menu/scripts.js"></script>
@@ -371,13 +409,20 @@
             const descripcion = document.getElementById("descripcion").value.trim();
             const cantidad = parseInt(document.getElementById("cantidad").value);
             const precioUnitario = parseInt(document.getElementById("preuni").value);
-            const iva = parseInt(document.getElementById("iva").value) || 0;
+            const iva = parseInt(document.getElementById("iva").value);
             // verifica que todos los campos se completen
             if(!codBarra || !descripcion || isNaN(cantidad) || isNaN(precioUnitario)){
                 alertify.error("Completa todos los campos del artículo");
                 return;
             }
-            const subtotal = cantidad * precioUnitario;
+            if(precioUnitario <= 0){
+                alertify.error("No se admiten números negativos ni cero");
+                document.getElementById("preuni").value = "";
+                document.getElementById("preuni").focus();
+                return;
+            }
+            const precioConIVA = precioUnitario + (precioUnitario * iva / 100);
+            const subtotal = cantidad * precioConIVA;
             detalleCompra.push({
                 codBarra,
                 descripcion,
@@ -398,7 +443,7 @@
                 document.getElementById("descripcion").value = articulo.nombre_articulo;
                 document.getElementById("idarticulo").value = articulo.idarticulo;
                 document.getElementById("iva").value = articulo.iva; 
-                document.getElementById("preuni").value = articulo.precio;
+                document.getElementById("preuni").value = articulo.costo;
                 document.getElementById("cantidad").focus();
                 calcularSubtotalArticulo();
             }else {
@@ -436,7 +481,7 @@
             document.getElementById("subtotal").value = total;
         }
         // funcion para limpiar campos articulos
-        function limpiarCamposArticulo() {
+        function limpiarCamposArticulo(){
             document.getElementById("codbarra").value = "";
             document.getElementById("descripcion").value = "";
             document.getElementById("cantidad").value = 1;
@@ -449,13 +494,13 @@
             mostrarDetalleEnTabla();
         }
         // funcion para guardar compra
-        function guardarCompra(){
+        function guardarCompra(){   
             const ruc = document.getElementById("ruc").value.trim();
             const proveedor = document.getElementById("proveedor").value.trim();
             const condicion = document.getElementById("condicion").value;
             const fecha = document.getElementById("fecha").value;
             const numFactura = document.getElementById("numfactura").value.trim();
-            const total = detalleCompra.reduce((sum, item) => sum + item.subtotal, 0);
+            const total = detalleCompra.reduce((sum, item) => sum + (item.precioUnitario * item.cantidad * (1 + item.iva / 100)), 0);
             // verifica que todos los campos se completen
             if (!ruc || !proveedor || !fecha || !numFactura || detalleCompra.length === 0) {
                 alertify.error("Completa todos los campos de la cabecera y agrega al menos un artículo.");
@@ -463,6 +508,7 @@
             }
             let comprasGuardadas = JSON.parse(localStorage.getItem("compras")) || [];
             let articulos = JSON.parse(localStorage.getItem("articulos")) || [];
+            let proveedores = JSON.parse(localStorage.getItem("proveedores")) || [];
             const facturaDuplicada = comprasGuardadas.some(c => c.ruc === ruc && c.numFactura === numFactura);
             if (facturaDuplicada) {
                 alertify.error("Este número de factura ya fue cargado para este proveedor.");
@@ -489,7 +535,25 @@
                 }
             });
             localStorage.setItem("articulos", JSON.stringify(articulos));
-            alertify.success("Compra Guardada Correctamente");
+            // Actualizar saldo del proveedor si es crédito
+            if (condicion === "credito") {
+                const proveedorIndex = proveedores.findIndex(p => p.ruc === ruc);
+                if (proveedorIndex !== -1) {
+                    // Si el proveedor no tiene saldo, inicializarlo en 0
+                    if (!proveedores[proveedorIndex].saldo) {
+                        proveedores[proveedorIndex].saldo = 0;
+                    }
+                    // Aumentar el saldo con el total de la compra
+                    proveedores[proveedorIndex].saldo += total;
+                    localStorage.setItem("proveedores", JSON.stringify(proveedores));
+                    
+                    alertify.success(`Compra guardada. Saldo del proveedor actualizado: ${proveedores[proveedorIndex].saldo}`);
+                } else {
+                    alertify.error("Proveedor no encontrado para actualizar saldo.");
+                }
+            } else {
+                alertify.success("Compra al contado guardada correctamente");
+            }
             // Limpiar todo
             detalleCompra = [];
             document.getElementById("formCompras").reset();
@@ -541,7 +605,7 @@
                 <td>${a.codigo}</td>
                 <td>${a.nombre_articulo}</td>
                 <td>${a.marcas}</td>
-                <td>${a.precio}</td>
+                <td>${a.costo}</td>
                 <td>${a.stock}</td>
                 <td>
                     <button class="btn btn-sm btn-primary" onclick="seleccionarArticulo(${a.codigo})">
@@ -563,7 +627,7 @@
                 document.getElementById("descripcion").value = articulo.nombre_articulo;
                 document.getElementById("idarticulo").value = articulo.idarticulo;
                 document.getElementById("iva").value = articulo.iva;
-                document.getElementById("preuni").value = articulo.precio;
+                document.getElementById("preuni").value = articulo.costo;
                 document.getElementById("cantidad").value = 1;
                 calcularSubtotalArticulo();
 
@@ -588,6 +652,119 @@
                 return maxId + 1;
             }
         }
+        //funcion que oculta elementos del menu dependiendo del rol
+        document.addEventListener("DOMContentLoaded", function () {
+            const rol = sessionStorage.getItem("rolUsuario"); // debe tener: administrador, gerente, etc.
+            const nombre = sessionStorage.getItem("nomUsuario");
+            if (!rol || !nombre) {
+                alertify.error("Acceso denegado.");
+                window.location.href = "login.html";
+                return;
+            }
+            // Mostrar el nombre en el panel
+            const spanUsuario = document.getElementById("usuario");
+            if (spanUsuario) spanUsuario.textContent = nombre;
+            
+            // Ocultar menús según el rol
+            switch (rol) {
+                case "administrador":
+                    // ve todo
+                    break;
+                case "gerente":
+                    ocultar(["menuMantenimiento", "menuCompras", "menuStock", "menuVentas"]);
+                    break;
+                case "cajero":
+                    ocultar(["menuMantenimiento", "menuCompras", "menuStock", "opcCobro", "opcCredito", "opcListadoVentas", "menuInformes"]);
+                    break;
+                case "codificador":
+                    ocultar(["opcUsuario", "opcClientes", "menuVentas", "opcPagos", "opcListado", "menuStock", "menuInformes"]);
+                    break;
+                default:
+                    alertify.error("Rol no válido.");
+                    window.location.href = "login.html";
+            }
+            // Función para ocultar elementos por ID
+            function ocultar(ids) {
+                ids.forEach(id => {
+                    const elem = document.getElementById(id);
+                    if (elem) elem.style.display = "none";
+                });
+            }
+        });
+        // reglas para el perfil
+        document.addEventListener("DOMContentLoaded", function () {
+            const reglas = {
+                r1: c => c.length >= 8,
+                r2: c => /[A-Z]/.test(c),
+                r3: c => /[a-z]/.test(c),
+                r4: c => /\d/.test(c),
+                r5: c => /[@#$%^&+=!¡¿?*()\-_"':;.,<>~`|{}\[\]\\]/.test(c),
+            };
+            function mostrarSeguridad(inputId, mensajeId) {
+                const input = document.getElementById(inputId);
+                const mensaje = document.getElementById(mensajeId);
+                if (!input || !mensaje) return;
+                input.addEventListener("input", () => {
+                    const contra = input.value;
+                    const cumple = Object.values(reglas).every(fn => fn(contra));
+                    if (contra === "") {
+                        mensaje.classList.add("d-none");
+                        return;
+                    }
+                    mensaje.classList.remove("d-none");
+                    if (cumple) {
+                        mensaje.textContent = "🟢 Contraseña segura";
+                        mensaje.classList.remove("text-danger");
+                        mensaje.classList.add("text-success");
+                    } else {
+                        mensaje.textContent = "La contraseña no es segura. Debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un caracter especial.";
+                        mensaje.classList.remove("text-success");
+                        mensaje.classList.add("text-danger");
+                    }
+                });
+            }
+            // Validación al enviar formulario
+            [
+                { formId: "formPerfilUsuario", passId: "perfil_contrasena", confId: "perfil_confirmar" },
+            ].forEach(({ formId, passId, confId }) => {
+                const form = document.getElementById(formId);
+                form.addEventListener("submit", function (e) {
+                const contra = document.getElementById(passId).value;
+                const confContra = document.getElementById(confId).value;
+                const cumple = Object.values(reglas).every(fn => fn(contra));
+
+                if (!cumple) {
+                    e.preventDefault();
+                    alertify.error("La contraseña no es segura.");
+                } else if (contra !== confContra) {
+                    e.preventDefault();
+                    alertify.warning("Las contraseñas no coinciden.");
+                }
+                });
+            });
+            // función para verificar coincidencia de contraseñas
+            function verificarCoincidencia(passId, confId, mensajeId) {
+                const pass = document.getElementById(passId);
+                const conf = document.getElementById(confId);
+                const mensaje = document.getElementById(mensajeId);
+                function checkMatch() {
+                    if (conf.value === "") {
+                        mensaje.classList.add("d-none");
+                        return;
+                    }
+                    if (pass.value === conf.value) {
+                        mensaje.classList.add("d-none");
+                    } else {
+                        mensaje.textContent = "Las contraseñas no coinciden";
+                        mensaje.classList.remove("d-none");
+                    }
+                }
+                pass.addEventListener("input", checkMatch);
+                conf.addEventListener("input", checkMatch);
+            }
+            mostrarSeguridad("perfil_contrasena", "mensajeSeguridad_perfil");
+            verificarCoincidencia("perfil_contrasena", "perfil_confirmar", "mensajeCoincidencia_perfil");
+        });
     </script>
 </body>
 </html>
